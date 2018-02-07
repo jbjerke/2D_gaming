@@ -26,8 +26,8 @@ int main(void) {
   );
 
   SDL_SetRenderDrawColor( renderer, 208, 209, 210, 255 );
-  SDL_RenderClear(renderer);
-  SDL_SetRenderDrawColor(renderer, RED.r, RED.g, RED.b, RED.a);
+  //SDL_RenderClear(renderer);
+  //SDL_SetRenderDrawColor(renderer, RED.r, RED.g, RED.b, RED.a);
 
   SDL_Point center = {320, 240};
   int radius = 50;

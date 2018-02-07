@@ -1,23 +1,12 @@
 #include <SDL2/SDL.h>
 #include "frameGenerator.h"
+#include "circle.h"
+#include "rectangle.h"
+#include "triangle.h"
 
-const std::string NAME = "malloy";
+const std::string NAME = "jbjerke";
 const int WIDTH = 640;
-const int HEIGHT = 480;
-
-void drawCircle(SDL_Renderer* renderer,
-  SDL_Point center, int radius, SDL_Color color) {
-  SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-  for (int w = 0; w < radius * 2; w++) {
-    for (int h = 0; h < radius * 2; h++) {
-      int dx = radius - w; // horizontal offset
-      int dy = radius - h; // vertical offset
-      if ((dx*dx + dy*dy) <= (radius * radius)) {
-        SDL_RenderDrawPoint(renderer, center.x + dx, center.y + dy);
-      }
-    }
-  }
-}
+const int HEIGHT = 500;
 
 int main(void) {
   SDL_Renderer *renderer;
@@ -29,11 +18,15 @@ int main(void) {
   SDL_SetRenderDrawColor( renderer, 255, 255, 255, 255 );
   SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+// Sky =========================================================================
 
-  SDL_Point center = {320, 240};
-  SDL_Color color = {255,0,0,255};
-  drawCircle(renderer, center, 50, color);
+// Land ========================================================================
 
+// Lake ========================================================================
+
+// Balloons and dock ===========================================================
+
+//==============================================================================
   SDL_RenderPresent(renderer);
   FrameGenerator frameGen(renderer, window, WIDTH, HEIGHT, NAME);
   frameGen.makeFrame();

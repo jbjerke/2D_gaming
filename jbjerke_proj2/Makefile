@@ -1,4 +1,4 @@
-CXX = clang++
+CXX = g++
 
 # Warnings frequently signal eventual errors:
 CXXFLAGS=`sdl2-config --cflags` -g -W -Wall -std=c++11 -Weffc++ -Wextra -pedantic -O0 -I `sdl2-config --prefix`/include/
@@ -6,6 +6,9 @@ CXXFLAGS=`sdl2-config --cflags` -g -W -Wall -std=c++11 -Weffc++ -Wextra -pedanti
 LDFLAGS = `sdl2-config --libs` -lm
 
 OBJS = \
+	circle.o \
+	rectangle.o \
+	triangle.o \
   frameGenerator.o \
   main.o
 
