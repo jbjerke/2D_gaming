@@ -1,15 +1,15 @@
-Name:
+Name: Jordan Bjerken
 
-Course:
+Course: Computer Science 4160
 
-Clemson Email Address:
+Clemson Email Address: jbjerke@clemson.edu
 
 Project no: 2
 
 Project due date: Feb. 8, 2018
 
-Project description: (Also, what image did you draw?)
+Project description: (Also, what image did you draw?) The project uses SDL features to create a picture. To be specific, it uses SDL_RenderDrawLine(s), SDL_RenderDrawPoint(s), and SDL_RenderDrawRect(s) to create outlines and filled-in triangles, circles, and rectangles. My particular project is a lake with glowing balloons floating on its surface during a sunset. 
 
-The easiest part of this project:
+The easiest part of this project: The easiest part was setting up the Circle and Rectangle classes.
 
-Problems that I had in completing this project:
+Problems that I had in completing this project: I definitely had problems trying to get the triangle to correctly fill in. The current program I recognize does not do an adequate job for any input triangle, but I could not figure out the provided example and ran out of ideas on how to do it on my own. The only other problem I really had was that I could not get the 'a' in the rgba codes to have an actual affect that I could see on my end. This forced me to create more layers in the sunset, etc.
