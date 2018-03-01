@@ -11,8 +11,8 @@
 #include "frameGenerator.h"
 
 Engine::~Engine() {
-  delete star;
-  delete spinningStar;
+  // delete star;
+  // delete spinningStar;
   std::cout << "Terminating program" << std::endl;
 }
 
@@ -25,13 +25,15 @@ Engine::Engine() :
   mntns("mntns", Gamedata::getInstance().getXmlInt("mntns/factor") ),
   trees("trees", Gamedata::getInstance().getXmlInt("trees/factor") ),
   viewport( Viewport::getInstance() ),
-  star(new Sprite("YellowStar")),
-  spinningStar(new MultiSprite("SpinningStar")),
+  sprites(),
+  //star(new Sprite("YellowStar")),
+  //spinningStar(new MultiSprite("SpinningStar")),
   currentSprite(0),
   makeVideo( false )
 {
-
-  Viewport::getInstance().setObjectToTrack(star);
+  sprites.push_back( new Sprite("YellowStar") );
+  sprites.push_back( new MultiSprite("SpinningStar") );
+  // Viewport::getInstance().setObjectToTrack(star);
   std::cout << "Loading complete" << std::endl;
 }
 
@@ -39,17 +41,28 @@ void Engine::draw() const {
   clouds.draw();
   mntns.draw();
   trees.draw();
+  //std::stringstream strm;
+  //strm << "fps: " << clock.getFps();
+  //io.writeText(strm.str(), 30, 60);
+  //SDL_Color color = {0xff, 0, 0, 0};
+  //io.writeText("Have some Pride ;)", 300, 30, color);
 
-  star->draw();
-  spinningStar->draw();
+  // star->draw();
+  // spinningStar->draw();
+  for(auto* sp : sprites){
+    sp->draw();
+  }
 
   viewport.draw();
   SDL_RenderPresent(renderer);
 }
 
 void Engine::update(Uint32 ticks) {
-  star->update(ticks);
-  spinningStar->update(ticks);
+  for(auto* sp : sprites){
+    sp->update(ticks);
+  }
+  // star->update(ticks);
+  // spinningStar->update(ticks);
   clouds.update();
   mntns.update();
   trees.update();
@@ -57,13 +70,20 @@ void Engine::update(Uint32 ticks) {
 }
 
 void Engine::switchSprite(){
+  std::vector<Drawable*>::const_iterator spiter = sprites.begin();
   ++currentSprite;
   currentSprite = currentSprite % 2;
   if ( currentSprite ) {
-    Viewport::getInstance().setObjectToTrack(spinningStar);
+    Viewport::getInstance().setObjectToTrack(*spiter);
   }
   else {
-    Viewport::getInstance().setObjectToTrack(star);
+    if( spiter != sprites.end()){
+      spiter++;
+    }
+    else {
+      spiter = sprites.begin();
+    }
+    Viewport::getInstance().setObjectToTrack(*spiter);
   }
 }
 

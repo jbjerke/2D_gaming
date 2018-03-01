@@ -24,8 +24,7 @@ private:
   World trees;
   Viewport& viewport;
 
-  Drawable* star;
-  Drawable* spinningStar;
+  std::vector<Drawable*> sprites;
   int currentSprite;
 
   bool makeVideo;
