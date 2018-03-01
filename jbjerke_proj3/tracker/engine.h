@@ -25,6 +25,7 @@ private:
   Viewport& viewport;
 
   std::vector<Drawable*> sprites;
+  std::vector<Drawable*>::const_iterator spiter;
   int currentSprite;
 
   bool makeVideo;

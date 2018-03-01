@@ -26,14 +26,20 @@ Engine::Engine() :
   trees("trees", Gamedata::getInstance().getXmlInt("trees/factor") ),
   viewport( Viewport::getInstance() ),
   sprites(),
-  //star(new Sprite("YellowStar")),
-  //spinningStar(new MultiSprite("SpinningStar")),
+  spiter(),
   currentSprite(0),
   makeVideo( false )
 {
-  sprites.push_back( new Sprite("YellowStar") );
+  unsigned int numOfSprite = Gamedata::getInstance().getXmlInt("PrideFlag/count");
+
+  for( unsigned int n = 0; n < numOfSprite; n++ ){
+    sprites.push_back( new Sprite("PrideFlag") );
+  }
   sprites.push_back( new MultiSprite("SpinningStar") );
+  spiter = sprites.begin();
+
   // Viewport::getInstance().setObjectToTrack(star);
+  switchSprite();
   std::cout << "Loading complete" << std::endl;
 }
 
@@ -41,11 +47,12 @@ void Engine::draw() const {
   clouds.draw();
   mntns.draw();
   trees.draw();
-  //std::stringstream strm;
-  //strm << "fps: " << clock.getFps();
-  //io.writeText(strm.str(), 30, 60);
-  //SDL_Color color = {0xff, 0, 0, 0};
-  //io.writeText("Have some Pride ;)", 300, 30, color);
+
+  std::stringstream strm;
+  strm << "fps: " << clock.getFps();
+  io.writeText(strm.str(), 30, 60);
+  SDL_Color color = {0xff, 0, 0, 0};
+  io.writeText("Have some Pride ;)", 300, 30, color);
 
   // star->draw();
   // spinningStar->draw();
@@ -70,7 +77,6 @@ void Engine::update(Uint32 ticks) {
 }
 
 void Engine::switchSprite(){
-  std::vector<Drawable*>::const_iterator spiter = sprites.begin();
   ++currentSprite;
   currentSprite = currentSprite % 2;
   if ( currentSprite ) {

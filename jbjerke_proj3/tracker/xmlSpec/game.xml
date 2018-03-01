@@ -18,7 +18,7 @@
 
 <world>
   <width>20000</width>
-  <height>690</height>
+  <height>800</height>
 </world>
 
 <back>
@@ -34,13 +34,13 @@
 </clouds>
 
 <mntns>
-  <file>assets/fullmntns.bmp</file>
+  <file>assets/fullmntns2.bmp</file>
   <factor>3</factor>
   <transparency>false</transparency>
 </mntns>
 
 <trees>
-  <file>assets/fulltree.bmp</file>
+  <file>assets/fulltrees2.bmp</file>
   <factor>1</factor>
   <transparency>false</transparency>
 </trees>
@@ -73,5 +73,14 @@
   <speedY>300</speedY>
   <transparency>false</transparency>
 </YellowStar>
+
+<PrideFlag>
+  <file>assets/flag.bmp</file>
+  <count>7</count>
+  <startLoc x="227" y="240"/>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
+  <transparency>false</transparency>
+</PrideFlag>
 
 </GameData>
