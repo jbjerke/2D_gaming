@@ -1,6 +1,6 @@
 <?xml version = "1.0"?>
 <GameData>
-<!-- screenTitle is also used to identify you and your animation. 
+<!-- screenTitle is also used to identify you and your animation.
      So make sure to include your name as part of the screenTitle -->
 <title>The Tracker Framework</title>
 <maxStringSize>50</maxStringSize>
@@ -9,7 +9,7 @@
 <period>17</period>
 
 <maxFrames>300</maxFrames>
-<username>malloy</username>
+<username>jbjerke</username>
 
 <view>
   <width>854</width>
@@ -17,8 +17,8 @@
 </view>
 
 <world>
-  <width>2000</width>
-  <height>800</height>
+  <width>20000</width>
+  <height>690</height>
 </world>
 
 <back>
@@ -26,6 +26,24 @@
   <factor>1</factor>
   <transparency>false</transparency>
 </back>
+
+<clouds>
+  <file>assets/clouds.bmp</file>
+  <factor>7</factor>
+  <transparency>false</transparency>
+</clouds>
+
+<mntns>
+  <file>assets/fullmntns.bmp</file>
+  <factor>3</factor>
+  <transparency>false</transparency>
+</mntns>
+
+<trees>
+  <file>assets/fulltree.bmp</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</trees>
 
 <font name="font">
   <file>fonts/arial.ttf</file>
