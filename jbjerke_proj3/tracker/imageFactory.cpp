@@ -12,7 +12,7 @@ ImageFactory::~ImageFactory() {
   std::cout << "Deleting images in Factory" << std::endl;
   // Free single image containers
   std::map<std::string, SDL_Surface*>::const_iterator si = surfaces.begin();
-  while( si != surfaces.begin() ){
+  while( si != surfaces.end() ){
     SDL_FreeSurface(si->second);
     si++;
   }

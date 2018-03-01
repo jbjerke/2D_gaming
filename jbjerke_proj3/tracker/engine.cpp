@@ -6,13 +6,18 @@
 #include <iomanip>
 #include "sprite.h"
 #include "multisprite.h"
+#include "twoWayMultiSprite.h"
 #include "gamedata.h"
 #include "engine.h"
 #include "frameGenerator.h"
 
 Engine::~Engine() {
-  // delete star;
-  // delete spinningStar;
+  spiter = sprites.begin();
+  while( spiter != sprites.end() ){
+    delete *spiter;
+    spiter++;
+  }
+
   std::cout << "Terminating program" << std::endl;
 }
 
@@ -27,7 +32,6 @@ Engine::Engine() :
   viewport( Viewport::getInstance() ),
   sprites(),
   spiter(),
-  currentSprite(0),
   makeVideo( false )
 {
   unsigned int numOfSprite = Gamedata::getInstance().getXmlInt("PrideFlag/count");
@@ -35,10 +39,9 @@ Engine::Engine() :
   for( unsigned int n = 0; n < numOfSprite; n++ ){
     sprites.push_back( new Sprite("PrideFlag") );
   }
-  //sprites.push_back( new MultiSprite("SpinningStar") );
+  sprites.push_back( new TwoWayMultiSprite("Pinkupine"));
   spiter = sprites.begin();
 
-  // Viewport::getInstance().setObjectToTrack(star);
   switchSprite();
   std::cout << "Loading complete" << std::endl;
 }
@@ -54,8 +57,6 @@ void Engine::draw() const {
   SDL_Color color = {0, 0, 255, 0};
   io.writeText("Jordan Bjerken", 30, 470, color);
 
-  // star->draw();
-  // spinningStar->draw();
   for(auto* sp : sprites){
     sp->draw();
   }

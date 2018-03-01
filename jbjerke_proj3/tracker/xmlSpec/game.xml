@@ -8,7 +8,7 @@
 <frameCapOn>true</frameCapOn>
 <period>17</period>
 
-<maxFrames>300</maxFrames>
+<maxFrames>40</maxFrames>
 <username>jbjerke</username>
 
 <view>
@@ -17,7 +17,7 @@
 </view>
 
 <world>
-  <width>20000</width>
+  <width>2000</width>
   <height>800</height>
 </world>
 
@@ -56,5 +56,29 @@
   <speedY>300</speedY>
   <transparency>false</transparency>
 </PrideFlag>
+
+<Pinkupine>
+  <file>assets/rightpinkupine.bmp</file>
+  <startLoc x="227" y="675"/>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</Pinkupine>
+
+<LeftPinkupine>
+  <file>assets/leftpinkupine.bmp</file>
+  <startLoc x="227" y="675"/>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftPinkupine>
 
 </GameData>

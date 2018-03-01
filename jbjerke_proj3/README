@@ -1,19 +1,23 @@
-Name:
+Name: Jordan Bjerken
 
-Course:
+Course: CpSc 4160
 
-Clemson Email Address:
+Clemson Email Address: jbjerke@clemson.edu
 
-Project no:
+Project no: 3
 
-Project due date:
+Project due date: 3/2/2018
 
-Project description:
+Project description: This project was meant to familiar with the Tracker Framework, data-driven programming, polymorphism, and inheritence. We converted classes to Myer's singletons, and turned the sprites into a polymorhpic vector. We also created backgrounds and learned parallax scrolling. We also created sprites and placed them into the world. In particular, I created the suggested two-way multi-sprite. 
 
 What sprite did I repeat at least 7 times?
+I kept it simple, and I repreated the Sprite 7 times which was a pride flag.
 
 What sprite (not Sprite or MultiSprite) did I design?
+My two-way multi-sprite is a small pink fluff/porcupine (pinkupine), that rolls across the ground.
 
 The easiest part of this project:
+Changing the while loops to ranged for loops and vice versa was simple. So was congerting the GoF to Meyers. With the video, parallax scrolling was also really simple.
 
 Problems that I had in completing this project:
+Most anything dealing with the polymorphic vector was a struggle at first; however, it was easier after I understood what I was doing wrong. Otherwise, most of my seg faults and errors along the way were due to typos.
