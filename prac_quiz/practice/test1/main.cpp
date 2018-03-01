@@ -1,19 +1,30 @@
-#include<ostream>
+#include<iostream>
+#include<string>
+#include<vector>
 
-class Pokemon{
+class Pokemon {
 public:
-  Pokemon() : name(),
-    index(0),
-    ad(0),
-    defense(0){}
-  Pokemon(string n, int i, )
+	Pokemon( ) : name() {std::cout << "default" << std::endl;}
+	Pokemon(const std::string& n) : name(n) {
+		std::cout << "conversion" << std::endl;
+	}
+	Pokemon(const Pokemon& p) : name(p.name) {
+		std::cout << "copy" << std::endl;
+	}
+	Pokemon& operator=(const Pokemon&) {
+		std::cout << "copy" << std::endl;
+		return *this;
+	}
 private:
-  string name;
-  int index;
-  int ad;
-  int defense;
-}
+	std::string name;
+};
 
 int main() {
-  return 0;
+	std::vector<Pokemon> pokes;
+	pokes.reserve(2);
+	pokes.push_back(std::string("Larvitar"));
+	pokes.push_back(Pokemon("Steelix"));
+	pokes.push_back(Pokemon("Dragonite"));
+	std::cout << "size " << pokes.size() << std::endl;
+	std::cout << "capacity " << pokes.capacity() << std::endl;
 }
