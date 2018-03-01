@@ -1,8 +1,8 @@
-#include "multisprite.h"
+#include "twoWayMultiSprite.h"
 #include "gamedata.h"
 #include "renderContext.h"
 
-void MultiSprite::advanceFrame(Uint32 ticks) {
+void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
 	if (timeSinceLastFrame > frameInterval) {
     currentFrame = (currentFrame+1) % numberOfFrames;
@@ -10,14 +10,16 @@ void MultiSprite::advanceFrame(Uint32 ticks) {
 	}
 }
 
-MultiSprite::MultiSprite( const std::string& name) :
+TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
   Drawable(name,
            Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"),
                     Gamedata::getInstance().getXmlInt(name+"/startLoc/y")),
            Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"),
                     Gamedata::getInstance().getXmlInt(name+"/speedY"))
            ),
-	images( RenderContext::getInstance()->getImages(name) ),
+	rightimages( RenderContext::getInstance()->getImages(name) ),
+	leftimages( RenderContext::getInstance()->getImages("left" + name) ),
+  images( rightimages ),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
@@ -26,8 +28,10 @@ MultiSprite::MultiSprite( const std::string& name) :
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
 
-MultiSprite::MultiSprite(const MultiSprite& s) :
+TwoWayMultiSprite::TwoWayMultiSprite(const TwoWayMultiSprite& s) :
   Drawable(s),
+  rightimages(s.rightimages),
+  leftimages(s.leftimages),
   images(s.images),
   currentFrame(s.currentFrame),
   numberOfFrames( s.numberOfFrames ),
@@ -37,8 +41,10 @@ MultiSprite::MultiSprite(const MultiSprite& s) :
   worldHeight( s.worldHeight )
   { }
 
-MultiSprite& MultiSprite::operator=(const MultiSprite& s) {
+TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
   Drawable::operator=(s);
+  rightimages = s.rightimages;
+  leftimages = s.leftimages;
   images = (s.images);
   currentFrame = (s.currentFrame);
   numberOfFrames = ( s.numberOfFrames );
@@ -49,11 +55,11 @@ MultiSprite& MultiSprite::operator=(const MultiSprite& s) {
   return *this;
 }
 
-void MultiSprite::draw() const {
+void TwoWayMultiSprite::draw() const {
   images[currentFrame]->draw(getX(), getY(), getScale());
 }
 
-void MultiSprite::update(Uint32 ticks) {
+void TwoWayMultiSprite::update(Uint32 ticks) {
   advanceFrame(ticks);
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
@@ -68,9 +74,11 @@ void MultiSprite::update(Uint32 ticks) {
 
   if ( getX() < 0) {
     setVelocityX( fabs( getVelocityX() ) );
+    images = rightimages;
   }
   if ( getX() > worldWidth-getScaledWidth()) {
     setVelocityX( -fabs( getVelocityX() ) );
+    images = leftimages;
   }
 
 }

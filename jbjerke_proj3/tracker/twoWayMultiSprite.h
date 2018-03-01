@@ -1,14 +1,14 @@
-#ifndef MULTISPRITE__H
-#define MULTISPRITE__H
+#ifndef TWOWAYMULTISPRITE__H
+#define TWOWAYMULTISPRITE__H
 #include <string>
 #include <vector>
 #include <cmath>
 #include "drawable.h"
 
-class MultiSprite : public Drawable {
+class TwoWayMultiSprite : public Drawable {
 public:
-  MultiSprite(const std::string&);
-  MultiSprite(const MultiSprite&);
+  TwoWayMultiSprite(const std::string&);
+  TwoWayMultiSprite(const TwoWayMultiSprite&);
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
@@ -27,6 +27,8 @@ public:
   }
 
 protected:
+  std::vector<Image *> rightimages;
+  std::vector<Image *> leftimages;
   std::vector<Image *> images;
 
   unsigned currentFrame;
@@ -37,6 +39,6 @@ protected:
   int worldHeight;
 
   void advanceFrame(Uint32 ticks);
-  MultiSprite& operator=(const MultiSprite&);
+  TwoWayMultiSprite& operator=(const TwoWayMultiSprite&);
 };
 #endif

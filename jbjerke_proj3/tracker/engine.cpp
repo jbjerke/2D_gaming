@@ -35,7 +35,7 @@ Engine::Engine() :
   for( unsigned int n = 0; n < numOfSprite; n++ ){
     sprites.push_back( new Sprite("PrideFlag") );
   }
-  sprites.push_back( new MultiSprite("SpinningStar") );
+  //sprites.push_back( new MultiSprite("SpinningStar") );
   spiter = sprites.begin();
 
   // Viewport::getInstance().setObjectToTrack(star);
@@ -51,8 +51,8 @@ void Engine::draw() const {
   std::stringstream strm;
   strm << "fps: " << clock.getFps();
   io.writeText(strm.str(), 30, 60);
-  SDL_Color color = {0xff, 0, 0, 0};
-  io.writeText("Have some Pride ;)", 300, 30, color);
+  SDL_Color color = {0, 0, 255, 0};
+  io.writeText("Jordan Bjerken", 30, 470, color);
 
   // star->draw();
   // spinningStar->draw();
@@ -77,19 +77,27 @@ void Engine::update(Uint32 ticks) {
 }
 
 void Engine::switchSprite(){
-  ++currentSprite;
-  currentSprite = currentSprite % 2;
-  if ( currentSprite ) {
+  // ++currentSprite;
+  // currentSprite = currentSprite % 2;
+  // if ( currentSprite ) {
+  //   Viewport::getInstance().setObjectToTrack(*spiter);
+  // }
+  // else {
+  //   if( spiter != sprites.end()){
+  //     spiter++;
+  //   }
+  //   else {
+  //     spiter = sprites.begin();
+  //   }
+  //   Viewport::getInstance().setObjectToTrack(*spiter);
+  // }
+  ++spiter;
+  if( spiter != sprites.end() ){
     Viewport::getInstance().setObjectToTrack(*spiter);
   }
   else {
-    if( spiter != sprites.end()){
-      spiter++;
-    }
-    else {
-      spiter = sprites.begin();
-    }
-    Viewport::getInstance().setObjectToTrack(*spiter);
+    spiter = sprites.begin();
+    Viewport::getInstance().setObjectToTrack(*spiter);;
   }
 }
 

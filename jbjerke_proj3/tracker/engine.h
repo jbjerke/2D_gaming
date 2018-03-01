@@ -26,7 +26,7 @@ private:
 
   std::vector<Drawable*> sprites;
   std::vector<Drawable*>::const_iterator spiter;
-  int currentSprite;
+  // int currentSprite;
 
   bool makeVideo;
 

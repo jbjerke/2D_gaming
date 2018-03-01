@@ -13,19 +13,13 @@
 
 <view>
   <width>854</width>
-  <height>480</height>
+  <height>500</height>
 </view>
 
 <world>
   <width>20000</width>
   <height>800</height>
 </world>
-
-<back>
-  <file>assets/checkerboard.bmp</file>
-  <factor>1</factor>
-  <transparency>false</transparency>
-</back>
 
 <clouds>
   <file>assets/clouds.bmp</file>
@@ -53,26 +47,6 @@
   <blue>0</blue>
   <alpha>0</alpha>
 </font>
-
-<SpinningStar>
-  <file>assets/spinstar.png</file>
-  <startLoc x="50" y="140"/>
-  <frames>4</frames>
-  <imageWidth>32</imageWidth>
-  <imageHeight>32</imageHeight>
-  <frameInterval>50</frameInterval>
-  <speedX>200</speedX>
-  <speedY>200</speedY>
-  <transparency>false</transparency>
-</SpinningStar>
-
-<YellowStar>
-  <file>assets/yellowstar32.png</file>
-  <startLoc x="227" y="240"/>
-  <speedX>300</speedX>
-  <speedY>300</speedY>
-  <transparency>false</transparency>
-</YellowStar>
 
 <PrideFlag>
   <file>assets/flag.bmp</file>
