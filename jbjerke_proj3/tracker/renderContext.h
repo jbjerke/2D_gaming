@@ -12,18 +12,18 @@ public:
   SDL_Window* getWindow() const { return window; }
   SDL_Renderer* getRenderer() const { return renderer; }
 
-  Image* getImage(const std::string& n) { 
-    return factory->getImage(n);
+  Image* getImage(const std::string& n) {
+    return factory.getImage(n);
   }
   std::vector<Image*> getImages(const std::string& n) {
-    return factory->getImages(n);
+    return factory.getImages(n);
   }
 private:
   static RenderContext* instance;
   SDL_Window* window;
   SDL_Renderer* renderer;
 
-  ImageFactory* factory;
+  ImageFactory& factory;
 
   SDL_Window* initWindow();
   SDL_Renderer* initRenderer();

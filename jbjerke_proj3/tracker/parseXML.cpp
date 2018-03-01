@@ -13,7 +13,7 @@ void ParseXML::parseXML() {
   XML_SetCharacterDataHandler(parser, wrapper4Chars);
   std::fstream in;
   in.open(filename.c_str(), std::ios::in);
-  if (!in) { 
+  if (!in) {
     throw string("Cannot open xml file: ")+filename;
   }
 
@@ -34,11 +34,11 @@ void ParseXML::parseXML() {
 }
 
 void ParseXML::displayData() const {
-  std::map<string, string>::const_iterator ptr = xmlData.begin();
-  while ( ptr != xmlData.end() ) {
-    std::cout << '(' << ptr->first << ", " 
-                     << ptr->second << ')' << std::endl;
-    ++ptr;
+  //std::map<string, string>::const_iterator ptr = xmlData.begin();
+  for ( const std::pair<string, string>& ptr : xmlData ) {
+    std::cout << '(' << ptr.first << ", "
+                     << ptr.second << ')' << std::endl;
+    //++ptr;
   }
 }
 
@@ -69,7 +69,7 @@ void ParseXML::start(const char *el, const char *attr[]) {
 }
 
 void ParseXML::end(const char *tagEnd) {
-  if ( tagEnd != tagNames.back() ) { 
+  if ( tagEnd != tagNames.back() ) {
     throw std::string("Tags ") + tagEnd+" and "+tagNames.back()+
           std::string(" don't match");
   }
@@ -77,9 +77,9 @@ void ParseXML::end(const char *tagEnd) {
 }
 
 void ParseXML::stripTrailWhiteSpace(string& str) const {
-  int length = str.size();   
+  int length = str.size();
   int i = length-1;
-  while (i >= 0) { 
+  while (i >= 0) {
     if (str[i] != ' ' && str[i] != '\n' && str[i] != '\t') {
       break;
     }
@@ -115,4 +115,3 @@ void ParseXML::wrapper4Chars(void *data, const char *text, int textlen) {
   ParseXML * parser = static_cast<ParseXML*>(data);
   parser->chars(text, textlen);
 }
-
