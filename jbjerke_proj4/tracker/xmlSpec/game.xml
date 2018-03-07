@@ -1,0 +1,84 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation.
+     So make sure to include your name as part of the screenTitle -->
+<title>The Tracker Framework</title>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+
+<maxFrames>40</maxFrames>
+<username>jbjerke</username>
+
+<view>
+  <width>854</width>
+  <height>500</height>
+</view>
+
+<world>
+  <width>2000</width>
+  <height>800</height>
+</world>
+
+<clouds>
+  <file>assets/clouds.bmp</file>
+  <factor>7</factor>
+  <transparency>false</transparency>
+</clouds>
+
+<mntns>
+  <file>assets/fullmntns2.bmp</file>
+  <factor>3</factor>
+  <transparency>false</transparency>
+</mntns>
+
+<trees>
+  <file>assets/fulltrees2.bmp</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</trees>
+
+<font name="font">
+  <file>fonts/arial.ttf</file>
+  <size>24</size>
+  <red>255</red>
+  <green>0</green>
+  <blue>0</blue>
+  <alpha>0</alpha>
+</font>
+
+<PrideFlag>
+  <file>assets/flag.bmp</file>
+  <count>7</count>
+  <startLoc x="227" y="240"/>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
+  <transparency>false</transparency>
+</PrideFlag>
+
+<Pinkupine>
+  <file>assets/rightpinkupine.bmp</file>
+  <startLoc x="227" y="675"/>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</Pinkupine>
+
+<LeftPinkupine>
+  <file>assets/leftpinkupine.bmp</file>
+  <startLoc x="227" y="675"/>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftPinkupine>
+
+</GameData>
