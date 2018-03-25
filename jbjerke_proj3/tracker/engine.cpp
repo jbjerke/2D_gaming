@@ -26,9 +26,10 @@ Engine::Engine() :
   io( IoMod::getInstance() ),
   clock( Clock::getInstance() ),
   renderer( rc->getRenderer() ),
-  clouds("clouds", Gamedata::getInstance().getXmlInt("clouds/factor") ),
+  sky("sky", Gamedata::getInstance().getXmlInt("sky/factor") ),
   mntns("mntns", Gamedata::getInstance().getXmlInt("mntns/factor") ),
   trees("trees", Gamedata::getInstance().getXmlInt("trees/factor") ),
+  path("path", Gamedata::getInstance().getXmlInt("path/factor") ),
   viewport( Viewport::getInstance() ),
   sprites(),
   spiter(),
@@ -47,9 +48,10 @@ Engine::Engine() :
 }
 
 void Engine::draw() const {
-  clouds.draw();
+  sky.draw();
   mntns.draw();
   trees.draw();
+  path.draw();
 
   std::stringstream strm;
   strm << "fps: " << clock.getFps();
@@ -71,9 +73,10 @@ void Engine::update(Uint32 ticks) {
   }
   // star->update(ticks);
   // spinningStar->update(ticks);
-  clouds.update();
+  sky.update();
   mntns.update();
   trees.update();
+  path.update();
   viewport.update(); // always update viewport last
 }
 

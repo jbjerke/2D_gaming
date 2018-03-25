@@ -17,27 +17,33 @@
 </view>
 
 <world>
-  <width>2000</width>
-  <height>800</height>
+  <width>2600</width>
+  <height>1000</height>
 </world>
 
-<clouds>
-  <file>assets/clouds.bmp</file>
+<sky>
+  <file>assets/background/sky_full.bmp</file>
   <factor>7</factor>
   <transparency>false</transparency>
-</clouds>
+</sky>
 
 <mntns>
-  <file>assets/fullmntns2.bmp</file>
+  <file>assets/background/mntns_full.bmp</file>
   <factor>3</factor>
   <transparency>false</transparency>
 </mntns>
 
 <trees>
-  <file>assets/fulltrees2.bmp</file>
-  <factor>1</factor>
+  <file>assets/background/foret_full.bmp</file>
+  <factor>2</factor>
   <transparency>false</transparency>
 </trees>
+
+<path>
+  <file>assets/background/stonepath_full.bmp</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</path>
 
 <font name="font">
   <file>fonts/arial.ttf</file>
