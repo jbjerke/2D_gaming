@@ -13,23 +13,23 @@
 
 <view>
   <width>854</width>
-  <height>500</height>
+  <height>800</height>
 </view>
 
 <world>
-  <width>2600</width>
+  <width>5000</width>
   <height>1000</height>
 </world>
 
 <sky>
   <file>assets/background/sky_full.bmp</file>
-  <factor>7</factor>
+  <factor>5</factor>
   <transparency>false</transparency>
 </sky>
 
 <mntns>
   <file>assets/background/mntns_full.bmp</file>
-  <factor>3</factor>
+  <factor>4</factor>
   <transparency>false</transparency>
 </mntns>
 
