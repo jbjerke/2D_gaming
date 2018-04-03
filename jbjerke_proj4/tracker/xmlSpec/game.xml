@@ -54,21 +54,48 @@
   <alpha>0</alpha>
 </font>
 
-<PrideFlag>
-  <file>assets/flag.bmp</file>
-  <count>7</count>
-  <startLoc x="227" y="240"/>
-  <speedX>300</speedX>
-  <speedY>300</speedY>
+<IdleFireSpirit>
+  <file>assets/fire_spirit/fire_spirit_idle.png</file>
+  <startLoc x="227" y="675"/>
+  <frames>6</frames>
+  <imageWidth>360</imageWidth>
+  <imageHeight>360</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
   <transparency>false</transparency>
-</PrideFlag>
+</IdleFireSpirit>
+
+<LeftFireSpirit>
+  <file>assets/fire_spirit/fire_spirit_left.png</file>
+  <startLoc x="227" y="675"/>
+  <frames>12</frames>
+  <imageWidth>360</imageWidth>
+  <imageHeight>360</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftFireSpirit>
+
+<FireSpirit>
+  <file>assets/fire_spirit/fire_spirit_right.png</file>
+  <startLoc x="227" y="675"/>
+  <frames>12</frames>
+  <imageWidth>360</imageWidth>
+  <imageHeight>360</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</FireSpirit>
 
 <Pinkupine>
-  <file>assets/rightpinkupine.bmp</file>
+  <file>assets/pinkupine/pinkupine_right.png</file>
   <startLoc x="227" y="675"/>
   <frames>8</frames>
-  <imageWidth>75</imageWidth>
-  <imageHeight>75</imageHeight>
+  <imageWidth>220</imageWidth>
+  <imageHeight>220</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>250</speedX>
   <speedY>0</speedY>
@@ -76,15 +103,62 @@
 </Pinkupine>
 
 <LeftPinkupine>
-  <file>assets/leftpinkupine.bmp</file>
+  <file>assets/pinkupine/pinkupine_left.png</file>
   <startLoc x="227" y="675"/>
   <frames>8</frames>
-  <imageWidth>75</imageWidth>
-  <imageHeight>75</imageHeight>
+  <imageWidth>220</imageWidth>
+  <imageHeight>220</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>250</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </LeftPinkupine>
 
+<WorriedPinkupine>
+  <file>assets/pinkupine/pinkupine_right.png</file>
+  <startLoc x="227" y="675"/>
+  <frames>8</frames>
+  <imageWidth>220</imageWidth>
+  <imageHeight>220</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</WorriedPinkupine>
+
+<LeftWorriedPinkupine>
+  <file>assets/pinkupine/pinkupine_left.png</file>
+  <startLoc x="227" y="675"/>
+  <frames>8</frames>
+  <imageWidth>220</imageWidth>
+  <imageHeight>220</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftWorriedPinkupine>
+
+<Dogat>
+  <file>assets/dogat/dogat_right.png</file>
+  <startLoc x="227" y="675"/>
+  <frames>4</frames>
+  <imageWidth>250</imageWidth>
+  <imageHeight>250</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>250</speedY>
+  <transparency>false</transparency>
+</Dogat>
+
+<LeftDogat>
+  <file>assets/dogat/dogat_left.png</file>
+  <startLoc x="227" y="675"/>
+  <frames>4</frames>
+  <imageWidth>250</imageWidth>
+  <imageHeight>250</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>250</speedY>
+  <transparency>false</transparency>
+</LeftDogat>
 </GameData>
