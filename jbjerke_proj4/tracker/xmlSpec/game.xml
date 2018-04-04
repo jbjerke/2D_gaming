@@ -13,7 +13,7 @@
 
 <view>
   <width>854</width>
-  <height>500</height>
+  <height>900</height>
 </view>
 
 <world>
@@ -58,8 +58,8 @@
   <file>assets/fire_spirit/fire_spirit_idle.png</file>
   <startLoc x="227" y="300"/>
   <frames>6</frames>
-  <imageWidth>360</imageWidth>
-  <imageHeight>360</imageHeight>
+  <imageWidth>80</imageWidth>
+  <imageHeight>80</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>0</speedX>
   <speedY>0</speedY>
@@ -70,8 +70,8 @@
   <file>assets/fire_spirit/fire_spirit_left.png</file>
   <startLoc x="227" y="300"/>
   <frames>12</frames>
-  <imageWidth>360</imageWidth>
-  <imageHeight>360</imageHeight>
+  <imageWidth>80</imageWidth>
+  <imageHeight>80</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>0</speedX>
   <speedY>0</speedY>
@@ -82,8 +82,8 @@
   <file>assets/fire_spirit/fire_spirit_right.png</file>
   <startLoc x="227" y="675"/>
   <frames>12</frames>
-  <imageWidth>360</imageWidth>
-  <imageHeight>360</imageHeight>
+  <imageWidth>80</imageWidth>
+  <imageHeight>80</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>0</speedX>
   <speedY>0</speedY>
@@ -95,8 +95,8 @@
   <startLoc x="227" y="675"/>
   <count>1</count>
   <frames>8</frames>
-  <imageWidth>220</imageWidth>
-  <imageHeight>220</imageHeight>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>250</speedX>
   <speedY>0</speedY>
@@ -107,8 +107,8 @@
   <file>assets/pinkupine/pinkupine_left.png</file>
   <startLoc x="227" y="675"/>
   <frames>8</frames>
-  <imageWidth>220</imageWidth>
-  <imageHeight>220</imageHeight>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>250</speedX>
   <speedY>0</speedY>
@@ -119,8 +119,8 @@
   <file>assets/pinkupine/pinkupine_right.png</file>
   <startLoc x="227" y="675"/>
   <frames>8</frames>
-  <imageWidth>220</imageWidth>
-  <imageHeight>220</imageHeight>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>250</speedX>
   <speedY>0</speedY>
@@ -131,8 +131,8 @@
   <file>assets/pinkupine/pinkupine_left.png</file>
   <startLoc x="227" y="675"/>
   <frames>8</frames>
-  <imageWidth>220</imageWidth>
-  <imageHeight>220</imageHeight>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>250</speedX>
   <speedY>0</speedY>
@@ -144,8 +144,8 @@
   <startLoc x="227" y="675"/>
   <count>3</count>
   <frames>4</frames>
-  <imageWidth>250</imageWidth>
-  <imageHeight>250</imageHeight>
+  <imageWidth>60</imageWidth>
+  <imageHeight>60</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>250</speedX>
   <speedY>250</speedY>
@@ -156,8 +156,8 @@
   <file>assets/dogat/dogat_left.png</file>
   <startLoc x="227" y="675"/>
   <frames>4</frames>
-  <imageWidth>250</imageWidth>
-  <imageHeight>250</imageHeight>
+  <imageWidth>60</imageWidth>
+  <imageHeight>60</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>250</speedX>
   <speedY>250</speedY>
