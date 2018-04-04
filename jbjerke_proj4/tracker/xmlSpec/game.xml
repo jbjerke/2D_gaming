@@ -13,7 +13,7 @@
 
 <view>
   <width>854</width>
-  <height>800</height>
+  <height>500</height>
 </view>
 
 <world>
@@ -56,7 +56,7 @@
 
 <IdleFireSpirit>
   <file>assets/fire_spirit/fire_spirit_idle.png</file>
-  <startLoc x="227" y="675"/>
+  <startLoc x="227" y="300"/>
   <frames>6</frames>
   <imageWidth>360</imageWidth>
   <imageHeight>360</imageHeight>
@@ -68,7 +68,7 @@
 
 <LeftFireSpirit>
   <file>assets/fire_spirit/fire_spirit_left.png</file>
-  <startLoc x="227" y="675"/>
+  <startLoc x="227" y="300"/>
   <frames>12</frames>
   <imageWidth>360</imageWidth>
   <imageHeight>360</imageHeight>
@@ -93,6 +93,7 @@
 <Pinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>
   <startLoc x="227" y="675"/>
+  <count>1</count>
   <frames>8</frames>
   <imageWidth>220</imageWidth>
   <imageHeight>220</imageHeight>
@@ -141,6 +142,7 @@
 <Dogat>
   <file>assets/dogat/dogat_right.png</file>
   <startLoc x="227" y="675"/>
+  <count>3</count>
   <frames>4</frames>
   <imageWidth>250</imageWidth>
   <imageHeight>250</imageHeight>

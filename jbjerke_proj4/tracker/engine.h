@@ -11,7 +11,7 @@ public:
   Engine ();
   ~Engine ();
   void play();
-  void switchSprite();
+  //void switchSprite(); maybe if I want more than one player?
 
 private:
   const RenderContext* rc;
@@ -25,8 +25,11 @@ private:
   World path;
   Viewport& viewport;
 
-  std::vector<Drawable*> sprites;
-  std::vector<Drawable*>::const_iterator spiter;
+  std::vector<Drawable*> dogats;
+  std::vector<Drawable*> pinkupines;
+  Drawable* player;
+  // might be useful if tracking players
+  //std::vector<Drawable*>::const_iterator spiter;
   // int currentSprite;
 
   bool makeVideo;

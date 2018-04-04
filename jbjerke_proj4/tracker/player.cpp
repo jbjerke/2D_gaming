@@ -1,6 +1,6 @@
 #include "player.h"
 #include "gamedata.h"
-#include "imageFactory.h"
+#include "renderContext.h"
 
 void Player::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
@@ -19,7 +19,7 @@ Player::Player( const std::string& name) :
            ),
   rightimages( RenderContext::getInstance()->getImages(name) ),
   leftimages( RenderContext::getInstance()->getImages("Left"+name) ),
-  idleimages( ImageFactory::getInstance()->getImages("Idle"+name) ),
+  idleimages( RenderContext::getInstance()->getImages("Idle"+name) ),
   images( idleimages ),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
@@ -102,10 +102,15 @@ void Player::update(Uint32 ticks) {
 
   if ( getX() < 0) {
     setVelocityX( fabs( getVelocityX() ) );
+		images = rightimages;
   }
   if ( getX() > worldWidth-getScaledWidth()) {
     setVelocityX( -fabs( getVelocityX() ) );
+		images = leftimages;
   }
+	if ( getX() == 0 ) {
+		images = idleimages;
+	}
 
   stop();
 }

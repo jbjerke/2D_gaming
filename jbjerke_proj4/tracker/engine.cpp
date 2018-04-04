@@ -7,15 +7,23 @@
 #include "sprite.h"
 #include "multisprite.h"
 #include "twoWayMultiSprite.h"
+#include "player.h"
 #include "gamedata.h"
 #include "engine.h"
 #include "frameGenerator.h"
 
 Engine::~Engine() {
-  spiter = sprites.begin();
-  while( spiter != sprites.end() ){
-    delete *spiter;
-    spiter++;
+  // spiter = sprites.begin();
+  // while( spiter != sprites.end() ){
+  //   delete *spiter;
+  //   spiter++;
+  // }
+
+  for(auto* ds : dogats){
+    delete ds;
+  }
+  for(auto* ps : pinkupines){
+    delete ps;
   }
 
   std::cout << "Terminating program" << std::endl;
@@ -31,19 +39,26 @@ Engine::Engine() :
   trees("trees", Gamedata::getInstance().getXmlInt("trees/factor") ),
   path("path", Gamedata::getInstance().getXmlInt("path/factor") ),
   viewport( Viewport::getInstance() ),
-  sprites(),
-  spiter(),
+  dogats(),
+  pinkupines(),
+  player(new Player("FireSpirit")),
   makeVideo( false )
 {
-  unsigned int numOfSprite = Gamedata::getInstance().getXmlInt("PrideFlag/count");
+  unsigned int numOfDogats= Gamedata::getInstance().getXmlInt("Dogat/count");
+  unsigned int numOfPinkupines= Gamedata::getInstance().getXmlInt("Pinkupine/count");
 
-  for( unsigned int n = 0; n < numOfSprite; n++ ){
-    sprites.push_back( new Sprite("PrideFlag") );
+  for( unsigned int n = 0; n < numOfDogats; n++ ){
+    dogats.push_back( new TwoWayMultiSprite("Dogat") );
   }
-  sprites.push_back( new TwoWayMultiSprite("Pinkupine"));
-  spiter = sprites.begin();
 
-  switchSprite();
+  for( unsigned int m = 0; m < numOfPinkupines; m++){
+    pinkupines.push_back( new TwoWayMultiSprite("Pinkupine"));
+  }
+
+  // spiter = sprites.begin();
+  //
+  // switchSprite();
+  Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
 }
 
@@ -53,24 +68,37 @@ void Engine::draw() const {
   trees.draw();
   path.draw();
 
-  std::stringstream strm;
-  strm << "fps: " << clock.getFps();
-  io.writeText(strm.str(), 30, 60);
-  SDL_Color color = {0, 0, 255, 0};
-  io.writeText("Jordan Bjerken", 30, 470, color);
+  // Put in the HUD:
+  // std::stringstream strm;
+  // strm << "fps: " << clock.getFps();
+  // io.writeText(strm.str(), 30, 60);
+  // SDL_Color color = {0, 0, 255, 0};
+  // io.writeText("Jordan Bjerken", 30, 470, color);
 
-  for(auto* sp : sprites){
-    sp->draw();
+  for(auto* dg : dogats){
+    dg->draw();
   }
+
+  for(auto* pk : pinkupines){
+    pk->draw();
+  }
+
+  player->draw();
 
   viewport.draw();
   SDL_RenderPresent(renderer);
 }
 
 void Engine::update(Uint32 ticks) {
-  for(auto* sp : sprites){
-    sp->update(ticks);
+  for(auto* dt : dogats){
+    dt->update(ticks);
   }
+
+  for(auto* pp : pinkupines){
+    pp->update(ticks);
+  }
+
+  player->update(ticks);
   // star->update(ticks);
   // spinningStar->update(ticks);
   sky.update();
@@ -80,30 +108,30 @@ void Engine::update(Uint32 ticks) {
   viewport.update(); // always update viewport last
 }
 
-void Engine::switchSprite(){
-  // ++currentSprite;
-  // currentSprite = currentSprite % 2;
-  // if ( currentSprite ) {
-  //   Viewport::getInstance().setObjectToTrack(*spiter);
-  // }
-  // else {
-  //   if( spiter != sprites.end()){
-  //     spiter++;
-  //   }
-  //   else {
-  //     spiter = sprites.begin();
-  //   }
-  //   Viewport::getInstance().setObjectToTrack(*spiter);
-  // }
-  ++spiter;
-  if( spiter != sprites.end() ){
-    Viewport::getInstance().setObjectToTrack(*spiter);
-  }
-  else {
-    spiter = sprites.begin();
-    Viewport::getInstance().setObjectToTrack(*spiter);;
-  }
-}
+// void Engine::switchSprite(){
+//   // ++currentSprite;
+//   // currentSprite = currentSprite % 2;
+//   // if ( currentSprite ) {
+//   //   Viewport::getInstance().setObjectToTrack(*spiter);
+//   // }
+//   // else {
+//   //   if( spiter != sprites.end()){
+//   //     spiter++;
+//   //   }
+//   //   else {
+//   //     spiter = sprites.begin();
+//   //   }
+//   //   Viewport::getInstance().setObjectToTrack(*spiter);
+//   // }
+//   ++spiter;
+//   if( spiter != sprites.end() ){
+//     Viewport::getInstance().setObjectToTrack(*spiter);
+//   }
+//   else {
+//     spiter = sprites.begin();
+//     Viewport::getInstance().setObjectToTrack(*spiter);;
+//   }
+// }
 
 void Engine::play() {
   SDL_Event event;
@@ -126,9 +154,6 @@ void Engine::play() {
           if ( clock.isPaused() ) clock.unpause();
           else clock.pause();
         }
-        if ( keystate[SDL_SCANCODE_T] ) {
-          switchSprite();
-        }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
           makeVideo = true;
@@ -141,10 +166,15 @@ void Engine::play() {
     }
 
     // In this section of the event loop we allow key bounce:
-
     ticks = clock.getElapsedTicks();
     if ( ticks > 0 ) {
       clock.incrFrame();
+      if (keystate[SDL_SCANCODE_A]){
+        static_cast<Player*>(player)->left();
+      }
+      if (keystate[SDL_SCANCODE_D]){
+        static_cast<Player*>(player)->right();
+      }
       draw();
       update(ticks);
       if ( makeVideo ) {
