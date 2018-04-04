@@ -1,6 +1,6 @@
 #include "twoWayMultiSprite.h"
 #include "gamedata.h"
-#include "renderContext.h"
+#include "imageFactory.h"
 
 void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
@@ -17,8 +17,8 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
            Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"),
                     Gamedata::getInstance().getXmlInt(name+"/speedY"))
            ),
-	rightimages( RenderContext::getInstance()->getImages(name) ),
-	leftimages( RenderContext::getInstance()->getImages("Left" + name) ),
+	rightimages( ImageFactory::getInstance().getImages(name) ),
+	leftimages( ImageFactory::getInstance().getImages("Left" + name) ),
   images( rightimages ),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
