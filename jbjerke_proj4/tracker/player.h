@@ -31,6 +31,10 @@ public:
   // void jump(); To come when I have the time to draw this
   void stop();
 
+  void attach( SmartSprite* ss ) { observers.push_back(o); }
+  void detach( SmartSprite* ss );
+  void notify( SmartSprite* ss ); //Can probably just include in the update
+
 private:
   std::vector<Image *> rightimages;
   std::vector<Image *> leftimages;
@@ -38,6 +42,8 @@ private:
   // Eventually - both directions of idle
   // Eventaully - jump
   std::vector<Image *> images;
+
+  std::list<SmartSprite*> observers;
 
   std::string playerName;
   unsigned currentFrame;

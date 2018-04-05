@@ -1,24 +1,28 @@
-#ifndef SUBJECTSPRITE__H
-#define SUBJECTSPRITE__H
-
+#ifndef SMARTSPRITE__H
+#define SMARTSPRITE__H
 #include <string>
-#include <list>
-#include <cmath>
-#include "multisprite.h"
+#include "sprite.h"
 
-class SmartSprite;
-
-class SubjectSprite : public MultiSprite {
+class SmartSprite : public Sprite {
 public:
-  SubjectSprite(const std::string&);
-  SubjectSprite(const SubjectSprite&);
+  SmartSprite(const std::string&, const Vector2f& pos, int w, int h);
+  SmartSprite(const SmartSprite&);
+  virtual ~SmartSprite() { }
 
-  void update(Uint32 ticks);
-  void attach( SmartSprite* o ) { observers.push_back(o); }
-  void detach( SmartSprite* o );
+  virtual void update(Uint32 ticks);
+  void setPlayerPos(const Vector2f& p) { playerPos = p; }
 
-protected:
-  std::list<SmartSprite*> observers;
-  SubjectSprite& operator=(const SubjectSprite&);
+private:
+  enum MODE {NORMAL, EVADE};
+  Vector2f playerPos;
+  int playerWidth;
+  int playerHeight;
+  MODE currentMode;
+  float safeDistance;
+
+  void goLeft();
+  void goRight();
+  void goUp();
+  void goDown();
 };
 #endif

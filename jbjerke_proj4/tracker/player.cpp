@@ -21,6 +21,7 @@ Player::Player( const std::string& name) :
   leftimages( ImageFactory::getInstance().getImages("Left"+name) ),
   idleimages( ImageFactory::getInstance().getImages("Idle"+name) ),
   images( idleimages ),
+	observers(),
 	playerName(name),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt("Idle"+name+"/frames") ),
@@ -37,6 +38,7 @@ Player::Player(const Player& s) :
   leftimages(s.leftimages),
   idleimages(s.idleimages),
   images(s.images),
+	observers(), //
 	playerName(s.playerName),
   currentFrame(s.currentFrame),
   numberOfFrames( s.numberOfFrames ),
@@ -53,6 +55,7 @@ Player& Player::operator=(const Player& s) {
   leftimages = s.leftimages;
   idleimages = s.idleimages;
   images = (s.images);
+	observers
 	playerName = (s.playerName);
   currentFrame = (s.currentFrame);
   numberOfFrames = ( s.numberOfFrames );
@@ -126,3 +129,7 @@ void Player::update(Uint32 ticks) {
 
   stop();
 }
+
+void Player::detach( SmartSprite* ss ){}
+
+void Player::notify( SmartSprite* ss ){}
