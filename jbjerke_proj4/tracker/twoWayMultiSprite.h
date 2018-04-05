@@ -26,7 +26,7 @@ public:
     return images[currentFrame]->getSurface();
   }
 
-protected:
+private:
   std::vector<Image *> rightimages;
   std::vector<Image *> leftimages;
   std::vector<Image *> images;
@@ -37,6 +37,8 @@ protected:
   float timeSinceLastFrame;
   int worldWidth;
   int worldHeight;
+
+  Vector2f makeVelocity(int, int) const;
 
   void advanceFrame(Uint32 ticks);
   TwoWayMultiSprite& operator=(const TwoWayMultiSprite&);

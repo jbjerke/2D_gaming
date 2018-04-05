@@ -134,13 +134,17 @@ void Player::update(Uint32 ticks) {
 }
 
 void Player::detach( SmartSprite* ss ){
+	std::cout << "omfg" << std::endl;
 	std::list<SmartSprite*>::iterator o = observers.begin();
 	while( o != observers.end() ){
 		if ( *o == ss){
 			o = observers.erase(o);
+			std::cout << "can we please" << std::endl;
 			return;
 		}
+		++o;
 	}
+	std::cout << "can we please" << std::endl;
 }
 
 void Player::notify(){

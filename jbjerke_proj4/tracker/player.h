@@ -34,7 +34,10 @@ public:
   // void jump(); To come when I have the time to draw this
   void stop();
 
-  void attach( SmartSprite* ss ) { observers.push_back(ss); }
+  void attach( SmartSprite* ss ) {
+    observers.push_back(ss);
+    std::cout << "size of observers is: " << observers.size() << std::endl;
+  }
   void detach( SmartSprite* ss );
   void notify( ); //Can probably just include in the update
 

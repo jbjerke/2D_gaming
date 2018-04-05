@@ -10,11 +10,28 @@ void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
 	}
 }
 
+Vector2f TwoWayMultiSprite::makeVelocity(int vx, int vy) const {
+  float newvx;
+	float newvy;
+
+	if(vx > 0){ newvx = Gamedata::getInstance().getRandFloat(vx-50,vx+50); }
+	else{ newvx = vx; }
+
+	if(vy > 0){ newvy = Gamedata::getInstance().getRandFloat(vy-50,vy+50); }
+	else { newvy = vy; }
+
+
+  newvx *= [](){ if(rand()%2) return -1; else return 1; }();
+  newvy *= [](){ if(rand()%2) return -1; else return 1; }();
+
+  return Vector2f(newvx, newvy);
+}
+
 TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
   Drawable(name,
-           Vector2f(Gamedata::getInstance().getRandFloat(name+"/startLoc/x","/world/width"),
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"),
                     Gamedata::getInstance().getXmlInt(name+"/startLoc/y")),
-           Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"),
+           makeVelocity(Gamedata::getInstance().getXmlInt(name+"/speedX"),
                     Gamedata::getInstance().getXmlInt(name+"/speedY"))
            ),
 	rightimages( ImageFactory::getInstance().getImages(name) ),

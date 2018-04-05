@@ -66,6 +66,7 @@ Engine::Engine() :
     static_cast<Player*>(player)->attach( pinkupines[m] );
   }
 
+
   strats.push_back( new RectangularCollisionStrategy );
   strats.push_back( new MidPointCollisionStrategy );
   strats.push_back( new PerPixelCollisionStrategy );
@@ -148,6 +149,10 @@ void Engine::checkForCollisions(){
     }
     else { ++pit; }
   }
+
+  // if ( strats[currentStrat]->execute(*player, *wizard) ){
+  //   static_cast<Player*>(player)->stop();
+  // }
 }
 
 void Engine::play() {
