@@ -105,6 +105,7 @@ void Engine::draw() const {
 }
 
 void Engine::update(Uint32 ticks) {
+  checkForCollisions();
   wizard->update(ticks);
 
   for(auto* dt : dogats){
@@ -129,7 +130,6 @@ void Engine::checkForCollisions(){
   std::vector<SmartSprite*>::iterator dit = dogats.begin();
   while( dit != dogats.end() ){
     if ( strats[currentStrat]->execute(*player, **dit) ){
-      std::cout << "collision detected w dogat" << std::endl;
       SmartSprite* doneForD = *dit;
       static_cast<Player*>(player)->detach(doneForD);
       delete doneForD;
@@ -141,7 +141,6 @@ void Engine::checkForCollisions(){
   std::vector<SmartSprite*>::iterator pit = pinkupines.begin();
   while( pit != pinkupines.end() ){
     if ( strats[currentStrat]->execute(*player, **pit) ){
-      std::cout << "collision detected w pinkupines" << std::endl;
       SmartSprite* doneForP = *pit;
       static_cast<Player*>(player)->detach(doneForP);
       delete doneForP;
@@ -173,6 +172,7 @@ void Engine::play() {
           else clock.pause();
         }
         if ( keystate[SDL_SCANCODE_M] ){
+          std::cout<<"changed strat" <<std::endl;
           currentStrat = (currentStrat + 1) % strats.size();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
