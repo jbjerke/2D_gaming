@@ -5,26 +5,25 @@
 #include <random>
 #include <iomanip>
 #include "sprite.h"
-#include "multisprite.h"
 #include "twoWayMultiSprite.h"
 #include "player.h"
+#include "smartSprite.h"
 #include "gamedata.h"
 #include "engine.h"
 #include "frameGenerator.h"
+#include "collisionStrategy.h"
 
 Engine::~Engine() {
-  // spiter = sprites.begin();
-  // while( spiter != sprites.end() ){
-  //   delete *spiter;
-  //   spiter++;
-  // }
-
   for(auto* ds : dogats){
     delete ds;
   }
   for(auto* ps : pinkupines){
     delete ps;
   }
+  for( CollisionStrategy* s : strats ){
+    delete s;
+  }
+  delete wizard;
 
   std::cout << "Terminating program" << std::endl;
 }
@@ -43,25 +42,38 @@ Engine::Engine() :
   dogats(),
   pinkupines(),
   player(new Player("FireSpirit")),
+  strats(),
+  currentStrat( 0 ),
+  collision( false ),
   makeVideo( false )
 {
   unsigned int numOfDogats= Gamedata::getInstance().getXmlInt("Dogat/count");
   unsigned int numOfPinkupines= Gamedata::getInstance().getXmlInt("Pinkupine/count");
+  dogats.reserve(numOfDogats);
+  pinkupines.reserve(numOfPinkupines);
+
+  Vector2f pos = player->getPosition();
+  int w = player->getScaledWidth();
+  int h = player->getScaledHeight();
 
   for( unsigned int n = 0; n < numOfDogats; n++ ){
-    dogats.push_back( new TwoWayMultiSprite("Dogat") );
+    dogats.push_back( new SmartSprite("Dogat", pos, w, h) );
+    static_cast<Player*>(player)->attach( dogats[n] );
   }
 
   for( unsigned int m = 0; m < numOfPinkupines; m++){
-    pinkupines.push_back( new TwoWayMultiSprite("Pinkupine"));
+    pinkupines.push_back( new SmartSprite("Pinkupine", pos, w, h) );
+    static_cast<Player*>(player)->attach( pinkupines[m] );
   }
 
-  // spiter = sprites.begin();
-  //
-  // switchSprite();
+  strats.push_back( new RectangularCollisionStrategy );
+  strats.push_back( new MidPointCollisionStrategy );
+  strats.push_back( new PerPixelCollisionStrategy );
+
   Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
 }
+
 
 void Engine::draw() const {
   sky.draw();
@@ -94,7 +106,7 @@ void Engine::draw() const {
 
 void Engine::update(Uint32 ticks) {
   wizard->update(ticks);
-  
+
   for(auto* dt : dogats){
     dt->update(ticks);
   }
@@ -113,30 +125,31 @@ void Engine::update(Uint32 ticks) {
   viewport.update(); // always update viewport last
 }
 
-// void Engine::switchSprite(){
-//   // ++currentSprite;
-//   // currentSprite = currentSprite % 2;
-//   // if ( currentSprite ) {
-//   //   Viewport::getInstance().setObjectToTrack(*spiter);
-//   // }
-//   // else {
-//   //   if( spiter != sprites.end()){
-//   //     spiter++;
-//   //   }
-//   //   else {
-//   //     spiter = sprites.begin();
-//   //   }
-//   //   Viewport::getInstance().setObjectToTrack(*spiter);
-//   // }
-//   ++spiter;
-//   if( spiter != sprites.end() ){
-//     Viewport::getInstance().setObjectToTrack(*spiter);
-//   }
-//   else {
-//     spiter = sprites.begin();
-//     Viewport::getInstance().setObjectToTrack(*spiter);;
-//   }
-// }
+void Engine::checkForCollisions(){
+  std::vector<SmartSprite*>::iterator dit = dogats.begin();
+  while( dit != dogats.end() ){
+    if ( strats[currentStrat]->execute(*player, **dit) ){
+      std::cout << "collision detected w dogat" << std::endl;
+      SmartSprite* doneForD = *dit;
+      static_cast<Player*>(player)->detach(doneForD);
+      delete doneForD;
+      dit = dogats.erase(dit);
+    }
+    else { ++dit; }
+  }
+
+  std::vector<SmartSprite*>::iterator pit = pinkupines.begin();
+  while( pit != pinkupines.end() ){
+    if ( strats[currentStrat]->execute(*player, **pit) ){
+      std::cout << "collision detected w pinkupines" << std::endl;
+      SmartSprite* doneForP = *pit;
+      static_cast<Player*>(player)->detach(doneForP);
+      delete doneForP;
+      pit = pinkupines.erase(pit);
+    }
+    else { ++pit; }
+  }
+}
 
 void Engine::play() {
   SDL_Event event;
@@ -158,6 +171,9 @@ void Engine::play() {
         if ( keystate[SDL_SCANCODE_P] ) {
           if ( clock.isPaused() ) clock.unpause();
           else clock.pause();
+        }
+        if ( keystate[SDL_SCANCODE_M] ){
+          currentStrat = (currentStrat + 1) % strats.size();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;

@@ -3,7 +3,10 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include <list>
 #include "drawable.h"
+
+class SmartSprite;
 
 class Player : public Drawable {
 public:
@@ -31,9 +34,9 @@ public:
   // void jump(); To come when I have the time to draw this
   void stop();
 
-  void attach( SmartSprite* ss ) { observers.push_back(o); }
+  void attach( SmartSprite* ss ) { observers.push_back(ss); }
   void detach( SmartSprite* ss );
-  void notify( SmartSprite* ss ); //Can probably just include in the update
+  void notify( ); //Can probably just include in the update
 
 private:
   std::vector<Image *> rightimages;

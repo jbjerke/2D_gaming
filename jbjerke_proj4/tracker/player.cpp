@@ -1,6 +1,7 @@
 #include "player.h"
 #include "gamedata.h"
 #include "imageFactory.h"
+#include "smartSprite.h"
 
 void Player::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
@@ -38,7 +39,7 @@ Player::Player(const Player& s) :
   leftimages(s.leftimages),
   idleimages(s.idleimages),
   images(s.images),
-	observers(), //
+	observers(s.observers),
 	playerName(s.playerName),
   currentFrame(s.currentFrame),
   numberOfFrames( s.numberOfFrames ),
@@ -55,7 +56,7 @@ Player& Player::operator=(const Player& s) {
   leftimages = s.leftimages;
   idleimages = s.idleimages;
   images = (s.images);
-	observers
+	observers = (s.observers);
 	playerName = (s.playerName);
   currentFrame = (s.currentFrame);
   numberOfFrames = ( s.numberOfFrames );
@@ -128,8 +129,22 @@ void Player::update(Uint32 ticks) {
 	}
 
   stop();
+
+	notify();
 }
 
-void Player::detach( SmartSprite* ss ){}
+void Player::detach( SmartSprite* ss ){
+	std::list<SmartSprite*>::iterator o = observers.begin();
+	while( o != observers.end() ){
+		if ( *o == ss){
+			o = observers.erase(o);
+			return;
+		}
+	}
+}
 
-void Player::notify( SmartSprite* ss ){}
+void Player::notify(){
+	for ( auto* o : observers ){
+		o->setPlayerPos( getPosition() );
+	}
+}

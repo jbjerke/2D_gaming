@@ -93,6 +93,7 @@
 <Pinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>
   <startLoc x="227" y="725"/>
+  <safeDistance>200</safeDistance>
   <count>1</count>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
@@ -106,6 +107,7 @@
 <LeftPinkupine>
   <file>assets/pinkupine/pinkupine_left.png</file>
   <startLoc x="227" y="725"/>
+  <safeDistance>200</safeDistance>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
@@ -118,6 +120,7 @@
 <WorriedPinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>
   <startLoc x="227" y="725"/>
+  <safeDistance>200</safeDistance>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
@@ -130,6 +133,7 @@
 <LeftWorriedPinkupine>
   <file>assets/pinkupine/pinkupine_left.png</file>
   <startLoc x="227" y="725"/>
+  <safeDistance>200</safeDistance>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
@@ -142,6 +146,7 @@
 <Dogat>
   <file>assets/dogat/dogat_right.png</file>
   <startLoc x="227" y="675"/>
+  <safeDistance>200</safeDistance>
   <count>3</count>
   <frames>4</frames>
   <imageWidth>60</imageWidth>
@@ -155,6 +160,7 @@
 <LeftDogat>
   <file>assets/dogat/dogat_left.png</file>
   <startLoc x="227" y="675"/>
+  <safeDistance>200</safeDistance>
   <frames>4</frames>
   <imageWidth>60</imageWidth>
   <imageHeight>60</imageHeight>

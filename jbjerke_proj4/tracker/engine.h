@@ -6,6 +6,9 @@
 #include "world.h"
 #include "viewport.h"
 
+class CollisionStrategy;
+class SmartSprite;
+
 class Engine {
 public:
   Engine ();
@@ -26,12 +29,16 @@ private:
   Viewport& viewport;
 
   Drawable* wizard;
-  std::vector<Drawable*> dogats;
-  std::vector<Drawable*> pinkupines;
+  std::vector<SmartSprite*> dogats;
+  std::vector<SmartSprite*> pinkupines;
   Drawable* player;
   // might be useful if tracking players
   //std::vector<Drawable*>::const_iterator spiter;
   // int currentSprite;
+
+  std::vector<CollisionStrategy*> strats;
+  int currentStrat;
+  bool collision;
 
   bool makeVideo;
 

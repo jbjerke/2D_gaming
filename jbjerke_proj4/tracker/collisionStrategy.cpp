@@ -6,25 +6,26 @@
 #include "renderContext.h"
 
 void RectangularCollisionStrategy::draw() const {
-  IOmod::
+  IoMod::
   getInstance().writeText("Strategy: Rectangular", 500, 30);
 }
 
 bool RectangularCollisionStrategy::execute(
       const Drawable& sprite1, const Drawable& sprite2) const {
-  float left1 = sprite1.getX();
-  float left2 = sprite2.getX();
+  float x1Left = sprite1.getX();
+  float y1Top = sprite1.getY();
+  float x2Left = sprite2.getX();
+  float y2Top = sprite2.getY();
 
-  float right1 = left1+sprite1.getScaledWidth();
-  float right2 = left2+sprite2.getScaledWidth();
-  if ( right1 < left2 ) return false;
-  if ( left1 > right2 ) return false;
-  float top1 = sprite1.getY();
-  float top2 = sprite2.getY();
-  float bottom1 = top1+sprite1.getScaledHeight();
-  float bottom2 = top2+sprite2.getScaledHeight();
-  if ( bottom1 < top2 ) return false;
-  if ( bottom2 < top1 ) return false;
+  // Check if sprite 1 is entirely left of sprite 2
+  if (x1Left+sprite1.getScaledWidth() < x2Left) { return false; }
+  // Check if sprite 1 is entirely right of sprite 2
+  if (x2Left+sprite2.getScaledWidth() < x1Left) { return false; }
+  // Check if sprite 1 is entirely above sprite 2
+  if (y1Top+sprite1.getScaledHeight() < y2Top) { return false; }
+  // Check if  sprite 1 is entirely below sprite 2
+  if (y2Top+sprite2.getScaledHeight() < y1Top) { return false; }
+  // Otherwise collision
   return true;
 }
 
@@ -36,7 +37,7 @@ distance(float x1, float y1, float x2, float y2) const {
 }
 
 void MidPointCollisionStrategy::draw() const {
-  IOmod::
+  IoMod::
   getInstance().writeText("Strategy: Distance", 500, 30);
 }
 
@@ -58,7 +59,7 @@ bool MidPointCollisionStrategy::execute(
 
 
 void PerPixelCollisionStrategy::draw() const {
-  IOmod::
+  IoMod::
   getInstance().writeText("Strategy: Per-Pixel ", 500, 30);
 }
 
