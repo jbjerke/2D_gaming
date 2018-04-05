@@ -21,8 +21,9 @@ Player::Player( const std::string& name) :
   leftimages( ImageFactory::getInstance().getImages("Left"+name) ),
   idleimages( ImageFactory::getInstance().getImages("Idle"+name) ),
   images( idleimages ),
+	playerName(name),
   currentFrame(0),
-  numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
+  numberOfFrames( Gamedata::getInstance().getXmlInt("Idle"+name+"/frames") ),
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   timeSinceLastFrame( 0 ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
@@ -36,6 +37,7 @@ Player::Player(const Player& s) :
   leftimages(s.leftimages),
   idleimages(s.idleimages),
   images(s.images),
+	playerName(s.playerName),
   currentFrame(s.currentFrame),
   numberOfFrames( s.numberOfFrames ),
   frameInterval( s.frameInterval ),
@@ -51,6 +53,7 @@ Player& Player::operator=(const Player& s) {
   leftimages = s.leftimages;
   idleimages = s.idleimages;
   images = (s.images);
+	playerName = (s.playerName);
   currentFrame = (s.currentFrame);
   numberOfFrames = ( s.numberOfFrames );
   frameInterval = ( s.frameInterval );
@@ -67,16 +70,22 @@ void Player::draw() const {
 
 void Player::stop() {
   //setVelocity( Vector2f(0, 0) );
-  setVelocityX( 0.93*getVelocityX() );
+  setVelocityX( 0.50*getVelocityX() );
   setVelocityY(0);
+	images = idleimages;
+	numberOfFrames = Gamedata::getInstance().getXmlInt("Idle"+playerName+"/frames");
 }
 
 void Player::right() {
+	images = rightimages;
+	numberOfFrames = Gamedata::getInstance().getXmlInt(playerName+"/frames");
   if ( getX() < worldWidth-getScaledWidth()) {
     setVelocityX(initialVelocity[0]);
   }
 }
 void Player::left()  {
+	images = leftimages;
+	numberOfFrames = Gamedata::getInstance().getXmlInt("Left"+playerName+"/frames");
   if ( getX() > 0) {
     setVelocityX(-initialVelocity[0]);
   }
@@ -103,13 +112,16 @@ void Player::update(Uint32 ticks) {
   if ( getX() < 0) {
     setVelocityX( fabs( getVelocityX() ) );
 		images = rightimages;
+		numberOfFrames = Gamedata::getInstance().getXmlInt(playerName+"/frames");
   }
   if ( getX() > worldWidth-getScaledWidth()) {
     setVelocityX( -fabs( getVelocityX() ) );
 		images = leftimages;
+		numberOfFrames = Gamedata::getInstance().getXmlInt("Left"+playerName+"/frames");
   }
 	if ( getX() == 0 ) {
 		images = idleimages;
+		numberOfFrames = Gamedata::getInstance().getXmlInt("Idle"+playerName+"/frames");
 	}
 
   stop();

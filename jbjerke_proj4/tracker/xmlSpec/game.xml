@@ -12,8 +12,8 @@
 <username>jbjerke</username>
 
 <view>
-  <width>854</width>
-  <height>900</height>
+  <width>1000</width>
+  <height>850</height>
 </view>
 
 <world>
@@ -56,85 +56,85 @@
 
 <IdleFireSpirit>
   <file>assets/fire_spirit/fire_spirit_idle.png</file>
-  <startLoc x="227" y="300"/>
+  <startLoc x="150" y="660"/>
   <frames>6</frames>
-  <imageWidth>80</imageWidth>
-  <imageHeight>80</imageHeight>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>0</speedX>
+  <speedX>250</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </IdleFireSpirit>
 
 <LeftFireSpirit>
   <file>assets/fire_spirit/fire_spirit_left.png</file>
-  <startLoc x="227" y="300"/>
+  <startLoc x="150" y="660"/>
   <frames>12</frames>
-  <imageWidth>80</imageWidth>
-  <imageHeight>80</imageHeight>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>0</speedX>
+  <speedX>250</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </LeftFireSpirit>
 
 <FireSpirit>
   <file>assets/fire_spirit/fire_spirit_right.png</file>
-  <startLoc x="227" y="675"/>
+  <startLoc x="150" y="660"/>
   <frames>12</frames>
-  <imageWidth>80</imageWidth>
-  <imageHeight>80</imageHeight>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>0</speedX>
+  <speedX>250</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </FireSpirit>
 
 <Pinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>
-  <startLoc x="227" y="675"/>
+  <startLoc x="227" y="725"/>
   <count>1</count>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>250</speedX>
+  <speedX>225</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </Pinkupine>
 
 <LeftPinkupine>
   <file>assets/pinkupine/pinkupine_left.png</file>
-  <startLoc x="227" y="675"/>
+  <startLoc x="227" y="725"/>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>250</speedX>
+  <speedX>225</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </LeftPinkupine>
 
 <WorriedPinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>
-  <startLoc x="227" y="675"/>
+  <startLoc x="227" y="725"/>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>250</speedX>
+  <speedX>225</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </WorriedPinkupine>
 
 <LeftWorriedPinkupine>
   <file>assets/pinkupine/pinkupine_left.png</file>
-  <startLoc x="227" y="675"/>
+  <startLoc x="227" y="725"/>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>250</speedX>
+  <speedX>225</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </LeftWorriedPinkupine>
@@ -147,8 +147,8 @@
   <imageWidth>60</imageWidth>
   <imageHeight>60</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>250</speedX>
-  <speedY>250</speedY>
+  <speedX>225</speedX>
+  <speedY>150</speedY>
   <transparency>false</transparency>
 </Dogat>
 
@@ -159,8 +159,20 @@
   <imageWidth>60</imageWidth>
   <imageHeight>60</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>250</speedX>
-  <speedY>250</speedY>
+  <speedX>225</speedX>
+  <speedY>150</speedY>
   <transparency>false</transparency>
 </LeftDogat>
+
+<Wizard>
+  <file>assets/wizard/wizard_left2.png</file>
+  <startLoc x="4500" y="570"/>
+  <frames>1</frames>
+  <imageWidth>167</imageWidth>
+  <imageHeight>250</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</Wizard>
 </GameData>

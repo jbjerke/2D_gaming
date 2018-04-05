@@ -68,7 +68,7 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
   if ( getY() < 0) {
     setVelocityY( fabs( getVelocityY() ) );
   }
-  if ( getY() > worldHeight-getScaledHeight()) {
+  if ( getY() > worldHeight-getScaledHeight()-250) {
     setVelocityY( -fabs( getVelocityY() ) );
   }
 

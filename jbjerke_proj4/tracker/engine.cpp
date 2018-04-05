@@ -39,6 +39,7 @@ Engine::Engine() :
   trees("trees", Gamedata::getInstance().getXmlInt("trees/factor") ),
   path("path", Gamedata::getInstance().getXmlInt("path/factor") ),
   viewport( Viewport::getInstance() ),
+  wizard(new Sprite("Wizard")),
   dogats(),
   pinkupines(),
   player(new Player("FireSpirit")),
@@ -75,6 +76,8 @@ void Engine::draw() const {
   // SDL_Color color = {0, 0, 255, 0};
   // io.writeText("Jordan Bjerken", 30, 470, color);
 
+  wizard->draw();
+
   for(auto* dg : dogats){
     dg->draw();
   }
@@ -90,6 +93,8 @@ void Engine::draw() const {
 }
 
 void Engine::update(Uint32 ticks) {
+  wizard->update(ticks);
+  
   for(auto* dt : dogats){
     dt->update(ticks);
   }

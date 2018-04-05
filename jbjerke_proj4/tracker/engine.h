@@ -25,6 +25,7 @@ private:
   World path;
   Viewport& viewport;
 
+  Drawable* wizard;
   std::vector<Drawable*> dogats;
   std::vector<Drawable*> pinkupines;
   Drawable* player;

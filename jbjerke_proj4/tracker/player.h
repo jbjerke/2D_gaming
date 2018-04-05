@@ -39,6 +39,7 @@ private:
   // Eventaully - jump
   std::vector<Image *> images;
 
+  std::string playerName;
   unsigned currentFrame;
   unsigned numberOfFrames;
   unsigned frameInterval;
