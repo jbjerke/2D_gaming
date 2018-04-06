@@ -150,7 +150,7 @@
 
 <Dogat>
   <file>assets/dogat/dogat_right.png</file>
-  <startLoc x="4000" y="675"/>
+  <startLoc x="2000" y="675"/>
   <safeDistance>200</safeDistance>
   <count>15</count>
   <frames>4</frames>

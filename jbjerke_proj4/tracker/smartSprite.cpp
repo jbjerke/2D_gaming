@@ -10,10 +10,16 @@ float distance(float x1, float y1, float x2, float y2) {
   return hypot(x, y);
 }
 
-void SmartSprite::goLeft()  { setVelocityX( -abs(getVelocityX()) );  }
-void SmartSprite::goRight() { setVelocityX( fabs(getVelocityX()) );  }
+void SmartSprite::goLeft()  {
+  setVelocityX( -abs(getVelocityX()) );
+  TwoWayMultiSprite::goLeft(); 
+}
+void SmartSprite::goRight() {
+  setVelocityX( fabs(getVelocityX()) );
+  TwoWayMultiSprite::goRight();
+}
 void SmartSprite::goUp()    { setVelocityY( -fabs(getVelocityY()) ); }
-void SmartSprite::goDown()  { setVelocityY( fabs(getVelocityY()) );  }
+void SmartSprite::goDown()  { setVelocityY( fabs(getVelocityY()) ); }
 
 
 SmartSprite::SmartSprite(const std::string& name, const Vector2f& pos,
@@ -37,7 +43,6 @@ SmartSprite::SmartSprite(const SmartSprite& s) :
 {}
 
 void SmartSprite::update(Uint32 ticks) {
-  TwoWayMultiSprite::update(ticks);
   float x= getX()+getImage()->getWidth()/2;
   float y= getY()+getImage()->getHeight()/2;
   float ex= playerPos[0]+playerWidth/2;
@@ -56,4 +61,5 @@ void SmartSprite::update(Uint32 ticks) {
       if ( y > ey ) goDown();
     }
   }
+  TwoWayMultiSprite::update(ticks);
 }

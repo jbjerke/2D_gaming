@@ -26,6 +26,9 @@ public:
     return images[currentFrame]->getSurface();
   }
 
+  void goLeft(){ images = leftimages; }
+  void goRight(){ images = rightimages; }
+
 private:
   std::vector<Image *> rightimages;
   std::vector<Image *> leftimages;

@@ -36,7 +36,7 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
            ),
 	rightimages( ImageFactory::getInstance().getImages(name) ),
 	leftimages( ImageFactory::getInstance().getImages("Left" + name) ),
-  images( rightimages ),
+  images( leftimages ),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
@@ -91,11 +91,11 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
 
   if ( getX() < 0) {
     setVelocityX( fabs( getVelocityX() ) );
-    images = rightimages;
+    goRight();
   }
   if ( getX() > worldWidth-getScaledWidth()) {
     setVelocityX( -fabs( getVelocityX() ) );
-    images = leftimages;
+    goLeft();
   }
 
 }
