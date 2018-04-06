@@ -1,0 +1,30 @@
+Name: Jordan Bjerken
+
+Course: CpSc 4160
+
+Clemson Email Address: jbjerke@clemson.edu
+
+Project no. 4
+
+Project Due Date: 4/6/2018
+
+Game Level:
+Tim is a simple left-to-right player. When projectiles are added, he will
+be able to project small balls of fire for an attack. There are two other
+rather simple creatures on this level: Pinkupines, and Dogats. Some of these
+pinkupines and dogats will attack and some will evade. To kill each creature,
+Tim will need to hit them with an undetermined about of fireballs. I don't
+know if this is in my scope, but I may try to make at least scaling sizes of
+pinkupines that require a 1-to-1 amount more attacks to take down. The point will
+be that Tim, the fire spirit, needs to kill a certain number of the attacking
+enemies to earn points. If he kills any peaceful, evading creatures, he will lose points.
+The goal is to acquire enough points so that when he reaches the goal
+(the wizard), the wizard will extend a gift to Tim.
+
+Although some of these features such as an attacking AI were probable for
+this project, the drawings all took too long, and with my original problem,
+I did not have time to include them.
+
+
+Note: All art from the background to each sprite are original artworks made in
+gimp using a tablet with poor calibration and aging issues.
