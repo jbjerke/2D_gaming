@@ -9,6 +9,7 @@
 #include "player.h"
 #include "smartSprite.h"
 #include "gamedata.h"
+#include "hud.h"
 #include "engine.h"
 #include "frameGenerator.h"
 #include "collisionStrategy.h"
@@ -45,6 +46,8 @@ Engine::Engine() :
   strats(),
   currentStrat( 0 ),
   collision( false ),
+  hd(new Hud),
+  hudOn( true ),
   makeVideo( false )
 {
   unsigned int numOfDogats= Gamedata::getInstance().getXmlInt("Dogat/count");
@@ -83,11 +86,8 @@ void Engine::draw() const {
   path.draw();
 
   // Put in the HUD:
-  // std::stringstream strm;
-  // strm << "fps: " << clock.getFps();
-  // io.writeText(strm.str(), 30, 60);
-  // SDL_Color color = {0, 0, 255, 0};
-  // io.writeText("Jordan Bjerken", 30, 470, color);
+  SDL_Color color = {255, 255, 255, 0};
+  io.writeText("Jordan Bjerken", 30, 800, color);
 
   wizard->draw();
 
@@ -102,6 +102,11 @@ void Engine::draw() const {
   player->draw();
 
   viewport.draw();
+
+  if (hudOn){
+    hd->toggleOn();
+  }
+
   SDL_RenderPresent(renderer);
 }
 
@@ -177,8 +182,11 @@ void Engine::play() {
           else clock.pause();
         }
         if ( keystate[SDL_SCANCODE_M] ){
-          std::cout<<"changed strat" <<std::endl;
           currentStrat = (currentStrat + 1) % strats.size();
+          std::cout << currentStrat << std::endl;
+        }
+        if ( keystate[SDL_SCANCODE_F1] ){
+          hudOn = !hudOn;
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;

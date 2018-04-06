@@ -8,6 +8,7 @@
 
 class CollisionStrategy;
 class SmartSprite;
+class Hud;
 
 class Engine {
 public:
@@ -39,6 +40,9 @@ private:
   std::vector<CollisionStrategy*> strats;
   int currentStrat;
   bool collision;
+
+  Hud* hd;
+  bool hudOn;
 
   bool makeVideo;
 

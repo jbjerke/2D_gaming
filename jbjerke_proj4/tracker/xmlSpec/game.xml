@@ -21,6 +21,11 @@
   <height>1000</height>
 </world>
 
+<hud>
+  <width>200</width>
+  <height>200</height>
+</hud>
+
 <sky>
   <file>assets/background/sky_full.bmp</file>
   <factor>5</factor>

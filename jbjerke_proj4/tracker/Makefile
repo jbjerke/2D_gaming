@@ -21,6 +21,7 @@ OBJS = \
 	twoWayMultiSprite.o \
 	player.o \
 	smartSprite.o \
+	hud.o \
 	collisionStrategy.o \
 	vector2f.o \
 	clock.o \
