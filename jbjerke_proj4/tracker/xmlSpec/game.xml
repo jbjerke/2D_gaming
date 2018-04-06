@@ -104,7 +104,7 @@
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>225</speedX>
+  <speedX>175</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </Pinkupine>
@@ -117,7 +117,7 @@
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>225</speedX>
+  <speedX>175</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </LeftPinkupine>
@@ -130,7 +130,7 @@
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>225</speedX>
+  <speedX>175</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </WorriedPinkupine>
@@ -143,7 +143,7 @@
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>225</speedX>
+  <speedX>175</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
 </LeftWorriedPinkupine>
