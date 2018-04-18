@@ -19,18 +19,14 @@ Player::Player(const Player& p) :
 { }
 
 void Player::stop() {
-  player.setVelocity( Vector2f(0, 0) );
+  player.stop();
 }
 
 void Player::right() {
-  if ( player.getX() < worldWidth-getScaledWidth()) {
-    player.setVelocityX(initialVelocity[0]);
-  }
+  player.right();
 }
 void Player::left()  {
-  if ( player.getX() > 0) {
-    player.setVelocityX(-initialVelocity[0]);
-  }
+  player.left();
 }
 
 void Player::update(Uint32 ticks) {

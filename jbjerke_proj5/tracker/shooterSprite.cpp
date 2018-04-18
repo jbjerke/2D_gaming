@@ -79,33 +79,33 @@ void ShooterSprite::draw() const {
   images[currentFrame]->draw(getX(), getY(), getScale());
 }
 
-// void ShooterSprite::stop() {
-//   //setVelocity( Vector2f(0, 0) );
-//   setVelocityX( 0.50*getVelocityX() );
-//   setVelocityY(0);
-//
-// 	if( facing == LEFT ) images = leftidleimages;
-// 	else images = idleimages;
-//
-// 	numberOfFrames = Gamedata::getInstance().getXmlInt("Idle"+ShooterSpriteName+"/frames");
-// }
-//
-// void ShooterSprite::right() {
-// 	images = rightimages;
-// 	facing = RIGHT;
-// 	numberOfFrames = Gamedata::getInstance().getXmlInt(ShooterSpriteName+"/frames");
-//   if ( getX() < worldWidth-getScaledWidth()) {
-//     setVelocityX(initialVelocity[0]);
-//   }
-// }
-// void ShooterSprite::left()  {
-// 	images = leftimages;
-// 	facing = LEFT;
-// 	numberOfFrames = Gamedata::getInstance().getXmlInt("Left"+ShooterSpriteName+"/frames");
-//   if ( getX() > 0) {
-//     setVelocityX(-initialVelocity[0]);
-//   }
-// }
+void ShooterSprite::stop() {
+  //setVelocity( Vector2f(0, 0) );
+  setVelocityX( 0.50*getVelocityX() );
+  setVelocityY(0);
+
+	if( facing == LEFT ) images = leftidleimages;
+	else images = idleimages;
+
+	numberOfFrames = Gamedata::getInstance().getXmlInt("Idle"+ShooterSpriteName+"/frames");
+}
+
+void ShooterSprite::right() {
+	images = rightimages;
+	facing = RIGHT;
+	numberOfFrames = Gamedata::getInstance().getXmlInt(ShooterSpriteName+"/frames");
+  if ( getX() < worldWidth-getScaledWidth()) {
+    setVelocityX(initialVelocity[0]);
+  }
+}
+void ShooterSprite::left()  {
+	images = leftimages;
+	facing = LEFT;
+	numberOfFrames = Gamedata::getInstance().getXmlInt("Left"+ShooterSpriteName+"/frames");
+  if ( getX() > 0) {
+    setVelocityX(-initialVelocity[0]);
+  }
+}
 
 void ShooterSprite::update(Uint32 ticks) {
   advanceFrame(ticks);

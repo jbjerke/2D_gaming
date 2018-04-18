@@ -27,9 +27,9 @@ public:
     return images[currentFrame]->getSurface();
   }
 
-  // void right();
-  // void left();
-  // void stop();
+  void right();
+  void left();
+  void stop();
 
 private:
   std::vector<Image *> rightimages;
