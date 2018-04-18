@@ -17,7 +17,7 @@
 </view>
 
 <world>
-  <width>5000</width>
+  <width>7000</width>
   <height>1000</height>
 </world>
 
@@ -71,6 +71,18 @@
   <transparency>false</transparency>
 </IdleFireSpirit>
 
+<LeftIdleFireSpirit>
+  <file>assets/fire_spirit/fire_spirit_idle_left.png</file>
+  <startLoc x="150" y="660"/>
+  <frames>6</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftIdleFireSpirit>
+
 <LeftFireSpirit>
   <file>assets/fire_spirit/fire_spirit_left.png</file>
   <startLoc x="150" y="660"/>
@@ -95,10 +107,53 @@
   <transparency>false</transparency>
 </FireSpirit>
 
+<FireSpiritAttack>
+  <file>assets/fire_spirit/fire_spirit_attack_right.png</file>
+  <frames>4</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</FireSpiritAttack>
+
+<LeftFireSpiritAttack>
+  <file>assets/fire_spirit/fire_spirit_attack_left.png</file>
+  <frames>4</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftFireSpiritAttack>
+
+<FireSpiritFireBall>
+  <file>assets/fire_spirit_projectile_right.png</file>
+  <frames>1</frames>
+  <imageWidth>73</imageWidth>
+  <imageHeight>45</imageHeight>
+  <speedX>500</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</FireSpiritFireBall>
+
+<LeftFireSpiritFireBall>
+  <file>assets/fire_spirit_projectile_left.png</file>
+  <frames>1</frames>
+  <imageWidth>73</imageWidth>
+  <imageHeight>45</imageHeight>
+  <speedX>500</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftFireSpiritFireBall>
+
 <Pinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>
   <startLoc x="4000" y="725"/>
   <safeDistance>200</safeDistance>
+  <attackDistance>300</attackDistance>
   <count>5</count>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
@@ -123,7 +178,7 @@
 </LeftPinkupine>
 
 <WorriedPinkupine>
-  <file>assets/pinkupine/pinkupine_right.png</file>
+  <file>assets/pinkupine/worried_pinkupine_right.png</file>
   <startLoc x="4000" y="725"/>
   <safeDistance>200</safeDistance>
   <frames>8</frames>
@@ -136,7 +191,7 @@
 </WorriedPinkupine>
 
 <LeftWorriedPinkupine>
-  <file>assets/pinkupine/pinkupine_left.png</file>
+  <file>assets/pinkupine/worried_pinkupine_left.png</file>
   <startLoc x="4000" y="725"/>
   <safeDistance>200</safeDistance>
   <frames>8</frames>
@@ -147,6 +202,32 @@
   <speedY>0</speedY>
   <transparency>false</transparency>
 </LeftWorriedPinkupine>
+
+<AngryPinkupine>
+  <file>assets/pinkupine/angry_pinkupine_right.png</file>
+  <startLoc x="4000" y="725"/>
+  <attackDistance>200</attackDistance>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>175</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</AngryPinkupine>
+
+<LeftAngryPinkupine>
+  <file>assets/pinkupine/angry_pinkupine_right.png</file>
+  <startLoc x="4000" y="725"/>
+  <attackDistance>200</attackDistance>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>175</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftAngryPinkupine>
 
 <Dogat>
   <file>assets/dogat/dogat_right.png</file>
@@ -177,7 +258,7 @@
 
 <Wizard>
   <file>assets/wizard/wizard_left2.png</file>
-  <startLoc x="4500" y="570"/>
+  <startLoc x="6500" y="570"/>
   <frames>1</frames>
   <imageWidth>167</imageWidth>
   <imageHeight>250</imageHeight>

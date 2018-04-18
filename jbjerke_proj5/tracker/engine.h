@@ -7,6 +7,7 @@
 #include "viewport.h"
 
 class CollisionStrategy;
+class Player;
 class SmartSprite;
 class Hud;
 
@@ -32,7 +33,7 @@ private:
   Drawable* wizard;
   std::vector<SmartSprite*> dogats;
   std::vector<SmartSprite*> pinkupines;
-  Drawable* player;
+  Player* player;
   // might be useful if tracking players
   //std::vector<Drawable*>::const_iterator spiter;
   // int currentSprite;

@@ -19,6 +19,7 @@ OBJS = \
 	sprite.o \
 	multisprite.o \
 	twoWayMultiSprite.o \
+	shooterSprite.o \
 	player.o \
 	smartSprite.o \
 	hud.o \

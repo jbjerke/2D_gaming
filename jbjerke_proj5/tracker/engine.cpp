@@ -6,6 +6,7 @@
 #include <iomanip>
 #include "sprite.h"
 #include "twoWayMultiSprite.h"
+#include "shooterSprite.h"
 #include "player.h"
 #include "smartSprite.h"
 #include "gamedata.h"
@@ -55,18 +56,18 @@ Engine::Engine() :
   dogats.reserve(numOfDogats);
   pinkupines.reserve(numOfPinkupines);
 
-  Vector2f pos = player->getPosition();
+  Vector2f pos = player->getPlayer()->getPosition();
   int w = player->getScaledWidth();
   int h = player->getScaledHeight();
 
   for( unsigned int n = 0; n < numOfDogats; n++ ){
     dogats.push_back( new SmartSprite("Dogat", pos, w, h) );
-    static_cast<Player*>(player)->attach( dogats[n] );
+    player->attach( dogats[n] );
   }
 
   for( unsigned int m = 0; m < numOfPinkupines; m++){
     pinkupines.push_back( new SmartSprite("Pinkupine", pos, w, h) );
-    static_cast<Player*>(player)->attach( pinkupines[m] );
+    player->attach( pinkupines[m] );
   }
 
 
@@ -74,7 +75,7 @@ Engine::Engine() :
   strats.push_back( new MidPointCollisionStrategy );
   strats.push_back( new PerPixelCollisionStrategy );
 
-  Viewport::getInstance().setObjectToTrack(player);
+  Viewport::getInstance().setObjectToTrack(player->getPlayer());
   std::cout << "Loading complete" << std::endl;
 }
 
@@ -137,7 +138,7 @@ void Engine::checkForCollisions(){
   while( dit != dogats.end() ){
     if ( strats[currentStrat]->execute(*player, **dit) ){
       SmartSprite* doneForD = *dit;
-      static_cast<Player*>(player)->detach(doneForD);
+      player->detach(doneForD);
       delete doneForD;
       dit = dogats.erase(dit);
     }
@@ -148,7 +149,7 @@ void Engine::checkForCollisions(){
   while( pit != pinkupines.end() ){
     if ( strats[currentStrat]->execute(*player, **pit) ){
       SmartSprite* doneForP = *pit;
-      static_cast<Player*>(player)->detach(doneForP);
+      player->detach(doneForP);
       delete doneForP;
       pit = pinkupines.erase(pit);
     }
@@ -204,10 +205,12 @@ void Engine::play() {
     if ( ticks > 0 ) {
       clock.incrFrame();
       if (keystate[SDL_SCANCODE_A]){
-        static_cast<Player*>(player)->left();
+        //player->left();
+        player->left();
       }
       if (keystate[SDL_SCANCODE_D]){
-        static_cast<Player*>(player)->right();
+        //player->right();
+        player->right();
       }
       draw();
       update(ticks);

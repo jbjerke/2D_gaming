@@ -12,7 +12,7 @@ float distance(float x1, float y1, float x2, float y2) {
 
 void SmartSprite::goLeft()  {
   setVelocityX( -abs(getVelocityX()) );
-  TwoWayMultiSprite::goLeft(); 
+  TwoWayMultiSprite::goLeft();
 }
 void SmartSprite::goRight() {
   setVelocityX( fabs(getVelocityX()) );
@@ -53,7 +53,7 @@ void SmartSprite::update(Uint32 ticks) {
     if(distanceToEnemy < safeDistance) currentMode = EVADE;
   }
   else if  ( currentMode == EVADE ) {
-    if(distanceToEnemy > safeDistance) currentMode=NORMAL;
+    if(distanceToEnemy > safeDistance) currentMode = NORMAL;
     else {
       if ( x < ex ) goLeft();
       if ( x > ex ) goRight();
