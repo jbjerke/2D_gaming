@@ -17,7 +17,7 @@ public:
   virtual void draw() const;
   virtual void update(Uint32 ticks);
   virtual void explode();
-  virtual bool isDoneExploding() const { return isExploded; }
+  virtual bool isExploding() const { return explosion; }
 
   virtual const Image* getImage() const { return image; }
   virtual const SDL_Surface* getSurface() const {
@@ -30,7 +30,6 @@ private:
   const Image * image;
 
   ExplodingSprite* explosion;
-  bool isExploded;
 
   int worldWidth;
   int worldHeight;

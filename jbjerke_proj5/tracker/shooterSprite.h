@@ -18,7 +18,7 @@ public:
   virtual void update(Uint32 ticks);
 
   virtual void explode();
-  virtual bool isDoneExploding() const { return isExploded; }
+  virtual bool isExploding() const { return explosion; }
 
   virtual const Image* getImage() const {
     return images[currentFrame];
@@ -60,7 +60,6 @@ private:
   Vector2f initialVelocity;
 
   ExplodingSprite* explosion;
-  bool isExploded;
 
   void advanceFrame(Uint32 ticks);
   ShooterSprite& operator=(const ShooterSprite&);

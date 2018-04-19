@@ -46,8 +46,7 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
   timeSinceLastFrame( 0 ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
-	explosion(nullptr),
-	isExploded(false)
+	explosion(nullptr)
 { }
 
 TwoWayMultiSprite::TwoWayMultiSprite(const TwoWayMultiSprite& s) :
@@ -77,14 +76,12 @@ TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
   worldWidth = ( s.worldWidth );
   worldHeight = ( s.worldHeight );
 	explosion = s.explosion;
-	isExploded = s.isExploded;
   return *this;
 }
 
 void TwoWayMultiSprite::draw() const {
 	if( explosion ){
 		explosion->draw();
-		std::cout << "why aren't you exploding" << std::endl;
 	}
   else images[currentFrame]->draw(getX(), getY(), getScale());
 }

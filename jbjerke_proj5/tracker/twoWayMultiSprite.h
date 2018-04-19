@@ -16,7 +16,7 @@ public:
   virtual void draw() const;
   virtual void update(Uint32 ticks);
   virtual void explode();
-  virtual bool isDoneExploding() const { return isExploded; }
+  virtual bool isExploding() const { return explosion; }
 
   virtual const Image* getImage() const {
     return images[currentFrame];
@@ -49,7 +49,6 @@ private:
   Vector2f makeVelocity(int, int) const;
 
   ExplodingSprite* explosion;
-  bool isExploded;
 
   void advanceFrame(Uint32 ticks);
   TwoWayMultiSprite& operator=(const TwoWayMultiSprite&);

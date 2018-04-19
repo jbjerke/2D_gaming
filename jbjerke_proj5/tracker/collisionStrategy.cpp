@@ -11,7 +11,7 @@ void RectangularCollisionStrategy::draw() const {
 }
 
 bool RectangularCollisionStrategy::execute(
-      const Player& sprite1, const Drawable& sprite2) const {
+      const Drawable& sprite1, const Drawable& sprite2) const {
   float x1Left = sprite1.getX();
   float y1Top = sprite1.getY();
   float x2Left = sprite2.getX();
@@ -42,7 +42,7 @@ void MidPointCollisionStrategy::draw() const {
 }
 
 bool MidPointCollisionStrategy::execute(
-      const Player& sprite1, const Drawable& sprite2) const {
+      const Drawable& sprite1, const Drawable& sprite2) const {
 
   int width1 = sprite1.getScaledWidth();
   int width2 = sprite2.getScaledWidth();
@@ -102,13 +102,13 @@ SDL_Surface* scaleSurface(const SDL_Surface* const surf, int width, int height) 
 }
 
 bool PerPixelCollisionStrategy::execute(
-      const Player& obj1, const Drawable& obj2) const {
+      const Drawable& obj1, const Drawable& obj2) const {
 
   RectangularCollisionStrategy strategy;
   if ( not strategy.execute(obj1, obj2) ) return false;
   // If we got this far, we know that the sprite rectangles intersect!
 
-  Vector2f p1 = obj1.getPlayer()->getPosition() - Viewport::getInstance().getPosition();
+  Vector2f p1 = obj1.getPosition() - Viewport::getInstance().getPosition();
   Vector2f p2 = obj2.getPosition() - Viewport::getInstance().getPosition();
 
   Uint16 width1 = obj1.getScaledWidth();

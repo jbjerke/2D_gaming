@@ -150,7 +150,7 @@ void Engine::update(Uint32 ticks) {
 void Engine::checkForCollisions(){
   std::vector<SmartSprite*>::iterator dit = dogats.begin();
   while( dit != dogats.end() ){
-    if ( strats[currentStrat]->execute(*player, **dit) ){
+    if ( strats[currentStrat]->execute(*(player->getPlayer()), **dit) ){
       SmartSprite* doneForD = *dit;
       (*dit)->explode();
       player->detach(doneForD);
@@ -161,7 +161,8 @@ void Engine::checkForCollisions(){
 
   std::vector<SmartSprite*>::iterator pit = pinkupines.begin();
   while( pit != pinkupines.end() ){
-    if ( strats[currentStrat]->execute(*player, **pit) ){
+
+    if ( strats[currentStrat]->execute(*(player->getPlayer()), **pit) ){
       SmartSprite* doneForP = *pit;
       (*pit)->explode();
       player->detach(doneForP);

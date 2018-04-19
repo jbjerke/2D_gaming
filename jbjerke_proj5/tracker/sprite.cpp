@@ -20,7 +20,6 @@ Sprite::Sprite(const string& n, const Vector2f& pos, const Vector2f& vel,
   Drawable(n, pos, vel),
   image( img ),
   explosion(nullptr),
-  isExploded(false),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
@@ -35,7 +34,6 @@ Sprite::Sprite(const std::string& name) :
            ),
   image( RenderContext::getInstance()->getImage(name) ),
   explosion(nullptr),
-  isExploded(false),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
@@ -44,7 +42,6 @@ Sprite::Sprite(const Sprite& s) :
   Drawable(s),
   image(s.image),
   explosion(s.explosion),
-  isExploded(s.isExploded),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
@@ -53,7 +50,6 @@ Sprite& Sprite::operator=(const Sprite& rhs) {
   Drawable::operator=( rhs );
   image = rhs.image;
   explosion = rhs.explosion;
-  isExploded = rhs.isExploded;
   worldWidth = rhs.worldWidth;
   worldHeight = rhs.worldHeight;
   return *this;
