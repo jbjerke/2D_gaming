@@ -12,6 +12,7 @@ class ShooterSprite : public Drawable {
 public:
   ShooterSprite(const std::string&);
   ShooterSprite(const ShooterSprite&);
+  ~ShooterSprite();
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);

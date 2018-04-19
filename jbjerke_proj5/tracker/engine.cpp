@@ -141,6 +141,7 @@ void Engine::checkForCollisions(){
   while( dit != dogats.end() ){
     if ( strats[currentStrat]->execute(*player, **dit) ){
       SmartSprite* doneForD = *dit;
+      (*dit)->explode();
       player->detach(doneForD);
       delete doneForD;
       dit = dogats.erase(dit);
@@ -152,9 +153,12 @@ void Engine::checkForCollisions(){
   while( pit != pinkupines.end() ){
     if ( strats[currentStrat]->execute(*player, **pit) ){
       SmartSprite* doneForP = *pit;
-      player->detach(doneForP);
-      delete doneForP;
-      pit = pinkupines.erase(pit);
+      (*pit)->explode();
+
+      if ( (*pit)->isDoneExploding() ) {
+        player->detach(doneForP);
+        delete doneForP;
+        pit = pinkupines.erase(pit);
     }
     else { ++pit; }
   }

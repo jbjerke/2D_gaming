@@ -11,11 +11,12 @@ class TwoWayMultiSprite : public Drawable {
 public:
   TwoWayMultiSprite(const std::string&);
   TwoWayMultiSprite(const TwoWayMultiSprite&);
+  ~TwoWayMultiSprite();
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
   virtual void explode();
-  virtual bool isDoneExploding() { return isExploded; }
+  virtual bool isDoneExploding() const { return isExploded; }
 
   virtual const Image* getImage() const {
     return images[currentFrame];

@@ -82,8 +82,11 @@ ShooterSprite& ShooterSprite::operator=(const ShooterSprite& s) {
   return *this;
 }
 
+ShooterSprite::~ShooterSprite(){ if(explosion) delete explosion; }
+
 void ShooterSprite::draw() const {
-  images[currentFrame]->draw(getX(), getY(), getScale());
+	if(explosion) explosion->draw();
+  else images[currentFrame]->draw(getX(), getY(), getScale());
 }
 
 void ShooterSprite::stop() {
@@ -117,6 +120,18 @@ void ShooterSprite::left()  {
 void ShooterSprite::update(Uint32 ticks) {
   advanceFrame(ticks);
 
+	if ( explosion ){
+		explosion->update(ticks);
+
+		if ( explosion->chunkCount() == 0 ){
+			delete explosion;
+			explosion = nullptr;
+
+			isExploded = true;
+		}
+		return;
+	}
+
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
 
@@ -147,4 +162,9 @@ void ShooterSprite::update(Uint32 ticks) {
 	}
 }
 
-void ShooterSprite::explode() {}
+void ShooterSprite::explode() {
+	if( !explosion ) {
+		Sprite sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+		explosion = new ExplodingSprite(sprite);
+	}
+}

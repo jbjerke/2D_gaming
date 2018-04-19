@@ -3,7 +3,7 @@
 #include <string>
 #include "twoWayMultiSprite.h"
 
-class ExplodingSprite;
+//class ExplodingSprite;
 
 class SmartSprite : public TwoWayMultiSprite {
 public:
@@ -11,9 +11,9 @@ public:
   SmartSprite(const SmartSprite&);
   virtual ~SmartSprite() { }
 
+  void explode() { TwoWayMultiSprite::explode(); }
+
   virtual void update(Uint32 ticks);
-  virtual void explode();
-  virtual void isExploded() const;
   void setPlayerPos(const Vector2f& p) { playerPos = p; }
 
 private:

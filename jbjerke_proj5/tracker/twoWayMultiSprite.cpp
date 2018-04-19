@@ -3,6 +3,8 @@
 #include "gamedata.h"
 #include "imageFactory.h"
 
+TwoWayMultiSprite::~TwoWayMultiSprite(){ if(explosion) delete explosion; }
+
 void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
 	if (timeSinceLastFrame > frameInterval) {
@@ -80,11 +82,24 @@ TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
 }
 
 void TwoWayMultiSprite::draw() const {
-  images[currentFrame]->draw(getX(), getY(), getScale());
+	if( explosion ){
+		explosion->draw();
+		std::cout << "why aren't you exploding" << std::endl;
+	}
+  else images[currentFrame]->draw(getX(), getY(), getScale());
 }
 
 void TwoWayMultiSprite::update(Uint32 ticks) {
   advanceFrame(ticks);
+
+	if ( explosion ){
+		explosion->update(ticks);
+		if ( explosion->chunkCount() == 0 ){
+			delete explosion;
+			explosion = nullptr;
+		}
+		return;
+	}
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
@@ -104,7 +119,12 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
     setVelocityX( -fabs( getVelocityX() ) );
     goLeft();
   }
-
 }
 
-void TwoWayMultiSprite::explode() {}
+void TwoWayMultiSprite::explode() {
+	if( !explosion ){
+		Sprite
+		sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+		explosion = new ExplodingSprite(sprite);
+	}
+}

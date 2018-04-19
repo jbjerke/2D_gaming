@@ -105,6 +105,10 @@
   <speedX>250</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>50</size>
+    <distance>100</distance>
+  </chunk>
 </FireSpirit>
 
 <FireSpiritAttack>
@@ -162,6 +166,10 @@
   <speedX>175</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>30</size>
+    <distance>100</distance>
+  </chunk>
 </Pinkupine>
 
 <LeftPinkupine>
@@ -241,6 +249,10 @@
   <speedX>225</speedX>
   <speedY>150</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>50</size>
+    <distance>100</distance>
+  </chunk>
 </Dogat>
 
 <LeftDogat>

@@ -17,6 +17,7 @@ public:
 
   void draw() const { player.draw(); }
   void update(Uint32 ticks);
+  void explode() { player.explode(); }
   const ShooterSprite* getPlayer() const { return &player; }
 
   const std::string& getName() const { return player.getName(); }
