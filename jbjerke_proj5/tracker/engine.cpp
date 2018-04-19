@@ -172,8 +172,6 @@ void Engine::checkForCollisions(){
         SmartSprite* doneForP = *pit;
         (*pit)->explode();
         player->detach(doneForP);
-        delete doneForP;
-        std::cout << "bitch" << std::endl;
         ++pit;
       }
       else { ++pit; }
