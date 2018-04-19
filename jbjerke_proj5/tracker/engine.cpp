@@ -116,19 +116,30 @@ void Engine::draw() const {
 
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
+
   wizard->update(ticks);
 
-  for(auto* dt : dogats){
-    dt->update(ticks);
+  auto dt = dogats.begin();
+  while( dt != dogats.end() ){
+    (*dt)->update(ticks);
+    if ( (*dt)->isDoneExploding() ){
+      delete *dt;
+      dt = dogats.erase(dt);
+    }
+    else ++dt;
   }
 
-  for(auto* pp : pinkupines){
-    pp->update(ticks);
+  auto pp = pinkupines.begin();
+  while( pp != pinkupines.end() ){
+  (*pp)->update(ticks);
+    if ( (*pp)->isDoneExploding() ){
+      delete *pp;
+      pp = pinkupines.erase(pp);
+    }
+    else ++pp;
   }
 
   player->update(ticks);
-  // star->update(ticks);
-  // spinningStar->update(ticks);
   sky.update();
   mntns.update();
   trees.update();
@@ -144,7 +155,6 @@ void Engine::checkForCollisions(){
       (*dit)->explode();
       player->detach(doneForD);
       delete doneForD;
-      dit = dogats.erase(dit);
     }
     else { ++dit; }
   }
@@ -154,11 +164,8 @@ void Engine::checkForCollisions(){
     if ( strats[currentStrat]->execute(*player, **pit) ){
       SmartSprite* doneForP = *pit;
       (*pit)->explode();
-
-      if ( (*pit)->isDoneExploding() ) {
-        player->detach(doneForP);
-        delete doneForP;
-        pit = pinkupines.erase(pit);
+      player->detach(doneForP);
+      delete doneForP;
     }
     else { ++pit; }
   }
