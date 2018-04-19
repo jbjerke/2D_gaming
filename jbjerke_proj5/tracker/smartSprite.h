@@ -13,7 +13,6 @@ public:
 
   virtual void explode() {
     TwoWayMultiSprite::explode(); 
-  std::cout << "here" << std::endl;
 }
 
   virtual void update(Uint32 ticks);

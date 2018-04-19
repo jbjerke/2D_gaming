@@ -115,9 +115,7 @@ void Engine::draw() const {
 }
 
 void Engine::update(Uint32 ticks) {
-  std::cout << "trying to update" << std::endl;
   checkForCollisions();
-  std::cout << "problem is actually here" << std::endl;
 
   wizard->update(ticks);
 
@@ -133,7 +131,6 @@ void Engine::update(Uint32 ticks) {
 
   auto pp = pinkupines.begin();
   while( pp != pinkupines.end() ){
-    std::cout << "right before pinkupine updates" << std::endl;
     (*pp)->update(ticks);
     if ( (*pp)->isDoneExploding() ){
       delete *pp;
@@ -182,8 +179,6 @@ void Engine::checkForCollisions(){
   // if ( strats[currentStrat]->execute(*player, *wizard) ){
   //   static_cast<Player*>(player)->stop();
   // }
-
-  std::cout << "left checkForCollisions" << std::endl;
 }
 
 void Engine::play() {

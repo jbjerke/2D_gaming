@@ -6,7 +6,6 @@
 TwoWayMultiSprite::~TwoWayMultiSprite(){ if(explosion) delete explosion; }
 
 void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
-	std::cout<<"pls"<<std::endl;
 	timeSinceLastFrame += ticks;
 	if (timeSinceLastFrame > frameInterval) {
     currentFrame = (currentFrame+1) % numberOfFrames;
@@ -84,7 +83,6 @@ TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
 
 void TwoWayMultiSprite::draw() const {
 	if( explosion ){
-		std::cout << "why aren't you exploding" << std::endl;
 		explosion->draw();
 	}
   else images[currentFrame]->draw(getX(), getY(), getScale());
@@ -92,11 +90,8 @@ void TwoWayMultiSprite::draw() const {
 
 void TwoWayMultiSprite::update(Uint32 ticks) {
 	advanceFrame(ticks);
-	std::cout<<"what"<<std::endl;
 	if ( explosion ){
-		std::cout << "some issues need tissues" << std::endl;
 		explosion->update(ticks);
-		std::cout << "some issues need tissues" << std::endl;
 		if ( explosion->chunkCount() == 0 ){
 			delete explosion;
 			explosion = nullptr;
@@ -104,7 +99,6 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
 		}
 		return;
 	}
-	std::cout<<"is it skipping the loop?" <<std::endl;
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
@@ -131,6 +125,5 @@ void TwoWayMultiSprite::explode() {
 		Sprite
 		sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
 		explosion = new ExplodingSprite(sprite);
-		std::cout << "made explosion" << std::endl;
 	}
 }
