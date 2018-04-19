@@ -1,4 +1,5 @@
 #include "twoWayMultiSprite.h"
+#include "explodingSprite.h"
 #include "gamedata.h"
 #include "imageFactory.h"
 
@@ -42,7 +43,9 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   timeSinceLastFrame( 0 ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
-  worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+	explosion(nullptr),
+	isExploded(false)
 { }
 
 TwoWayMultiSprite::TwoWayMultiSprite(const TwoWayMultiSprite& s) :
@@ -55,8 +58,10 @@ TwoWayMultiSprite::TwoWayMultiSprite(const TwoWayMultiSprite& s) :
   frameInterval( s.frameInterval ),
   timeSinceLastFrame( s.timeSinceLastFrame ),
   worldWidth( s.worldWidth ),
-  worldHeight( s.worldHeight )
-  { }
+  worldHeight( s.worldHeight ),
+	explosion(s.explosion),
+	isExploded(s.isExploded)
+{ }
 
 TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
   Drawable::operator=(s);
@@ -69,6 +74,8 @@ TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
   timeSinceLastFrame = ( s.timeSinceLastFrame );
   worldWidth = ( s.worldWidth );
   worldHeight = ( s.worldHeight );
+	explosion = s.explosion;
+	isExploded = s.isExploded;
   return *this;
 }
 
@@ -99,3 +106,5 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
   }
 
 }
+
+void TwoWayMultiSprite::explode() {}

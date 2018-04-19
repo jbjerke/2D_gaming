@@ -35,9 +35,9 @@ public:
     return player.getSurface();
   }
 
-  void right();
-  void left();
-  void stop();
+  void right() { player.right(); }
+  void left() { player.left(); }
+  void stop() { player.stop(); }
 
   void attach( SmartSprite* ss ) { observers.push_back(ss); }
   void detach( SmartSprite* ss );

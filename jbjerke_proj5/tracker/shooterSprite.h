@@ -6,6 +6,8 @@
 #include <list>
 #include "drawable.h"
 
+class ExplodingSprite;
+
 class ShooterSprite : public Drawable {
 public:
   ShooterSprite(const std::string&);
@@ -13,6 +15,9 @@ public:
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
+
+  virtual void explode();
+  virtual bool isDoneExploding() const { return isExploded; }
 
   virtual const Image* getImage() const {
     return images[currentFrame];
@@ -38,7 +43,6 @@ private:
   std::vector<Image *> leftidleimages;
   std::vector<Image *> attackimages;
   std::vector<Image *> leftattackimages;
-  // Eventaully - jump
   std::vector<Image *> images;
 
   std::string ShooterSpriteName;
@@ -53,6 +57,9 @@ private:
   DIRECTION facing;
 
   Vector2f initialVelocity;
+
+  ExplodingSprite* explosion;
+  bool isExploded;
 
   void advanceFrame(Uint32 ticks);
   ShooterSprite& operator=(const ShooterSprite&);

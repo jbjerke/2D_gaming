@@ -21,6 +21,8 @@ OBJS = \
 	shooterSprite.o \
 	player.o \
 	smartSprite.o \
+	explodingSprite.o \
+	chunk.o \
 	hud.o \
 	collisionStrategy.o \
 	vector2f.o \

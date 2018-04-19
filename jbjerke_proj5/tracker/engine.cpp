@@ -25,7 +25,10 @@ Engine::~Engine() {
   for( CollisionStrategy* s : strats ){
     delete s;
   }
+
   delete wizard;
+
+  //delete player;
 
   std::cout << "Terminating program" << std::endl;
 }

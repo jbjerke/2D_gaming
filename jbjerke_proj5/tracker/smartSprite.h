@@ -3,6 +3,8 @@
 #include <string>
 #include "twoWayMultiSprite.h"
 
+class ExplodingSprite;
+
 class SmartSprite : public TwoWayMultiSprite {
 public:
   SmartSprite(const std::string&, const Vector2f& pos, int w, int h);
@@ -10,6 +12,8 @@ public:
   virtual ~SmartSprite() { }
 
   virtual void update(Uint32 ticks);
+  virtual void explode();
+  virtual void isExploded() const;
   void setPlayerPos(const Vector2f& p) { playerPos = p; }
 
 private:

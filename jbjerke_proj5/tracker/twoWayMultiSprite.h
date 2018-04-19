@@ -5,6 +5,8 @@
 #include <cmath>
 #include "drawable.h"
 
+class ExplodingSprite;
+
 class TwoWayMultiSprite : public Drawable {
 public:
   TwoWayMultiSprite(const std::string&);
@@ -12,6 +14,8 @@ public:
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
+  virtual void explode();
+  virtual bool isDoneExploding() { return isExploded; }
 
   virtual const Image* getImage() const {
     return images[currentFrame];
@@ -42,6 +46,9 @@ private:
   int worldHeight;
 
   Vector2f makeVelocity(int, int) const;
+
+  ExplodingSprite* explosion;
+  bool isExploded;
 
   void advanceFrame(Uint32 ticks);
   TwoWayMultiSprite& operator=(const TwoWayMultiSprite&);

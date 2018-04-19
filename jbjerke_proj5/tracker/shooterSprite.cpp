@@ -1,4 +1,5 @@
 #include "shooterSprite.h"
+#include "explodingSprite.h"
 #include "gamedata.h"
 #include "imageFactory.h"
 
@@ -32,7 +33,9 @@ ShooterSprite::ShooterSprite( const std::string& name) :
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
 	facing(RIGHT),
-  initialVelocity(getVelocity())
+  initialVelocity(getVelocity()),
+	explosion(nullptr),
+	isExploded(false)
 { }
 
 ShooterSprite::ShooterSprite(const ShooterSprite& s) :
@@ -52,7 +55,9 @@ ShooterSprite::ShooterSprite(const ShooterSprite& s) :
   worldWidth( s.worldWidth ),
   worldHeight( s.worldHeight ),
 	facing(s.facing),
-  initialVelocity( s.initialVelocity )
+  initialVelocity( s.initialVelocity ),
+	explosion(s.explosion),
+	isExploded(s.isExploded)
   { }
 
 ShooterSprite& ShooterSprite::operator=(const ShooterSprite& s) {
@@ -72,6 +77,8 @@ ShooterSprite& ShooterSprite::operator=(const ShooterSprite& s) {
   worldWidth = ( s.worldWidth );
   worldHeight = ( s.worldHeight );
   initialVelocity = ( s.initialVelocity );
+	explosion = s.explosion;
+	isExploded = s.isExploded;
   return *this;
 }
 
@@ -139,3 +146,5 @@ void ShooterSprite::update(Uint32 ticks) {
 		numberOfFrames = Gamedata::getInstance().getXmlInt("Idle"+ShooterSpriteName+"/frames");
 	}
 }
+
+void ShooterSprite::explode() {}

@@ -18,17 +18,6 @@ Player::Player(const Player& p) :
   worldHeight(p.worldHeight)
 { }
 
-void Player::stop() {
-  player.stop();
-}
-
-void Player::right() {
-  player.right();
-}
-void Player::left()  {
-  player.left();
-}
-
 void Player::update(Uint32 ticks) {
   player.update(ticks);
 
