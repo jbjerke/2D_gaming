@@ -11,7 +11,10 @@ public:
   SmartSprite(const SmartSprite&);
   virtual ~SmartSprite() { }
 
-  void explode() { TwoWayMultiSprite::explode(); }
+  virtual void explode() {
+    TwoWayMultiSprite::explode(); 
+  std::cout << "here" << std::endl;
+}
 
   virtual void update(Uint32 ticks);
   void setPlayerPos(const Vector2f& p) { playerPos = p; }

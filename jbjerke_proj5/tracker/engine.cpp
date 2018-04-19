@@ -115,7 +115,9 @@ void Engine::draw() const {
 }
 
 void Engine::update(Uint32 ticks) {
+  std::cout << "trying to update" << std::endl;
   checkForCollisions();
+  std::cout << "problem is actually here" << std::endl;
 
   wizard->update(ticks);
 
@@ -131,7 +133,8 @@ void Engine::update(Uint32 ticks) {
 
   auto pp = pinkupines.begin();
   while( pp != pinkupines.end() ){
-  (*pp)->update(ticks);
+    std::cout << "right before pinkupine updates" << std::endl;
+    (*pp)->update(ticks);
     if ( (*pp)->isDoneExploding() ){
       delete *pp;
       pp = pinkupines.erase(pp);
@@ -150,30 +153,39 @@ void Engine::update(Uint32 ticks) {
 void Engine::checkForCollisions(){
   std::vector<SmartSprite*>::iterator dit = dogats.begin();
   while( dit != dogats.end() ){
-    if ( strats[currentStrat]->execute(*(player->getPlayer()), **dit) ){
-      SmartSprite* doneForD = *dit;
-      (*dit)->explode();
-      player->detach(doneForD);
-      delete doneForD;
+    if( !(*dit)->isExploding() ){
+      if ( strats[currentStrat]->execute(*(player->getPlayer()), **dit) ){
+        SmartSprite* doneForD = *dit;
+        (*dit)->explode();
+        player->detach(doneForD);
+        delete doneForD;
+      }
+      else ++dit;
     }
     else { ++dit; }
   }
 
   std::vector<SmartSprite*>::iterator pit = pinkupines.begin();
   while( pit != pinkupines.end() ){
-
-    if ( strats[currentStrat]->execute(*(player->getPlayer()), **pit) ){
-      SmartSprite* doneForP = *pit;
-      (*pit)->explode();
-      player->detach(doneForP);
-      delete doneForP;
+    if( !(*pit)->isExploding() ){
+      if ( strats[currentStrat]->execute(*(player->getPlayer()), **pit) ){
+        SmartSprite* doneForP = *pit;
+        (*pit)->explode();
+        player->detach(doneForP);
+        delete doneForP;
+        std::cout << "bitch" << std::endl;
+        ++pit;
+      }
+      else { ++pit; }
     }
-    else { ++pit; }
+    else ++pit;
   }
 
   // if ( strats[currentStrat]->execute(*player, *wizard) ){
   //   static_cast<Player*>(player)->stop();
   // }
+
+  std::cout << "left checkForCollisions" << std::endl;
 }
 
 void Engine::play() {

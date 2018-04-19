@@ -34,7 +34,8 @@ ShooterSprite::ShooterSprite( const std::string& name) :
   worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
 	facing(RIGHT),
   initialVelocity(getVelocity()),
-	explosion(nullptr)
+	explosion(nullptr),
+	isExploded(false)
 { }
 
 ShooterSprite::ShooterSprite(const ShooterSprite& s) :
@@ -55,7 +56,8 @@ ShooterSprite::ShooterSprite(const ShooterSprite& s) :
   worldHeight( s.worldHeight ),
 	facing(s.facing),
   initialVelocity( s.initialVelocity ),
-	explosion(s.explosion)
+	explosion(s.explosion),
+	isExploded(false)
   { }
 
 ShooterSprite& ShooterSprite::operator=(const ShooterSprite& s) {
@@ -76,6 +78,7 @@ ShooterSprite& ShooterSprite::operator=(const ShooterSprite& s) {
   worldHeight = ( s.worldHeight );
   initialVelocity = ( s.initialVelocity );
 	explosion = s.explosion;
+	isExploded = s.isExploded;
   return *this;
 }
 
@@ -123,6 +126,7 @@ void ShooterSprite::update(Uint32 ticks) {
 		if ( explosion->chunkCount() == 0 ){
 			delete explosion;
 			explosion = nullptr;
+			isExploded = true;
 		}
 		return;
 	}

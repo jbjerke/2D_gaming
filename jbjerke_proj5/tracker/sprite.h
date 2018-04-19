@@ -30,6 +30,7 @@ private:
   const Image * image;
 
   ExplodingSprite* explosion;
+  bool isExploded;
 
   int worldWidth;
   int worldHeight;

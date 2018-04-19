@@ -20,6 +20,7 @@ Sprite::Sprite(const string& n, const Vector2f& pos, const Vector2f& vel,
   Drawable(n, pos, vel),
   image( img ),
   explosion(nullptr),
+  isExploded(false),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
@@ -34,6 +35,7 @@ Sprite::Sprite(const std::string& name) :
            ),
   image( RenderContext::getInstance()->getImage(name) ),
   explosion(nullptr),
+  isExploded(false),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
@@ -42,6 +44,7 @@ Sprite::Sprite(const Sprite& s) :
   Drawable(s),
   image(s.image),
   explosion(s.explosion),
+  isExploded(s.isExploded),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
@@ -50,6 +53,7 @@ Sprite& Sprite::operator=(const Sprite& rhs) {
   Drawable::operator=( rhs );
   image = rhs.image;
   explosion = rhs.explosion;
+  isExploded = rhs.isExploded;
   worldWidth = rhs.worldWidth;
   worldHeight = rhs.worldHeight;
   return *this;
@@ -59,14 +63,27 @@ inline namespace{
   constexpr float SCALE_EPSILON = 2e-7;
 }
 
-void Sprite::explode() { }
+void Sprite::explode() {
+  explosion = new ExplodingSprite(*this);
+}
 
 void Sprite::draw() const {
   if(getScale() < SCALE_EPSILON) return;
-  image->draw(getX(), getY(), getScale());
+  if( explosion ) explosion->draw();
+  else image->draw(getX(), getY(), getScale());
 }
 
 void Sprite::update(Uint32 ticks) {
+  if( explosion ){
+    explosion->update(ticks);
+    if( explosion->chunkCount() == 0 ){
+      delete explosion;
+      explosion = nullptr;
+      isExploded = true;
+    }
+    return;
+  }
+
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
 
