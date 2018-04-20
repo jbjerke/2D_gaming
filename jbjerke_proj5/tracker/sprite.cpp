@@ -6,6 +6,8 @@
 #include "gamedata.h"
 #include "renderContext.h"
 
+Sprite::~Sprite(){ if(explosion) delete explosion; }
+
 Vector2f Sprite::makeVelocity(int vx, int vy) const {
   float newvx = Gamedata::getInstance().getRandFloat(vx-50,vx+50);;
   float newvy = Gamedata::getInstance().getRandFloat(vy-50,vy+50);;

@@ -141,7 +141,6 @@ void ShooterSprite::update(Uint32 ticks) {
 
 	if ( explosion ){
 		explosion->update(ticks);
-
 		if ( explosion->chunkCount() == 0 ){
 			delete explosion;
 			explosion = nullptr;

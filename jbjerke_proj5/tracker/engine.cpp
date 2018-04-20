@@ -65,8 +65,13 @@ Engine::Engine() :
     dogats.push_back( new TwoWayMultiSprite("Dogat") );
   }
 
-  for( unsigned int m = 0; m < numOfPinkupines; m++){
+  for( unsigned int m = 0; m < numOfPinkupines/2; m++){
     pinkupines.push_back( new SmartSprite("Pinkupine", "aggressive", pos, w, h) );
+    player->attach( pinkupines[m] );
+  }
+
+  for( unsigned int m = 0; m < numOfPinkupines/2; m++){
+    pinkupines.push_back( new SmartSprite("Pinkupine", "passive", pos, w, h) );
     player->attach( pinkupines[m] );
   }
 
@@ -156,6 +161,9 @@ void Engine::checkForCollisions(){
     if( !((*dit)->isExploding()) ){
       if ( strat->execute(*(player->getPlayer()), **dit) ){
         (*dit)->explode();
+        //player->explode();
+        //return;
+        ++dit;
       }
       else ++dit;
     }
@@ -231,6 +239,9 @@ void Engine::play() {
       }
       if( keystate[SDL_SCANCODE_SPACE] ){
         player->heAttak();
+      }
+      if( keystate[SDL_SCANCODE_E ]){
+        player->explode();
       }
       draw();
       update(ticks);
