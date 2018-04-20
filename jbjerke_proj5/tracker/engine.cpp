@@ -29,7 +29,7 @@ Engine::~Engine() {
 
   delete player;
 
-  delete hd;
+  // delete hd;
 
   std::cout << "Terminating program" << std::endl;
 }

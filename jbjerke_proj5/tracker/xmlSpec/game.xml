@@ -160,6 +160,11 @@
   <speedX>500</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
+  <interval>300</interval>
+  <minSpeedX>700</minSpeedX>
+  <distance>500</distance>
+  <maxCount>3</maxCount>
+  <reloadTime>900</reloadTime>
 </LeftFireBall>
 
 <Pinkupine>

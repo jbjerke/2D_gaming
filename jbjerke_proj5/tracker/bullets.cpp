@@ -6,17 +6,16 @@
 #include "collisionStrategy.h"
 
 Bullets::~Bullets() {
-  auto del = bulletList.begin();
-  while(del != bulletList.end()){
-    delete *del;
-    del = bulletList.erase(del);
+  for( Bullet* bl : bulletList ){
+    delete bl;
   }
 
-  auto delF = freeList.begin();
-  while(delF != freeList.end()){
-    delete *delF;
-    delF = freeList.erase(del);
+  for( Bullet* fl : freeList ){
+    delete fl;
   }
+
+  bulletList.clear();
+  freeList.clear();
 
   delete strategy;
 }
@@ -65,7 +64,7 @@ void  Bullets::shoot(const Vector2f& pos, const Vector2f& objVel){
     Bullet* b = freeList.front();
     freeList.pop_front();
     b->reset();
-    b->setVelocity(objVel);
+    b->fireDirection(objVel);
     b->setPosition(pos);
     bulletList.push_back( b );
   }

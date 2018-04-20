@@ -17,6 +17,7 @@ OBJS = \
 	imageFactory.o \
 	frameGenerator.o \
 	sprite.o \
+	twoWaySprite.o \
 	twoWayMultiSprite.o \
 	shooterSprite.o \
 	player.o \

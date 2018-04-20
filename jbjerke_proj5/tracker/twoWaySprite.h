@@ -26,6 +26,11 @@ public:
   int getScaledWidth()  const { return getScale()*image->getWidth();  }
   int getScaledHeight() const { return getScale()*image->getHeight(); }
 
+
+    void goLeft() { image = leftimage; }
+    void goRight() { image = rightimage; }
+
+
 private:
   Image * rightimage;
   Image * leftimage;
