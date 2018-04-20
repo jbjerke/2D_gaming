@@ -27,7 +27,9 @@ Engine::~Engine() {
 
   delete wizard;
 
-  //delete player;
+  delete player;
+
+  delete hd;
 
   std::cout << "Terminating program" << std::endl;
 }
@@ -160,7 +162,12 @@ void Engine::checkForCollisions(){
   std::vector<Drawable*>::iterator dit = dogats.begin();
   while( dit != dogats.end() ){
     if( !((*dit)->isExploding()) ){
-      if ( strat->execute(*(player->getPlayer()), **dit) ){
+      if ( strat->execute(*(player->getPlayer()), **dit) && !( player->isExploding() ) ){
+        // (*dit)->explode();
+        player->explode();
+        return;
+      }
+      if( player->heHitSomething(*dit) ){
         (*dit)->explode();
       }
     }
@@ -170,7 +177,13 @@ void Engine::checkForCollisions(){
   std::vector<SmartSprite*>::iterator pit = pinkupines.begin();
   while( pit != pinkupines.end() ){
     if( !(*pit)->isExploding() ){
-      if ( strat->execute(*(player->getPlayer()), **pit) ){
+      if ( strat->execute(*(player->getPlayer()), **pit) && !( player->isExploding() ) ){
+        (*pit)->explode();
+        player->detach(*pit);
+        player->explode();
+        return;
+      }
+      if( player->heHitSomething(*pit) ){
         (*pit)->explode();
         player->detach(*pit);
       }

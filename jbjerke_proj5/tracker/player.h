@@ -14,10 +14,13 @@ class Player {
 public:
   Player(const std::string&);
   Player(const Player&);
+  ~Player();
 
   void draw() const { player.draw(); }
   void update(Uint32 ticks);
-  void explode() { player.explode(); }
+  void explode();
+  bool isExploding() { return player.isExploding(); }
+
   const ShooterSprite* getPlayer() const { return &player; }
 
   const std::string& getName() const { return player.getName(); }
@@ -40,6 +43,7 @@ public:
   void left() { player.left(); }
   void stop() { player.stop(); }
   void heAttak() { player.shoot(); }
+  bool heHitSomething(const Drawable* d) const { return player.shotSomething(d); }
 
   void attach( SmartSprite* ss ) { observers.push_back(ss); }
   void detach( SmartSprite* ss );

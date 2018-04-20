@@ -41,6 +41,7 @@ public:
 
   void shoot();
   bool isShooting() const { return bulletCount(); }
+  bool shotSomething(const Drawable* d) const { return bullets.collided(d); }
 
   unsigned int bulletCount() const { return bullets.bulletCount(); }
   unsigned int freeCount() const {return bullets.freeCount(); }

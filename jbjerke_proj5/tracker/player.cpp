@@ -20,10 +20,24 @@ Player::Player(const Player& p) :
   lives(p.lives)
 { }
 
+Player::~Player(){
+  // for( SmartSprite* ss : observers){
+  //   delete ss;
+  // }
+
+  observers.clear();
+}
+
 void Player::update(Uint32 ticks) {
   player.update(ticks);
 
   stop();
+
+  notify();
+}
+
+void Player::explode() {
+  player.explode();
 
   notify();
 }
@@ -42,5 +56,6 @@ void Player::detach( SmartSprite* ss ){
 void Player::notify(){
 	for ( auto* o : observers ){
 		o->setPlayerPos( player.getPosition() );
+    o->setPlayerIsExploding( isExploding() );
 	}
 }

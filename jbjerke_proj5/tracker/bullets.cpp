@@ -17,6 +17,8 @@ Bullets::~Bullets() {
     delete *delF;
     delF = freeList.erase(del);
   }
+
+  delete strategy;
 }
 
 Bullets::Bullets(const std::string& name) :
@@ -69,9 +71,10 @@ void  Bullets::shoot(const Vector2f& pos, const Vector2f& objVel){
   }
 }
 
-bool Bullets::collided(const Drawable* obj) const{
+bool Bullets::collided(const Drawable* obj) const {
   for( const auto& bt : bulletList ){
     if( strategy->execute(*bt, *obj) ){
+      // move to freeList somehow
       return true;
     }
   }

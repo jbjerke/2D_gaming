@@ -15,6 +15,7 @@ public:
 
   virtual void update(Uint32 ticks);
   void setPlayerPos(const Vector2f& p) { playerPos = p; }
+  void setPlayerIsExploding(const bool expd ) { playerIsExploding = expd; }
 
 private:
   enum TYPE {AGGRESSIVE, PASSIVE};
@@ -26,6 +27,7 @@ private:
   MODE currentMode;
   float safeDistance;
   float attackDistance;
+  bool playerIsExploding;
 
   void goLeft();
   void goRight();

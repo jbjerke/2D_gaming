@@ -29,7 +29,8 @@ SmartSprite::SmartSprite(const std::string& name, const std::string& type,
   smartSpriteType(PASSIVE),
   currentMode(NORMAL),
   safeDistance( Gamedata::getInstance().getXmlFloat(name+"/safeDistance") ),
-  attackDistance( Gamedata::getInstance().getXmlFloat(name+"/attackDistance") )
+  attackDistance( Gamedata::getInstance().getXmlFloat(name+"/attackDistance") ),
+  playerIsExploding(false)
 {
   if(type == "passive") {
     smartSpriteType = PASSIVE;
@@ -50,7 +51,8 @@ SmartSprite::SmartSprite(const SmartSprite& s) :
   smartSpriteType(s.smartSpriteType),
   currentMode(s.currentMode),
   safeDistance(s.safeDistance),
-  attackDistance(s.attackDistance)
+  attackDistance(s.attackDistance),
+  playerIsExploding(s.playerIsExploding)
 {}
 
 void SmartSprite::update(Uint32 ticks) {
@@ -60,7 +62,7 @@ void SmartSprite::update(Uint32 ticks) {
   float ey= playerPos[1]+playerHeight/2;
   float distanceToEnemy = ::distance( x, y, ex, ey );
 
-  if  ( currentMode == NORMAL ) {
+  if  ( currentMode == NORMAL && !playerIsExploding ) {
     if( smartSpriteType == PASSIVE && distanceToEnemy < safeDistance ) {
       currentMode = EVADE;
       toggleAlt();
@@ -73,7 +75,7 @@ void SmartSprite::update(Uint32 ticks) {
     }
   }
   else if  ( currentMode == EVADE ) {
-    if( distanceToEnemy > safeDistance ) {
+    if( distanceToEnemy > safeDistance || playerIsExploding ) {
       currentMode = NORMAL;
       toggleAlt();
       if( getVelocityX() > 0 ) goRight();
