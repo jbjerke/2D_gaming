@@ -11,8 +11,10 @@
 <maxFrames>40</maxFrames>
 <username>jbjerke</username>
 
+<collisionStrategy>PerPixel</collisionStrategy>
+
 <view>
-  <width>1000</width>
+  <width>1500</width>
   <height>850</height>
 </view>
 
@@ -22,8 +24,8 @@
 </world>
 
 <hud>
-  <width>200</width>
-  <height>200</height>
+  <width>250</width>
+  <height>250</height>
 </hud>
 
 <sky>
@@ -109,6 +111,7 @@
     <size>50</size>
     <distance>100</distance>
   </chunk>
+  <bulletName>FireBall</bulletName>
 </FireSpirit>
 
 <FireSpiritAttack>
@@ -133,25 +136,30 @@
   <transparency>false</transparency>
 </LeftFireSpiritAttack>
 
-<FireSpiritFireBall>
-  <file>assets/fire_spirit_projectile_right.png</file>
+<FireBall>
+  <file>assets/fire_spirit/fire_spirit_projectile_right.png</file>
   <frames>1</frames>
   <imageWidth>73</imageWidth>
   <imageHeight>45</imageHeight>
   <speedX>500</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
-</FireSpiritFireBall>
+  <interval>300</interval>
+  <minSpeedX>700</minSpeedX>
+  <distance>500</distance>
+  <maxCount>3</maxCount>
+  <reloadTime>900</reloadTime>
+</FireBall>
 
-<LeftFireSpiritFireBall>
-  <file>assets/fire_spirit_projectile_left.png</file>
+<LeftFireBall>
+  <file>assets/fire_spirit/fire_spirit_projectile_left.png</file>
   <frames>1</frames>
   <imageWidth>73</imageWidth>
   <imageHeight>45</imageHeight>
   <speedX>500</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
-</LeftFireSpiritFireBall>
+</LeftFireBall>
 
 <Pinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>
@@ -185,7 +193,7 @@
   <transparency>false</transparency>
 </LeftPinkupine>
 
-<WorriedPinkupine>
+<EvadePinkupine>
   <file>assets/pinkupine/worried_pinkupine_right.png</file>
   <startLoc x="4000" y="725"/>
   <safeDistance>200</safeDistance>
@@ -196,9 +204,9 @@
   <speedX>175</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
-</WorriedPinkupine>
+</EvadePinkupine>
 
-<LeftWorriedPinkupine>
+<LeftEvadePinkupine>
   <file>assets/pinkupine/worried_pinkupine_left.png</file>
   <startLoc x="4000" y="725"/>
   <safeDistance>200</safeDistance>
@@ -209,7 +217,7 @@
   <speedX>175</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
-</LeftWorriedPinkupine>
+</LeftEvadePinkupine>
 
 <AngryPinkupine>
   <file>assets/pinkupine/angry_pinkupine_right.png</file>

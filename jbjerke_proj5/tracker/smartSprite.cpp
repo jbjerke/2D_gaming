@@ -18,8 +18,6 @@ void SmartSprite::goRight() {
   setVelocityX( fabs(getVelocityX()) );
   TwoWayMultiSprite::goRight();
 }
-void SmartSprite::goUp()    { setVelocityY( -fabs(getVelocityY()) ); }
-void SmartSprite::goDown()  { setVelocityY( fabs(getVelocityY()) ); }
 
 
 SmartSprite::SmartSprite(const std::string& name, const Vector2f& pos,
@@ -30,7 +28,9 @@ SmartSprite::SmartSprite(const std::string& name, const Vector2f& pos,
   playerHeight(h),
   currentMode(NORMAL),
   safeDistance(Gamedata::getInstance().getXmlFloat(name+"/safeDistance"))
-{}
+{
+  TwoWayMultiSprite::createAltImages("Evade"+name);
+}
 
 
 SmartSprite::SmartSprite(const SmartSprite& s) :
@@ -50,15 +50,22 @@ void SmartSprite::update(Uint32 ticks) {
   float distanceToEnemy = ::distance( x, y, ex, ey );
 
   if  ( currentMode == NORMAL ) {
-    if(distanceToEnemy < safeDistance) currentMode = EVADE;
+    if(distanceToEnemy < safeDistance) {
+      currentMode = EVADE;
+      toggleAlt();
+      //setVelocityX( (1.5)*getVelocityX() );
+    }
   }
   else if  ( currentMode == EVADE ) {
-    if(distanceToEnemy > safeDistance) currentMode = NORMAL;
+    if(distanceToEnemy > safeDistance) {
+      currentMode = NORMAL;
+      toggleAlt();
+      if( getVelocityX() > 0 ) goRight();
+      if( getVelocityX() < 0 ) goLeft();
+    }
     else {
       if ( x < ex ) goLeft();
       if ( x > ex ) goRight();
-      if ( y < ey ) goUp();
-      if ( y > ey ) goDown();
     }
   }
   TwoWayMultiSprite::update(ticks);

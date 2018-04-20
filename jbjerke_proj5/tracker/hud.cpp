@@ -34,6 +34,8 @@ void Hud::toggleOn(){
   SDL_RenderDrawRect(renderer, &rect);
   IoMod::getInstance().writeText("A - move left", 75, 75,textclr);
   IoMod::getInstance().writeText("D - move right", 75, 125,textclr);
+  IoMod::getInstance().writeText("Q - Attack", 75, 175, textclr);
+  IoMod::getInstance().writeText("F1 - Toggle Help", 75, 225, textclr);
   SDL_RenderPresent(renderer);
 }
 

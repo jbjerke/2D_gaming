@@ -32,12 +32,17 @@ public:
     return images[currentFrame]->getSurface();
   }
 
-  void goLeft(){ images = leftimages; }
-  void goRight(){ images = rightimages; }
+  void goLeft();
+  void goRight();
+
+  void createAltImages(const std::string&);
+  void toggleAlt(){ useAlt = !useAlt; }
 
 private:
   std::vector<Image *> rightimages;
   std::vector<Image *> leftimages;
+  std::vector<Image *> altrightimages;
+  std::vector<Image *> altleftimages;
   std::vector<Image *> images;
 
   unsigned currentFrame;
@@ -46,6 +51,7 @@ private:
   float timeSinceLastFrame;
   int worldWidth;
   int worldHeight;
+  bool useAlt;
 
   Vector2f makeVelocity(int, int) const;
 

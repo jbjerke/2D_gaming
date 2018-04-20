@@ -31,15 +31,14 @@ private:
   Viewport& viewport;
 
   Drawable* wizard;
-  std::vector<SmartSprite*> dogats;
+  std::vector<Drawable*> dogats;
   std::vector<SmartSprite*> pinkupines;
   Player* player;
   // might be useful if tracking players
   //std::vector<Drawable*>::const_iterator spiter;
   // int currentSprite;
 
-  std::vector<CollisionStrategy*> strats;
-  int currentStrat;
+  CollisionStrategy* strat;
   bool collision;
 
   Hud* hd;

@@ -22,9 +22,8 @@ Engine::~Engine() {
   for(auto* ps : pinkupines){
     delete ps;
   }
-  for( CollisionStrategy* s : strats ){
-    delete s;
-  }
+
+  delete strat;
 
   delete wizard;
 
@@ -47,8 +46,7 @@ Engine::Engine() :
   dogats(),
   pinkupines(),
   player(new Player("FireSpirit")),
-  strats(),
-  currentStrat( 0 ),
+  strat(),
   collision( false ),
   hd(new Hud),
   hudOn( true ),
@@ -64,8 +62,7 @@ Engine::Engine() :
   int h = player->getScaledHeight();
 
   for( unsigned int n = 0; n < numOfDogats; n++ ){
-    dogats.push_back( new SmartSprite("Dogat", pos, w, h) );
-    player->attach( dogats[n] );
+    dogats.push_back( new TwoWayMultiSprite("Dogat") );
   }
 
   for( unsigned int m = 0; m < numOfPinkupines; m++){
@@ -73,10 +70,16 @@ Engine::Engine() :
     player->attach( pinkupines[m] );
   }
 
-
-  strats.push_back( new RectangularCollisionStrategy );
-  strats.push_back( new MidPointCollisionStrategy );
-  strats.push_back( new PerPixelCollisionStrategy );
+  const std::string s = Gamedata::getInstance().getXmlStr("collisionStrategy");
+  if( s == "Rectangular" ){
+    strat = new RectangularCollisionStrategy;
+  }
+  else if ( s == "MidPoint" ){
+    strat = new MidPointCollisionStrategy;
+  }
+  else if ( s == "PerPixel" ){
+    strat = new PerPixelCollisionStrategy;
+  }
 
   Viewport::getInstance().setObjectToTrack(player->getPlayer());
   std::cout << "Loading complete" << std::endl;
@@ -148,14 +151,11 @@ void Engine::update(Uint32 ticks) {
 }
 
 void Engine::checkForCollisions(){
-  std::vector<SmartSprite*>::iterator dit = dogats.begin();
+  std::vector<Drawable*>::iterator dit = dogats.begin();
   while( dit != dogats.end() ){
-    if( !(*dit)->isExploding() ){
-      if ( strats[currentStrat]->execute(*(player->getPlayer()), **dit) ){
-        SmartSprite* doneForD = *dit;
+    if( !((*dit)->isExploding()) ){
+      if ( strat->execute(*(player->getPlayer()), **dit) ){
         (*dit)->explode();
-        player->detach(doneForD);
-        delete doneForD;
       }
       else ++dit;
     }
@@ -165,7 +165,7 @@ void Engine::checkForCollisions(){
   std::vector<SmartSprite*>::iterator pit = pinkupines.begin();
   while( pit != pinkupines.end() ){
     if( !(*pit)->isExploding() ){
-      if ( strats[currentStrat]->execute(*(player->getPlayer()), **pit) ){
+      if ( strat->execute(*(player->getPlayer()), **pit) ){
         SmartSprite* doneForP = *pit;
         (*pit)->explode();
         player->detach(doneForP);
@@ -176,7 +176,7 @@ void Engine::checkForCollisions(){
     else ++pit;
   }
 
-  // if ( strats[currentStrat]->execute(*player, *wizard) ){
+  // if ( strat->execute(*player, *wizard) ){
   //   static_cast<Player*>(player)->stop();
   // }
 }
@@ -193,7 +193,7 @@ void Engine::play() {
     while ( SDL_PollEvent(&event) ) {
       keystate = SDL_GetKeyboardState(NULL);
       if (event.type ==  SDL_QUIT) { done = true; break; }
-      if(event.type == SDL_KEYDOWN) {
+      if(event.type == SDL_KEYDOWN && event.key.repeat == 0) {
         if (keystate[SDL_SCANCODE_ESCAPE] || keystate[SDL_SCANCODE_Q]) {
           done = true;
           break;
@@ -202,10 +202,9 @@ void Engine::play() {
           if ( clock.isPaused() ) clock.unpause();
           else clock.pause();
         }
-        if ( keystate[SDL_SCANCODE_M] ){
-          currentStrat = (currentStrat + 1) % strats.size();
-          std::cout << currentStrat << std::endl;
-        }
+        // if( keystate[SDL_SCANCODE_SPACE] ){
+        //   player->heAttak();
+        // }
         if ( keystate[SDL_SCANCODE_F1] ){
           hudOn = !hudOn;
         }
@@ -225,12 +224,13 @@ void Engine::play() {
     if ( ticks > 0 ) {
       clock.incrFrame();
       if (keystate[SDL_SCANCODE_A]){
-        //player->left();
         player->left();
       }
       if (keystate[SDL_SCANCODE_D]){
-        //player->right();
         player->right();
+      }
+      if( keystate[SDL_SCANCODE_SPACE] ){
+        player->heAttak();
       }
       draw();
       update(ticks);

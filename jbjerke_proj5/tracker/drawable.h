@@ -22,6 +22,7 @@ public:
   virtual void draw() const = 0;
   virtual void update(Uint32 ticks) = 0;
   virtual void explode() = 0;
+  virtual bool isDoneExploding() const = 0;
   virtual bool isExploding() const = 0;
 
   // virtual void left() = 0;

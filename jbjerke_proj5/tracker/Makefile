@@ -23,6 +23,8 @@ OBJS = \
 	smartSprite.o \
 	explodingSprite.o \
 	chunk.o \
+	bullet.o \
+	bullets.o \
 	hud.o \
 	collisionStrategy.o \
 	vector2f.o \

@@ -39,6 +39,8 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
            ),
 	rightimages( ImageFactory::getInstance().getImages(name) ),
 	leftimages( ImageFactory::getInstance().getImages("Left" + name) ),
+	altrightimages(),
+	altleftimages(),
   images( leftimages ),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
@@ -46,6 +48,7 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
   timeSinceLastFrame( 0 ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+	useAlt(false),
 	explosion(nullptr),
 	isExploded(false)
 { }
@@ -54,6 +57,8 @@ TwoWayMultiSprite::TwoWayMultiSprite(const TwoWayMultiSprite& s) :
   Drawable(s),
   rightimages(s.rightimages),
   leftimages(s.leftimages),
+	altrightimages(s.altrightimages),
+	altleftimages(s.altleftimages),
   images(s.images),
   currentFrame(s.currentFrame),
   numberOfFrames( s.numberOfFrames ),
@@ -61,6 +66,7 @@ TwoWayMultiSprite::TwoWayMultiSprite(const TwoWayMultiSprite& s) :
   timeSinceLastFrame( s.timeSinceLastFrame ),
   worldWidth( s.worldWidth ),
   worldHeight( s.worldHeight ),
+	useAlt(s.useAlt),
 	explosion(s.explosion),
 	isExploded(s.isExploded)
 { }
@@ -69,6 +75,8 @@ TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
   Drawable::operator=(s);
   rightimages = s.rightimages;
   leftimages = s.leftimages;
+	altrightimages = s.altrightimages;
+	altleftimages = s.altleftimages;
   images = (s.images);
   currentFrame = (s.currentFrame);
   numberOfFrames = ( s.numberOfFrames );
@@ -76,6 +84,7 @@ TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
   timeSinceLastFrame = ( s.timeSinceLastFrame );
   worldWidth = ( s.worldWidth );
   worldHeight = ( s.worldHeight );
+	useAlt = s.useAlt;
 	explosion = s.explosion;
 	isExploded = s.isExploded;
   return *this;
@@ -120,10 +129,25 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
   }
 }
 
+void TwoWayMultiSprite::goLeft(){
+	if( useAlt ) images = altleftimages;
+	else images = leftimages;
+}
+
+void TwoWayMultiSprite::goRight(){
+	if( useAlt ) images = altrightimages;
+	else images = rightimages;
+}
+
 void TwoWayMultiSprite::explode() {
 	if( !explosion ){
 		Sprite
 		sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
 		explosion = new ExplodingSprite(sprite);
 	}
+}
+
+void TwoWayMultiSprite::createAltImages(const std::string& name){
+	altrightimages = ImageFactory::getInstance().getImages(name);
+	altleftimages = ImageFactory::getInstance().getImages("Left"+name);
 }

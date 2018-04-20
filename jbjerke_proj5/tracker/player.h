@@ -39,6 +39,7 @@ public:
   void right() { player.right(); }
   void left() { player.left(); }
   void stop() { player.stop(); }
+  void heAttak() { player.shoot(); }
 
   void attach( SmartSprite* ss ) { observers.push_back(ss); }
   void detach( SmartSprite* ss );

@@ -5,6 +5,7 @@
 
 void ShooterSprite::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
+	timeSinceLastBullet += ticks;
 	if (timeSinceLastFrame > frameInterval) {
     currentFrame = (currentFrame+1) % numberOfFrames;
 		timeSinceLastFrame = 0;
@@ -20,11 +21,11 @@ ShooterSprite::ShooterSprite( const std::string& name) :
            ),
   rightimages( ImageFactory::getInstance().getImages(name) ),
   leftimages( ImageFactory::getInstance().getImages("Left"+name) ),
-  idleimages( ImageFactory::getInstance().getImages("Idle"+name) ),
+  rightidleimages( ImageFactory::getInstance().getImages("Idle"+name) ),
 	leftidleimages( ImageFactory::getInstance().getImages("LeftIdle"+name) ),
-	attackimages( ImageFactory::getInstance().getImages(name+"Attack") ),
+	rightattackimages( ImageFactory::getInstance().getImages(name+"Attack") ),
 	leftattackimages( ImageFactory::getInstance().getImages("Left"+name+"Attack") ),
-  images( idleimages ),
+  images( rightidleimages ),
 	ShooterSpriteName(name),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt("Idle"+name+"/frames") ),
@@ -35,16 +36,21 @@ ShooterSprite::ShooterSprite( const std::string& name) :
 	facing(RIGHT),
   initialVelocity(getVelocity()),
 	explosion(nullptr),
-	isExploded(false)
+	isExploded(false),
+	bulletName( Gamedata::getInstance().getXmlStr(name+"/bulletName") ),
+	bullets(bulletName),
+	minBulletSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/minSpeedX") ),
+	bulletInterval( Gamedata::getInstance().getXmlInt(bulletName+"/interval") ),
+	timeSinceLastBullet(0)
 { }
 
 ShooterSprite::ShooterSprite(const ShooterSprite& s) :
   Drawable(s),
   rightimages(s.rightimages),
   leftimages(s.leftimages),
-  idleimages(s.idleimages),
+  rightidleimages(s.rightidleimages),
 	leftidleimages(s.leftidleimages),
-	attackimages(s.attackimages),
+	rightattackimages(s.rightattackimages),
 	leftattackimages(s.leftattackimages),
   images(s.images),
 	ShooterSpriteName(s.ShooterSpriteName),
@@ -57,16 +63,21 @@ ShooterSprite::ShooterSprite(const ShooterSprite& s) :
 	facing(s.facing),
   initialVelocity( s.initialVelocity ),
 	explosion(s.explosion),
-	isExploded(false)
-  { }
+	isExploded(false),
+	bulletName(s.bulletName),
+	bullets(s.bullets),
+	minBulletSpeed(s.minBulletSpeed),
+	bulletInterval(s.bulletInterval),
+	timeSinceLastBullet(s.timeSinceLastBullet)
+{ }
 
 ShooterSprite& ShooterSprite::operator=(const ShooterSprite& s) {
   Drawable::operator=(s);
   rightimages = s.rightimages;
   leftimages = s.leftimages;
-  idleimages = s.idleimages;
+  rightidleimages = s.rightidleimages;
 	leftidleimages = s.leftidleimages;
-	attackimages = s.attackimages;
+	rightattackimages = s.rightattackimages;
 	leftattackimages = s.leftattackimages;
   images = (s.images);
 	ShooterSpriteName = (s.ShooterSpriteName);
@@ -79,12 +90,18 @@ ShooterSprite& ShooterSprite::operator=(const ShooterSprite& s) {
   initialVelocity = ( s.initialVelocity );
 	explosion = s.explosion;
 	isExploded = s.isExploded;
+	bulletName = s.bulletName;
+	bulletInterval = s.bulletInterval;
+	timeSinceLastBullet = s.timeSinceLastBullet;
+	minBulletSpeed = s.minBulletSpeed;
+	//bullets = s.bullets;
   return *this;
 }
 
 ShooterSprite::~ShooterSprite(){ if(explosion) delete explosion; }
 
 void ShooterSprite::draw() const {
+	bullets.draw();
 	if(explosion) explosion->draw();
   else images[currentFrame]->draw(getX(), getY(), getScale());
 }
@@ -95,13 +112,13 @@ void ShooterSprite::stop() {
   setVelocityY(0);
 
 	if( facing == LEFT ) images = leftidleimages;
-	else images = idleimages;
+	else images = rightidleimages;
 
 	numberOfFrames = Gamedata::getInstance().getXmlInt("Idle"+ShooterSpriteName+"/frames");
 }
 
 void ShooterSprite::right() {
-	images = rightimages;
+	if( !isShooting() ) images = rightimages;
 	facing = RIGHT;
 	numberOfFrames = Gamedata::getInstance().getXmlInt(ShooterSpriteName+"/frames");
   if ( getX() < worldWidth-getScaledWidth()) {
@@ -109,7 +126,7 @@ void ShooterSprite::right() {
   }
 }
 void ShooterSprite::left()  {
-	images = leftimages;
+	if( !isShooting() ) images = leftimages;
 	facing = LEFT;
 	numberOfFrames = Gamedata::getInstance().getXmlInt("Left"+ShooterSpriteName+"/frames");
   if ( getX() > 0) {
@@ -119,6 +136,8 @@ void ShooterSprite::left()  {
 
 void ShooterSprite::update(Uint32 ticks) {
   advanceFrame(ticks);
+
+	bullets.update(ticks);
 
 	if ( explosion ){
 		explosion->update(ticks);
@@ -154,8 +173,8 @@ void ShooterSprite::update(Uint32 ticks) {
 		facing = LEFT;
   }
 	if ( getX() == 0 ) {
-		if( facing == LEFT ) images = leftidleimages;
-		else images = idleimages;
+		if( facing == LEFT && !isShooting() ) images = leftidleimages;
+		else if (facing == RIGHT && !isShooting() ) images = rightidleimages;
 
 		numberOfFrames = Gamedata::getInstance().getXmlInt("Idle"+ShooterSpriteName+"/frames");
 	}
@@ -163,7 +182,36 @@ void ShooterSprite::update(Uint32 ticks) {
 
 void ShooterSprite::explode() {
 	if( !explosion ) {
-		Sprite sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+		Sprite
+		sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
 		explosion = new ExplodingSprite(sprite);
+	}
+}
+
+void ShooterSprite::shoot() {
+	if ( getVelocityX() > 0 ) { images = rightattackimages; }
+	else if( getVelocityX() < 0 ) { images = leftattackimages; }
+	else if( facing == RIGHT ) { images = rightattackimages; }
+	else if( facing == LEFT ) { images = leftattackimages; }
+
+	numberOfFrames = Gamedata::getInstance().getXmlInt(ShooterSpriteName+"Attack/frames");
+
+	// See if it's okay to shoot now:
+	if( timeSinceLastBullet > bulletInterval ){
+		Vector2f vel = getVelocity();
+		float x;
+		float y = getY() + getScaledHeight()/2; //CHANGE
+
+		if( facing == RIGHT ){
+			x = getX() + getScaledWidth();
+			vel[0] += minBulletSpeed;
+		}
+		else if( facing == LEFT ){
+			x = getX();
+			vel[0] -= minBulletSpeed;
+		}
+
+		bullets.shoot( Vector2f(x,y), vel );
+		timeSinceLastBullet = 0;
 	}
 }

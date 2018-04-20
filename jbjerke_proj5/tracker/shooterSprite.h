@@ -5,6 +5,7 @@
 #include <cmath>
 #include <list>
 #include "drawable.h"
+#include "bullets.h"
 
 class ExplodingSprite;
 
@@ -38,12 +39,18 @@ public:
   void left();
   void stop();
 
+  void shoot();
+  bool isShooting() const { return bulletCount(); }
+
+  unsigned int bulletCount() const { return bullets.bulletCount(); }
+  unsigned int freeCount() const {return bullets.freeCount(); }
+
 private:
   std::vector<Image *> rightimages;
   std::vector<Image *> leftimages;
-  std::vector<Image *> idleimages;
+  std::vector<Image *> rightidleimages;
   std::vector<Image *> leftidleimages;
-  std::vector<Image *> attackimages;
+  std::vector<Image *> rightattackimages;
   std::vector<Image *> leftattackimages;
   std::vector<Image *> images;
 
@@ -62,6 +69,12 @@ private:
 
   ExplodingSprite* explosion;
   bool isExploded;
+
+  std::string bulletName;
+  Bullets bullets;
+  float minBulletSpeed;
+  float bulletInterval;
+  float timeSinceLastBullet;
 
   void advanceFrame(Uint32 ticks);
   ShooterSprite& operator=(const ShooterSprite&);
