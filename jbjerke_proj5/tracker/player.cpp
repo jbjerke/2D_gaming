@@ -7,7 +7,8 @@ Player::Player( const std::string& name) :
   observers( ),
   initialVelocity(player.getVelocity()),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
-  worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+  lives(Gamedata::getInstance().getXmlInt(name+"/lifeCount"))
 { }
 
 Player::Player(const Player& p) :
@@ -15,7 +16,8 @@ Player::Player(const Player& p) :
   observers(p.observers),
   initialVelocity(p.initialVelocity),
   worldWidth(p.worldWidth),
-  worldHeight(p.worldHeight)
+  worldHeight(p.worldHeight),
+  lives(p.lives)
 { }
 
 void Player::update(Uint32 ticks) {

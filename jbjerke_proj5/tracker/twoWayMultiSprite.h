@@ -54,6 +54,7 @@ private:
   bool useAlt;
 
   Vector2f makeVelocity(int, int) const;
+  Vector2f makeStart(int, int) const;
 
   ExplodingSprite* explosion;
   bool isExploded;

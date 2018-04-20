@@ -30,9 +30,21 @@ Vector2f TwoWayMultiSprite::makeVelocity(int vx, int vy) const {
   return Vector2f(newvx, newvy);
 }
 
+Vector2f TwoWayMultiSprite::makeStart(int sx, int sy) const {
+	float newsx;
+
+	if(sx > 0){ newsx = Gamedata::getInstance().getRandFloat(sx-1500, sx+1500); }
+	else{ newsx = sx; }
+
+	newsx *= [](){ if(rand()%2) return -1; else return 1; }();
+	sy *= [](){ return rand()%2?-1:1; }();
+
+	return Vector2f(newsx, sy);
+}
+
 TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
   Drawable(name,
-           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"),
+           makeStart(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"),
                     Gamedata::getInstance().getXmlInt(name+"/startLoc/y")),
            makeVelocity(Gamedata::getInstance().getXmlInt(name+"/speedX"),
                     Gamedata::getInstance().getXmlInt(name+"/speedY"))
@@ -41,7 +53,7 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
 	leftimages( ImageFactory::getInstance().getImages("Left" + name) ),
 	altrightimages(),
 	altleftimages(),
-  images( leftimages ),
+  images(),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
@@ -51,7 +63,10 @@ TwoWayMultiSprite::TwoWayMultiSprite( const std::string& name) :
 	useAlt(false),
 	explosion(nullptr),
 	isExploded(false)
-{ }
+{
+	if( getVelocityX() < 0 ) images = leftimages;
+	else if( getVelocityX() > 0 ) images = rightimages;
+}
 
 TwoWayMultiSprite::TwoWayMultiSprite(const TwoWayMultiSprite& s) :
   Drawable(s),

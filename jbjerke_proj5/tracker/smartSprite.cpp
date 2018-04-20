@@ -20,16 +20,25 @@ void SmartSprite::goRight() {
 }
 
 
-SmartSprite::SmartSprite(const std::string& name, const Vector2f& pos,
-  int w, int h) :
+SmartSprite::SmartSprite(const std::string& name, const std::string& type,
+  const Vector2f& pos, int w, int h) :
   TwoWayMultiSprite(name),
   playerPos(pos),
   playerWidth(w),
   playerHeight(h),
+  smartSpriteType(),
   currentMode(NORMAL),
-  safeDistance(Gamedata::getInstance().getXmlFloat(name+"/safeDistance"))
+  safeDistance( Gamedata::getInstance().getXmlFloat(name+"/safeDistance") ),
+  attackDistance( Gamedata::getInstance().getXmlFloat(name+"/attackDistance") )
 {
-  TwoWayMultiSprite::createAltImages("Evade"+name);
+  if(type == "passive") {
+    smartSpriteType = PASSIVE;
+    TwoWayMultiSprite::createAltImages("Evade"+name);
+  }
+  else if(type == "aggressive") {
+    smartSpriteType = AGGRESSIVE;
+    TwoWayMultiSprite::createAltImages("Attack"+name);
+  }
 }
 
 
@@ -38,8 +47,10 @@ SmartSprite::SmartSprite(const SmartSprite& s) :
   playerPos(s.playerPos),
   playerWidth(s.playerWidth),
   playerHeight(s.playerHeight),
+  smartSpriteType(s.smartSpriteType),
   currentMode(s.currentMode),
-  safeDistance(s.safeDistance)
+  safeDistance(s.safeDistance),
+  attackDistance(s.attackDistance)
 {}
 
 void SmartSprite::update(Uint32 ticks) {
@@ -50,14 +61,19 @@ void SmartSprite::update(Uint32 ticks) {
   float distanceToEnemy = ::distance( x, y, ex, ey );
 
   if  ( currentMode == NORMAL ) {
-    if(distanceToEnemy < safeDistance) {
+    if( smartSpriteType == PASSIVE && distanceToEnemy < safeDistance ) {
       currentMode = EVADE;
       toggleAlt();
       //setVelocityX( (1.5)*getVelocityX() );
     }
+    else if( smartSpriteType == AGGRESSIVE && distanceToEnemy < attackDistance ){
+      currentMode = ATTACK;
+      toggleAlt();
+      setVelocityX( 2*getVelocityX() );
+    }
   }
   else if  ( currentMode == EVADE ) {
-    if(distanceToEnemy > safeDistance) {
+    if( distanceToEnemy > safeDistance ) {
       currentMode = NORMAL;
       toggleAlt();
       if( getVelocityX() > 0 ) goRight();
@@ -66,6 +82,18 @@ void SmartSprite::update(Uint32 ticks) {
     else {
       if ( x < ex ) goLeft();
       if ( x > ex ) goRight();
+    }
+  }
+  else if ( currentMode == ATTACK ) {
+    if( distanceToEnemy > attackDistance ) {
+      currentMode = NORMAL;
+      toggleAlt();
+      if( getVelocityX() > 0 ) goRight();
+      if( getVelocityX() < 0 ) goLeft();
+    }
+    else {
+    if( x < ex ) goRight();
+    if( x > ex ) goLeft();
     }
   }
   TwoWayMultiSprite::update(ticks);

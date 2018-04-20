@@ -112,6 +112,7 @@
     <distance>100</distance>
   </chunk>
   <bulletName>FireBall</bulletName>
+  <lifeCount>3</lifeCount>
 </FireSpirit>
 
 <FireSpiritAttack>
@@ -164,9 +165,9 @@
 <Pinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>
   <startLoc x="4000" y="725"/>
-  <safeDistance>200</safeDistance>
-  <attackDistance>300</attackDistance>
-  <count>1</count>
+  <safeDistance>300</safeDistance>
+  <attackDistance>550</attackDistance>
+  <count>10</count>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
@@ -219,7 +220,7 @@
   <transparency>false</transparency>
 </LeftEvadePinkupine>
 
-<AngryPinkupine>
+<AttackPinkupine>
   <file>assets/pinkupine/angry_pinkupine_right.png</file>
   <startLoc x="4000" y="725"/>
   <attackDistance>200</attackDistance>
@@ -230,9 +231,9 @@
   <speedX>175</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
-</AngryPinkupine>
+</AttackPinkupine>
 
-<LeftAngryPinkupine>
+<LeftAttackPinkupine>
   <file>assets/pinkupine/angry_pinkupine_right.png</file>
   <startLoc x="4000" y="725"/>
   <attackDistance>200</attackDistance>
@@ -243,7 +244,7 @@
   <speedX>175</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
-</LeftAngryPinkupine>
+</LeftAttackPinkupine>
 
 <Dogat>
   <file>assets/dogat/dogat_right.png</file>

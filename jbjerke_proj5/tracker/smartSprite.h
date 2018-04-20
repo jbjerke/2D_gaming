@@ -7,7 +7,7 @@
 
 class SmartSprite : public TwoWayMultiSprite {
 public:
-  SmartSprite(const std::string&, const Vector2f& pos, int w, int h);
+  SmartSprite(const std::string&, const std::string&, const Vector2f& pos, int w, int h);
   SmartSprite(const SmartSprite&);
   virtual ~SmartSprite() { }
 
@@ -17,12 +17,15 @@ public:
   void setPlayerPos(const Vector2f& p) { playerPos = p; }
 
 private:
-  enum MODE {NORMAL, EVADE};
+  enum TYPE {AGGRESSIVE, PASSIVE};
+  enum MODE {NORMAL, EVADE, ATTACK};
   Vector2f playerPos;
   int playerWidth;
   int playerHeight;
+  TYPE smartSpriteType;
   MODE currentMode;
   float safeDistance;
+  float attackDistance;
 
   void goLeft();
   void goRight();

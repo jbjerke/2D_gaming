@@ -66,7 +66,7 @@ Engine::Engine() :
   }
 
   for( unsigned int m = 0; m < numOfPinkupines; m++){
-    pinkupines.push_back( new SmartSprite("Pinkupine", pos, w, h) );
+    pinkupines.push_back( new SmartSprite("Pinkupine", "aggressive", pos, w, h) );
     player->attach( pinkupines[m] );
   }
 

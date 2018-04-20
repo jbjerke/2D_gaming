@@ -51,5 +51,6 @@ private:
   Vector2f initialVelocity;
   int worldWidth;
   int worldHeight;
+  int lives;
 };
 #endif
