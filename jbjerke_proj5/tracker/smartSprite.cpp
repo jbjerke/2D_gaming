@@ -26,18 +26,18 @@ SmartSprite::SmartSprite(const std::string& name, const std::string& type,
   playerPos(pos),
   playerWidth(w),
   playerHeight(h),
-  smartSpriteType(),
+  smartSpriteType(PASSIVE),
   currentMode(NORMAL),
   safeDistance( Gamedata::getInstance().getXmlFloat(name+"/safeDistance") ),
   attackDistance( Gamedata::getInstance().getXmlFloat(name+"/attackDistance") )
 {
   if(type == "passive") {
     smartSpriteType = PASSIVE;
-    TwoWayMultiSprite::createAltImages("Evade"+name);
+    createAltImages("Evade"+name);
   }
   else if(type == "aggressive") {
     smartSpriteType = AGGRESSIVE;
-    TwoWayMultiSprite::createAltImages("Attack"+name);
+    createAltImages("Attack"+name);
   }
 }
 
@@ -66,9 +66,9 @@ void SmartSprite::update(Uint32 ticks) {
       toggleAlt();
       //setVelocityX( (1.5)*getVelocityX() );
     }
-    else if( smartSpriteType == AGGRESSIVE && distanceToEnemy < attackDistance ){
+  else if( smartSpriteType == AGGRESSIVE && distanceToEnemy < attackDistance ){
       currentMode = ATTACK;
-      toggleAlt();
+     toggleAlt();
       setVelocityX( 2*getVelocityX() );
     }
   }
