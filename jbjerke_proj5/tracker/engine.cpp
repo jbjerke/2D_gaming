@@ -71,8 +71,9 @@ Engine::Engine() :
   }
 
   for( unsigned int m = 0; m < numOfPinkupines/2; m++){
-    pinkupines.push_back( new SmartSprite("Pinkupine", "passive", pos, w, h) );
-    player->attach( pinkupines[m] );
+    SmartSprite* sm = new SmartSprite("Pinkupine", "passive", pos, w, h);
+    pinkupines.push_back( sm );
+    player->attach( sm );
   }
 
   const std::string s = Gamedata::getInstance().getXmlStr("collisionStrategy");
@@ -161,27 +162,20 @@ void Engine::checkForCollisions(){
     if( !((*dit)->isExploding()) ){
       if ( strat->execute(*(player->getPlayer()), **dit) ){
         (*dit)->explode();
-        //player->explode();
-        //return;
-        ++dit;
       }
-      else ++dit;
     }
-    else { ++dit; }
+    ++dit;
   }
 
   std::vector<SmartSprite*>::iterator pit = pinkupines.begin();
   while( pit != pinkupines.end() ){
     if( !(*pit)->isExploding() ){
       if ( strat->execute(*(player->getPlayer()), **pit) ){
-        SmartSprite* doneForP = *pit;
         (*pit)->explode();
-        player->detach(doneForP);
-        ++pit;
+        player->detach(*pit);
       }
-      else { ++pit; }
     }
-    else ++pit;
+    ++pit;
   }
 
   // if ( strat->execute(*player, *wizard) ){

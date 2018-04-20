@@ -3,7 +3,9 @@
 #include "gamedata.h"
 #include "imageFactory.h"
 
-TwoWayMultiSprite::~TwoWayMultiSprite(){ if(explosion) delete explosion; }
+TwoWayMultiSprite::~TwoWayMultiSprite(){ 
+  if(explosion) delete explosion; 
+}
 
 void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;

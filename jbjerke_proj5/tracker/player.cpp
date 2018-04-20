@@ -35,7 +35,7 @@ void Player::detach( SmartSprite* ss ){
 			o = observers.erase(o);
 			return;
 		}
-		++o;
+		else ++o;
 	}
 }
 
