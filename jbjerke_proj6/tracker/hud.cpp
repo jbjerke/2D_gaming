@@ -26,7 +26,7 @@ Hud::Hud(const Hud& hd):
   textclr(hd.textclr)
 {}
 
-void Hud::toggleOn(){
+void Hud::toggleHelperOn(){
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, hudclr.r, hudclr.g, hudclr.b, hudclr.a);
   SDL_RenderFillRect(renderer, &rect);

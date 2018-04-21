@@ -5,14 +5,16 @@ class Hud {
 public:
   Hud();
   Hud(const Hud&);
-  void toggleOn();
-  // void toggleOff();
+  void toggleHelperOn();
 
 private:
-  int w;
-  int h;
+  int playerw;
+  int playerh;
+  int helperw;
+  int helperh;
   SDL_Renderer* renderer;
-  SDL_Rect rect;
+  SDL_Rect helpHud;
+  SDL_Rect playerHud;
   SDL_Color hudclr;
   SDL_Color hudoutline;
   SDL_Color textclr;

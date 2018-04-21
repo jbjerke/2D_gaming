@@ -50,8 +50,8 @@ Engine::Engine() :
   player(new Player("FireSpirit")),
   strat(),
   collision( false ),
-  hd(new Hud),
-  hudOn( true ),
+  helperHud(new Hud),
+  helperHudOn( true ),
   makeVideo( false )
 {
   unsigned int numOfDogats= Gamedata::getInstance().getXmlInt("Dogat/count");
@@ -118,8 +118,8 @@ void Engine::draw() const {
 
   viewport.draw();
 
-  if (hudOn){
-    hd->toggleOn();
+  if (helperHudOn){
+    helperHud->toggleOn();
   }
 
   SDL_RenderPresent(renderer);
