@@ -38,10 +38,10 @@ ShooterSprite::ShooterSprite( const std::string& name) :
 	explosion(nullptr),
 	isExploded(false),
 	bulletName( Gamedata::getInstance().getXmlStr(name+"/bulletName") ),
-	bullets(bulletName),
+	bullets( new Bullets(bulletName) ),
 	minBulletSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/minSpeedX") ),
 	bulletInterval( Gamedata::getInstance().getXmlInt(bulletName+"/interval") ),
-	timeSinceLastBullet(0)
+	timeSinceLastBullet( 0 )
 { }
 
 ShooterSprite::ShooterSprite(const ShooterSprite& s) :
@@ -98,10 +98,13 @@ ShooterSprite& ShooterSprite::operator=(const ShooterSprite& s) {
   return *this;
 }
 
-ShooterSprite::~ShooterSprite(){ if(explosion) delete explosion; }
+ShooterSprite::~ShooterSprite(){
+	delete bullets;
+	if(explosion) delete explosion;
+}
 
 void ShooterSprite::draw() const {
-	bullets.draw();
+	bullets->draw();
 	if(explosion) explosion->draw();
   else images[currentFrame]->draw(getX(), getY(), getScale());
 }
@@ -137,7 +140,7 @@ void ShooterSprite::left()  {
 void ShooterSprite::update(Uint32 ticks) {
   advanceFrame(ticks);
 
-	bullets.update(ticks);
+	bullets->update(ticks);
 
 	if ( explosion ){
 		explosion->update(ticks);
@@ -210,7 +213,7 @@ void ShooterSprite::shoot() {
 			vel[0] -= minBulletSpeed;
 		}
 
-		bullets.shoot( Vector2f(x,y), vel );
+		bullets->shoot( Vector2f(x,y), vel );
 		timeSinceLastBullet = 0;
 	}
 }

@@ -17,6 +17,8 @@ public:
   void setPlayerPos(const Vector2f& p) { playerPos = p; }
   void setPlayerIsExploding(const bool expd ) { playerIsExploding = expd; }
 
+  int getType() const;
+
 private:
   enum TYPE {AGGRESSIVE, PASSIVE};
   enum MODE {NORMAL, EVADE, ATTACK};

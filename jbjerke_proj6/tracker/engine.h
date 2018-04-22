@@ -41,8 +41,7 @@ private:
   CollisionStrategy* strat;
   bool collision;
 
-  Hud* hd;
-  bool hudOn;
+  Hud* hud;
 
   bool makeVideo;
 

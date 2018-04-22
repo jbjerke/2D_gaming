@@ -6,39 +6,88 @@
 #include "clock.h"
 #include "renderContext.h"
 
-Hud::Hud() :
-  w ( Gamedata::getInstance().getXmlInt("hud/width") ),
-  h ( Gamedata::getInstance().getXmlInt("hud/height") ),
+Hud::Hud(const Player& p) :
+  px ( Gamedata::getInstance().getXmlInt("hud/player/x") ),
+  py ( Gamedata::getInstance().getXmlInt("hud/player/y") ),
+  pw ( Gamedata::getInstance().getXmlInt("hud/player/width") ),
+  ph ( Gamedata::getInstance().getXmlInt("hud/player/height") ),
+  hx ( Gamedata::getInstance().getXmlInt("hud/help/x") ),
+  hy ( Gamedata::getInstance().getXmlInt("hud/help/y") ),
+  hw ( Gamedata::getInstance().getXmlInt("hud/help/width") ),
+  hh ( Gamedata::getInstance().getXmlInt("hud/help/height") ),
   renderer ( RenderContext::getInstance()->getRenderer() ),
-  rect({50,50,w,h}),
+  helpHud({hx,hy,hw,hh}),
+  helpOn(true),
+  playerHud({px,py,pw,ph}),
+  player( new Player(p) ),
   hudclr({44,14,73,150}),
   hudoutline({24,4,43,150}),
-  textclr({255,255,255,255}){
-  }
+  textclr({255,255,255,255})
+{  }
 
 Hud::Hud(const Hud& hd):
-  w(hd.w),
-  h(hd.h),
+  px(hd.px),
+  py(hd.py),
+  pw(hd.pw),
+  ph(hd.ph),
+  hx(hd.hx),
+  hy(hd.hy),
+  hw(hd.hw),
+  hh(hd.hh),
   renderer(hd.renderer),
-  rect(hd.rect),
+  helpHud(hd.helpHud),
+  helpOn(hd.helpOn),
+  playerHud(hd.playerHud),
+  player( hd.player ),
   hudclr(hd.hudclr),
   hudoutline(hd.hudoutline),
   textclr(hd.textclr)
-{}
+{ }
 
-void Hud::toggleHelperOn(){
-  SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-  SDL_SetRenderDrawColor(renderer, hudclr.r, hudclr.g, hudclr.b, hudclr.a);
-  SDL_RenderFillRect(renderer, &rect);
-  SDL_SetRenderDrawColor(renderer, hudoutline.r, hudoutline.g, hudoutline.b, hudoutline.a);
-  SDL_RenderDrawRect(renderer, &rect);
-  IoMod::getInstance().writeText("A - move left", 75, 75,textclr);
-  IoMod::getInstance().writeText("D - move right", 75, 125,textclr);
-  IoMod::getInstance().writeText("SPACE - Attack", 75, 175, textclr);
-  IoMod::getInstance().writeText("F1 - Toggle Help", 75, 225, textclr);
-  SDL_RenderPresent(renderer);
+Hud& Hud::operator=(const Hud& hd){
+  px = hd.px;
+  py = hd.py;
+  pw = hd.pw;
+  ph = hd.ph;
+  hx = hd.hx;
+  hy = hd.hy;
+  hw = hd.hw;
+  hh = hd.hh;
+  renderer = hd.renderer;
+  helpHud = hd.helpHud;
+  helpOn = hd.helpOn;
+  playerHud = hd.playerHud;
+  player =  hd.player;
+  hudclr = hd.hudclr;
+  hudoutline = hd.hudoutline;
+  textclr = hd.textclr;
+  return *this;
 }
 
-// void Hud::toggleOff(){
-//   SDL_RenderClear( renderer );
-// }
+void Hud::draw() const {
+  if( helpOn ){
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, hudclr.r, hudclr.g, hudclr.b, hudclr.a);
+    SDL_RenderFillRect(renderer, &helpHud);
+    SDL_SetRenderDrawColor(renderer, hudoutline.r, hudoutline.g, hudoutline.b, hudoutline.a);
+    SDL_RenderDrawRect(renderer, &helpHud);
+    IoMod::getInstance().writeText("A - move left", 75, 75,textclr);
+    IoMod::getInstance().writeText("D - move right", 75, 125,textclr);
+    IoMod::getInstance().writeText("SPACE - Attack", 75, 175, textclr);
+    IoMod::getInstance().writeText("F1 - Toggle Help", 75, 225, textclr);
+    SDL_RenderPresent(renderer);
+  }
+
+  SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+  SDL_SetRenderDrawColor(renderer, hudclr.r, hudclr.g, hudclr.b, hudclr.a);
+  SDL_RenderFillRect(renderer, &playerHud);
+  SDL_SetRenderDrawColor(renderer, hudoutline.r, hudoutline.g, hudoutline.b, hudoutline.a);
+  SDL_RenderDrawRect(renderer, &playerHud);
+  // draw this bullets
+  // draw the lives
+  // write the score
+  std::stringstream strm;
+  strm << player->getScore();
+  IoMod::getInstance().writeText(strm.str(), px+pw/2, py+hh/2, textclr);
+  SDL_RenderPresent(renderer);
+}

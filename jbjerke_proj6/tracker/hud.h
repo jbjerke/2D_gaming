@@ -1,20 +1,35 @@
 #include <iostream>
 #include <SDL.h>
+#include "player.h"
 
 class Hud {
 public:
-  Hud();
+  Hud(const Player&);
   Hud(const Hud&);
-  void toggleHelperOn();
+  Hud& operator=(const Hud&);
+  ~Hud() { delete player; }
+  void draw() const;
+  void toggleHelp() { helpOn = !helpOn; }
 
 private:
-  int playerw;
-  int playerh;
-  int helperw;
-  int helperh;
+  int px;
+  int py;
+  int pw;
+  int ph;
+
+  int hx;
+  int hy;
+  int hw;
+  int hh;
+
   SDL_Renderer* renderer;
+
   SDL_Rect helpHud;
+  bool helpOn;
+
   SDL_Rect playerHud;
+  Player* player;
+
   SDL_Color hudclr;
   SDL_Color hudoutline;
   SDL_Color textclr;

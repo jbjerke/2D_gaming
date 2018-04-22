@@ -50,8 +50,7 @@ Engine::Engine() :
   player(new Player("FireSpirit")),
   strat(),
   collision( false ),
-  helperHud(new Hud),
-  helperHudOn( true ),
+  hud(new Hud(*player) ),
   makeVideo( false )
 {
   unsigned int numOfDogats= Gamedata::getInstance().getXmlInt("Dogat/count");
@@ -118,9 +117,7 @@ void Engine::draw() const {
 
   viewport.draw();
 
-  if (helperHudOn){
-    helperHud->toggleOn();
-  }
+  hud->draw();
 
   SDL_RenderPresent(renderer);
 }
@@ -221,7 +218,7 @@ void Engine::play() {
         //   player->heAttak();
         // }
         if ( keystate[SDL_SCANCODE_F1] ){
-          hudOn = !hudOn;
+          hud->toggleHelp();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;

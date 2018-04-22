@@ -24,8 +24,18 @@
 </world>
 
 <hud>
-  <width>250</width>
-  <height>250</height>
+  <help>
+    <x>50</x>
+    <y>50</y>
+    <width>250</width>
+    <height>250</height>
+  </help>
+  <player>
+    <x>625</x>
+    <y>750</y>
+    <width>250</width>
+    <height>100</height>
+  </player>
 </hud>
 
 <sky>

@@ -100,3 +100,9 @@ void SmartSprite::update(Uint32 ticks) {
   }
   TwoWayMultiSprite::update(ticks);
 }
+
+int SmartSprite::getType() const {
+  if( smartSpriteType == PASSIVE ) return -1;
+  else if( smartSpriteType == AGGRESSIVE) return 1;
+  else return 0;
+}
