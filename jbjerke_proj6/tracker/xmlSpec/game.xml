@@ -38,6 +38,21 @@
   </player>
 </hud>
 
+<lifeIcon>
+  <file>assets/fire_spirit/life_icon.png</file>
+  <imageWidth>50</imageWidth>
+  <imageHeight>50</imageHeight>
+  <transparency>false</transparency>
+</lifeIcon>
+
+<bulletIcon>
+  <file>assets/fire_spirit/bullet_icon.png</file>
+  <imageWidth>81</imageWidth>
+  <imageHeight>50</imageHeight>
+  <transparency>false</transparency>
+</bulletIcon>
+
+
 <sky>
   <file>assets/background/sky_full.bmp</file>
   <factor>5</factor>
@@ -123,6 +138,7 @@
   </chunk>
   <bulletName>FireBall</bulletName>
   <lifeCount>3</lifeCount>
+  <winningScore>15</winningScore>
 </FireSpirit>
 
 <FireSpiritAttack>

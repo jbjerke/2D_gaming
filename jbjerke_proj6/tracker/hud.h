@@ -30,6 +30,9 @@ private:
   SDL_Rect playerHud;
   Player* player;
 
+  const Image * lifeIcon;
+  const Image * bulletIcon;
+
   SDL_Color hudclr;
   SDL_Color hudoutline;
   SDL_Color textclr;

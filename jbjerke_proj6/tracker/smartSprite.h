@@ -11,13 +11,14 @@ public:
   SmartSprite(const SmartSprite&);
   virtual ~SmartSprite() { }
 
-  virtual void explode() { TwoWayMultiSprite::explode(); }
+  virtual void explode();
 
   virtual void update(Uint32 ticks);
   void setPlayerPos(const Vector2f& p) { playerPos = p; }
   void setPlayerIsExploding(const bool expd ) { playerIsExploding = expd; }
 
   int getType() const;
+  int getTimesHit() const { return timesHit; }
 
 private:
   enum TYPE {AGGRESSIVE, PASSIVE};
@@ -30,6 +31,7 @@ private:
   float safeDistance;
   float attackDistance;
   bool playerIsExploding;
+  int timesHit;
 
   void goLeft();
   void goRight();

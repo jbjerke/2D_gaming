@@ -9,7 +9,8 @@ Player::Player( const std::string& name) :
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
   lives(Gamedata::getInstance().getXmlInt(name+"/lifeCount")),
-  score( 0 )
+  score( 0 ),
+  winningScore( Gamedata::getInstance().getXmlInt(name+"/winningScore") )
 { }
 
 Player::Player(const Player& p) :
@@ -19,7 +20,8 @@ Player::Player(const Player& p) :
   worldWidth(p.worldWidth),
   worldHeight(p.worldHeight),
   lives(p.lives),
-  score(p.score)
+  score(p.score),
+  winningScore(p.winningScore)
 { }
 
 Player& Player::operator=(const Player& p){
@@ -30,6 +32,7 @@ Player& Player::operator=(const Player& p){
   worldHeight = p.worldHeight;
   lives = p.lives;
   score = p.score;
+  winningScore = p.winningScore;
   return *this;
 }
 
@@ -51,6 +54,8 @@ void Player::update(Uint32 ticks) {
 }
 
 void Player::explode() {
+  --lives;
+  
   player->explode();
 
   notify();
@@ -60,8 +65,11 @@ void Player::detach( SmartSprite* ss ){
 	std::list<SmartSprite*>::iterator o = observers.begin();
 	while( o != observers.end() ){
 		if ( *o == ss){
-      score += (*o)->getScale()*(*o)->getType();
-			o = observers.erase(o);
+      // score += (*o)->getScale()*(*o)->getType();
+			if( (*o)->getTimesHit() == (*o)->getScale() ){
+        score += (*o)->getScale()*(*o)->getType();
+        o = observers.erase(o);
+      }
 			return;
 		}
 		else ++o;

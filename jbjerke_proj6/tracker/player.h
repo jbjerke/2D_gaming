@@ -45,6 +45,9 @@ public:
   void heAttak() { player->shoot(); }
   bool heHitSomething(const Drawable* d) const { return player->shotSomething(d); }
   int getScore() const { return score; }
+  int getLifeCount() const { return lives; }
+  bool playerWins() const { return score >= winningScore; }
+  bool playerDies() const { return !lives; }
 
   void attach( SmartSprite* ss ) { observers.push_back(ss); }
   void detach( SmartSprite* ss );
@@ -58,6 +61,7 @@ private:
   int worldHeight;
   int lives;
   int score;
+  int winningScore;
 
   Player& operator=(const Player&);
 };

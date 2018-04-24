@@ -20,6 +20,8 @@ Hud::Hud(const Player& p) :
   helpOn(true),
   playerHud({px,py,pw,ph}),
   player( new Player(p) ),
+  lifeIcon( ImageFactory::getInstance().getImage("lifeIcon") ),
+  bulletIcon( ImageFactory::getInstance().getImage("bulletIcon") ),
   hudclr({44,14,73,150}),
   hudoutline({24,4,43,150}),
   textclr({255,255,255,255})
@@ -39,6 +41,8 @@ Hud::Hud(const Hud& hd):
   helpOn(hd.helpOn),
   playerHud(hd.playerHud),
   player( hd.player ),
+  lifeIcon( hd.lifeIcon ),
+  bulletIcon( hd.bulletIcon ),
   hudclr(hd.hudclr),
   hudoutline(hd.hudoutline),
   textclr(hd.textclr)
@@ -83,7 +87,11 @@ void Hud::draw() const {
   SDL_RenderFillRect(renderer, &playerHud);
   SDL_SetRenderDrawColor(renderer, hudoutline.r, hudoutline.g, hudoutline.b, hudoutline.a);
   SDL_RenderDrawRect(renderer, &playerHud);
+  // std::cout << player->getScore() << std::endl;
   // draw this bullets
+  for(int n = 0; n < player->getLifeCount(); n++){
+    lifeIcon->draw( px + 10*(n+1) + lifeIcon->getWidth(), py  );
+  }
   // draw the lives
   // write the score
   std::stringstream strm;

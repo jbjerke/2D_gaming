@@ -30,7 +30,8 @@ SmartSprite::SmartSprite(const std::string& name, const std::string& type,
   currentMode(NORMAL),
   safeDistance( Gamedata::getInstance().getXmlFloat(name+"/safeDistance") ),
   attackDistance( Gamedata::getInstance().getXmlFloat(name+"/attackDistance") ),
-  playerIsExploding(false)
+  playerIsExploding(false),
+  timesHit( 0 )
 {
   if(type == "passive") {
     smartSpriteType = PASSIVE;
@@ -52,8 +53,14 @@ SmartSprite::SmartSprite(const SmartSprite& s) :
   currentMode(s.currentMode),
   safeDistance(s.safeDistance),
   attackDistance(s.attackDistance),
-  playerIsExploding(s.playerIsExploding)
-{}
+  playerIsExploding(s.playerIsExploding),
+  timesHit(s.timesHit)
+{ }
+
+void SmartSprite::explode(){
+  ++timesHit;
+  if (timesHit == getScale() ) TwoWayMultiSprite::explode();
+}
 
 void SmartSprite::update(Uint32 ticks) {
   float x= getX()+getImage()->getWidth()/2;
