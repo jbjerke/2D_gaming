@@ -11,7 +11,14 @@ public:
   Derived(const char* n) : name(new char[strlen(n)+1]){
     strcpy(name, n);
   }
-  //overload
+  Derived& operator=(const Derived& d){
+    if( this == &d ) return *this;
+
+    delete name;
+    name = new char[strlen(d.getName())+1];
+    strcpy(name, d.getName());
+    return *this;
+  }
   const char* getName() const { return name; }
 
 private:

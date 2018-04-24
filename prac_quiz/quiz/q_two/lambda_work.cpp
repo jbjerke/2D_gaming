@@ -9,12 +9,12 @@ int main() {
   speed = speed * (rand()%2?-1:1);
   std::cout<<"speed" << speed << std::endl;
 
-  //lambda here
+  auto fixSpeed = [](){ return rand()%2?-1:1; };
   speed = speed * fixSpeed();
   std::cout << "speed" << speed << std::endl;
 
   int number = rand() % 100;
   std::cout << "number" << number << std::endl;
-  // lambda here
+  auto isEven = [](int n){ return n%2?0:1; };
   std::cout << "isEven(number) = " << isEven(number) << std::endl;
 }

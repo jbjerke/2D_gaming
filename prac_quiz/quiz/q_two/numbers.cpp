@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <algorithm>
 const int MAX = 20;
-const in MAX_NUMBER = 100;
+const int MAX_NUMBER = 100;
 
 class Pokemon {
 public:
@@ -12,16 +12,27 @@ public:
   Pokemon(const Pokemon& p) : number(p.number){ }
   int getPokemon() const { return number; }
   bool operator<(const Pokemon& rhs) const {
-    return this.number < rhs.number;
+    return number < rhs.number;
   }
 
 private:
   int number;
+};
+
+class PokemonLess {
+public:
+  bool operator()(const Pokemon* lhs, const Pokemon* rhs) const {
+    return lhs->getPokemon() < rhs->getPokemon();
+  }
+};
+
+std::ostream& operator<<(std::ostream& cout, const Pokemon* pokeList){
+  return cout << pokeList->getPokemon();
 }
 
 void init(std::list<Pokemon*> & pokeList){
   for( unsigned int i = 0; i < MAX; i++){
-    pokeList.push_back( new Pokemon(rand() % MAX_NUMBER ) )
+    pokeList.push_back( new Pokemon(rand() % MAX_NUMBER ) );
   }
 }
 
@@ -36,6 +47,8 @@ int main() {
   std::list<Pokemon*> pokeList;
   init(pokeList);
   print(pokeList);
-  pokeList.sort(PokemonLess());
+  pokeList.sort(
+    [](const Pokemon* lhs, const Pokemon* rhs){ return lhs->getPokemon() > rhs->getPokemon(); }
+  );
   print(pokeList);
 }
