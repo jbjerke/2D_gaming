@@ -55,7 +55,6 @@ void Player::update(Uint32 ticks) {
 
 void Player::explode() {
   --lives;
-  --score;
 
   player->explode();
 

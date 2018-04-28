@@ -38,6 +38,7 @@ Engine::Engine() :
   rc( RenderContext::getInstance() ),
   io( IoMod::getInstance() ),
   clock( Clock::getInstance() ),
+  sound( new SDLSound() ),
   renderer( rc->getRenderer() ),
   sky("sky", Gamedata::getInstance().getXmlInt("sky/factor") ),
   mntns("mntns", Gamedata::getInstance().getXmlInt("mntns/factor") ),

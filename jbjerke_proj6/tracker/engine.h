@@ -5,6 +5,7 @@
 #include "clock.h"
 #include "world.h"
 #include "viewport.h"
+#include "sound.h"
 
 class CollisionStrategy;
 class Player;
@@ -22,6 +23,8 @@ private:
   const RenderContext* rc;
   const IoMod& io;
   Clock& clock;
+
+  SDLSound* sound;
 
   SDL_Renderer * const renderer;
   World sky;
