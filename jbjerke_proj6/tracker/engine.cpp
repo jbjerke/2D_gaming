@@ -268,6 +268,7 @@ bool Engine::play() {
       }
       if( keystate[SDL_SCANCODE_SPACE] ){
         player->heAttak();
+        sound[0];
       }
       if( keystate[SDL_SCANCODE_E ]){
         player->explode();
