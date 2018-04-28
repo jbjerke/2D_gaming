@@ -38,7 +38,7 @@ Engine::Engine() :
   rc( RenderContext::getInstance() ),
   io( IoMod::getInstance() ),
   clock( Clock::getInstance() ),
-  sound( new SDLSound() ),
+  // sound( ),
   renderer( rc->getRenderer() ),
   sky("sky", Gamedata::getInstance().getXmlInt("sky/factor") ),
   mntns("mntns", Gamedata::getInstance().getXmlInt("mntns/factor") ),
@@ -219,6 +219,7 @@ bool Engine::play() {
   bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
   FrameGenerator frameGen;
+  SDLSound sound;
 
   while ( !done ) {
     // The next loop polls for events, guarding against key bounce:

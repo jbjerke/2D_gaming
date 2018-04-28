@@ -24,7 +24,7 @@ private:
   const IoMod& io;
   Clock& clock;
 
-  SDLSound* sound;
+  // SDLSound sound;
 
   SDL_Renderer * const renderer;
   World sky;
