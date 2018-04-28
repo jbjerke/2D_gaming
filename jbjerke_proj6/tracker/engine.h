@@ -15,7 +15,7 @@ class Engine {
 public:
   Engine ();
   ~Engine ();
-  void play();
+  bool play();
   //void switchSprite(); maybe if I want more than one player?
 
 private:
@@ -40,6 +40,8 @@ private:
 
   CollisionStrategy* strat;
   bool collision;
+
+  bool godmode;
 
   Hud* hud;
 

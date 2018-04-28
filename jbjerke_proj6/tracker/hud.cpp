@@ -84,21 +84,22 @@ Hud& Hud::operator=(const Hud& hd){
 }
 
 void Hud::draw(const Player& player) const {
+  SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
   if( helpOn ){
-    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    // SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(renderer, hudclr.r, hudclr.g, hudclr.b, hudclr.a);
     SDL_RenderFillRect(renderer, &helpHud);
     SDL_SetRenderDrawColor(renderer, hudoutline.r, hudoutline.g, hudoutline.b, hudoutline.a);
     SDL_RenderDrawRect(renderer, &helpHud);
-    IoMod::getInstance().writeText("A - move left", 75, 75,textclr);
-    IoMod::getInstance().writeText("D - move right", 75, 125,textclr);
-    IoMod::getInstance().writeText("SPACE - Attack", 75, 175, textclr);
-    IoMod::getInstance().writeText("F1 - Toggle Help", 75, 225, textclr);
+    IoMod::getInstance().writeText("A - move left", hx + buffer, hy + buffer,textclr);
+    IoMod::getInstance().writeText("D - move right", hx + buffer, hy + buffer + 50,textclr);
+    IoMod::getInstance().writeText("SPACE - Attack", hx + buffer, hy + buffer + 100, textclr);
+    IoMod::getInstance().writeText("F1 - Toggle Help", hx + buffer, hy + buffer + 150, textclr);
     //SDL_RenderPresent(renderer);
   }
 
-  SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-  SDL_SetRenderDrawColor(renderer, hudclr.r, hudclr.g, hudclr.b, hudclr.a);
+  SDL_SetRenderDrawColor(renderer, hudclr.r, hudclr.g, hudclr.b, hudclr.a + 50);
   SDL_RenderFillRect(renderer, &playerHud);
   SDL_SetRenderDrawColor(renderer, hudoutline.r, hudoutline.g, hudoutline.b, hudoutline.a);
   SDL_RenderDrawRect(renderer, &playerHud);
@@ -110,12 +111,12 @@ void Hud::draw(const Player& player) const {
   // draw the lives
   std::stringstream strm1;
   strm1 << "Lives: " << player.getLifeCount();
-  IoMod::getInstance().writeText(strm1.str(), px+buffer, py+ph/3, textclr);
+  IoMod::getInstance().writeText(strm1.str(), px+buffer, py+ph/4, textclr);
 
   // write the score
   std::stringstream strm2;
   strm2 << "Score: " << player.getScore();
-  IoMod::getInstance().writeText(strm2.str(), px+pw/2+buffer, py+ph/3, textclr);
+  IoMod::getInstance().writeText(strm2.str(), px+pw/2+buffer, py+ph/4, textclr);
 
   SDL_RenderPresent(renderer);
 }

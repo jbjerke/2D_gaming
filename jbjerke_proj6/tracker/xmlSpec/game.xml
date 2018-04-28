@@ -31,9 +31,9 @@
     <height>250</height>
   </help>
   <player>
-    <x>625</x>
+    <x>600</x>
     <y>750</y>
-    <width>250</width>
+    <width>300</width>
     <height>100</height>
   </player>
   <color>
@@ -97,8 +97,8 @@
 </path>
 
 <font name="font">
-  <file>fonts/arial.ttf</file>
-  <size>24</size>
+  <file>fonts/Amatic_SC/AmaticSC-Bold.ttf</file>
+  <size>50</size>
   <red>255</red>
   <green>0</green>
   <blue>0</blue>

@@ -55,7 +55,8 @@ void Player::update(Uint32 ticks) {
 
 void Player::explode() {
   --lives;
-  
+  --score;
+
   player->explode();
 
   notify();
@@ -65,7 +66,6 @@ void Player::detach( SmartSprite* ss ){
 	std::list<SmartSprite*>::iterator o = observers.begin();
 	while( o != observers.end() ){
 		if ( *o == ss){
-      // score += (*o)->getScale()*(*o)->getType();
 			if( (*o)->getTimesHit() == (*o)->getScale() ){
         score += (*o)->getScale()*(*o)->getType();
         o = observers.erase(o);

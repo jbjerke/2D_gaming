@@ -50,9 +50,12 @@ Engine::Engine() :
   player(new Player("FireSpirit")),
   strat(),
   collision( false ),
+  godmode( false ),
   hud(new Hud() ),
   makeVideo( false )
 {
+  clock.startClock();
+
   unsigned int numOfDogats= Gamedata::getInstance().getXmlInt("Dogat/count");
   unsigned int numOfPinkupines= Gamedata::getInstance().getXmlInt("Pinkupine/count");
   dogats.reserve(numOfDogats);
@@ -113,6 +116,14 @@ void Engine::draw() const {
     pk->draw();
   }
 
+  if ( !godmode ) {
+    if ( player->playerDed() ){
+      SDL_Color color = {255, 255, 255, 0};
+      io.writeText("Press 'R' to restart", 625, 150, color);
+      clock.pause();
+    }
+  }
+
   player->draw();
 
   viewport.draw();
@@ -124,6 +135,14 @@ void Engine::draw() const {
 
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
+
+  // if ( !godmode ) {
+  //   if ( player->playerDed() ){
+  //     SDL_Color color = {255, 255, 255, 0};
+  //     io.writeText("Press 'R' to restart", 400, 700, color);
+  //     clock.pause();
+  //   }
+  // }
 
   wizard->update(ticks);
 
@@ -193,7 +212,7 @@ void Engine::checkForCollisions(){
   // }
 }
 
-void Engine::play() {
+bool Engine::play() {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -214,9 +233,13 @@ void Engine::play() {
           if ( clock.isPaused() ) clock.unpause();
           else clock.pause();
         }
-        // if( keystate[SDL_SCANCODE_SPACE] ){
-        //   player->heAttak();
-        // }
+        if( keystate[SDL_SCANCODE_R] ){
+          clock.unpause();
+          return true;
+        }
+        if( keystate[SDL_SCANCODE_G] ){
+          godmode = !godmode;
+        }
         if ( keystate[SDL_SCANCODE_F1] ){
           hud->toggleHelp();
         }
@@ -254,4 +277,5 @@ void Engine::play() {
       }
     }
   }
+  return false;
 }
