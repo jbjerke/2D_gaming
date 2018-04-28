@@ -38,7 +38,7 @@ Engine::Engine() :
   rc( RenderContext::getInstance() ),
   io( IoMod::getInstance() ),
   clock( Clock::getInstance() ),
-  // sound( ),
+  sound( ),
   renderer( rc->getRenderer() ),
   sky("sky", Gamedata::getInstance().getXmlInt("sky/factor") ),
   mntns("mntns", Gamedata::getInstance().getXmlInt("mntns/factor") ),
@@ -105,7 +105,7 @@ void Engine::draw() const {
 
   // Put in the HUD:
   SDL_Color color = {255, 255, 255, 0};
-  io.writeText("Jordan Bjerken", 30, 800, color);
+  io.writeText("Jordan Bjerken", 30, 775, color);
 
   wizard->draw();
 
@@ -136,14 +136,6 @@ void Engine::draw() const {
 
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
-
-  // if ( !godmode ) {
-  //   if ( player->playerDed() ){
-  //     SDL_Color color = {255, 255, 255, 0};
-  //     io.writeText("Press 'R' to restart", 400, 700, color);
-  //     clock.pause();
-  //   }
-  // }
 
   wizard->update(ticks);
 
@@ -181,10 +173,12 @@ void Engine::checkForCollisions(){
     if( !((*dit)->isExploding()) ){
       if ( strat->execute(*(player->getPlayer()), **dit) && !( player->isExploding() ) ){
         // (*dit)->explode();
+        sound[1];
         player->explode();
         return;
       }
       if( player->heHitSomething(*dit) ){
+        sound[1];
         (*dit)->explode();
       }
     }
@@ -195,9 +189,10 @@ void Engine::checkForCollisions(){
   while( pit != pinkupines.end() ){
     if( !(*pit)->isExploding() ){
       if ( strat->execute(*(player->getPlayer()), **pit) && !( player->isExploding() ) ){
+        sound[1];
+        player->explode();
         (*pit)->explode();
         player->detach(*pit);
-        player->explode();
         return;
       }
       if( player->heHitSomething(*pit) ){
@@ -219,7 +214,7 @@ bool Engine::play() {
   bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
   FrameGenerator frameGen;
-  SDLSound sound;
+  // SDLSound sound;
 
   while ( !done ) {
     // The next loop polls for events, guarding against key bounce:
@@ -267,8 +262,10 @@ bool Engine::play() {
         player->right();
       }
       if( keystate[SDL_SCANCODE_SPACE] ){
-        player->heAttak();
-        sound[0];
+        if( !(player->isExploding()) ){
+          sound[0];
+          player->heAttak();
+        }
       }
       if( keystate[SDL_SCANCODE_E ]){
         player->explode();

@@ -66,7 +66,9 @@ void Player::detach( SmartSprite* ss ){
 	while( o != observers.end() ){
 		if ( *o == ss){
 			if( (*o)->getTimesHit() == (*o)->getScale() ){
-        score += (*o)->getScale()*(*o)->getType();
+        if( !player->isExploding() || (*o)->getType() != 1 ) {
+          score += (*o)->getScale()*(*o)->getType();
+        }
         o = observers.erase(o);
       }
 			return;
