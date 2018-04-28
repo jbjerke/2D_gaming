@@ -6,7 +6,7 @@
 #include "clock.h"
 #include "renderContext.h"
 
-Hud::Hud(const Player& p) :
+Hud::Hud() :
   px ( Gamedata::getInstance().getXmlInt("hud/player/x") ),
   py ( Gamedata::getInstance().getXmlInt("hud/player/y") ),
   pw ( Gamedata::getInstance().getXmlInt("hud/player/width") ),
@@ -15,16 +15,29 @@ Hud::Hud(const Player& p) :
   hy ( Gamedata::getInstance().getXmlInt("hud/help/y") ),
   hw ( Gamedata::getInstance().getXmlInt("hud/help/width") ),
   hh ( Gamedata::getInstance().getXmlInt("hud/help/height") ),
+  buffer( Gamedata::getInstance().getXmlInt("hud/textBuffer") ),
   renderer ( RenderContext::getInstance()->getRenderer() ),
   helpHud({hx,hy,hw,hh}),
   helpOn(true),
   playerHud({px,py,pw,ph}),
-  player( new Player(p) ),
-  lifeIcon( ImageFactory::getInstance().getImage("lifeIcon") ),
-  bulletIcon( ImageFactory::getInstance().getImage("bulletIcon") ),
-  hudclr({44,14,73,150}),
-  hudoutline({24,4,43,150}),
-  textclr({255,255,255,255})
+//  player( new Player(p) ),
+  // lifeIcon( ImageFactory::getInstance().getImage("lifeIcon") ),
+  // bulletIcon( ImageFactory::getInstance().getImage("bulletIcon") ),
+  hudclr(
+    {(Uint8)Gamedata::getInstance().getXmlInt("hud/color/r"),
+       (Uint8)Gamedata::getInstance().getXmlInt("hud/color/g"),
+       (Uint8)Gamedata::getInstance().getXmlInt("hud/color/b"),
+       (Uint8)Gamedata::getInstance().getXmlInt("hud/color/a")}),
+  hudoutline(
+    {(Uint8)Gamedata::getInstance().getXmlInt("hud/outlineColor/r"),
+       (Uint8)Gamedata::getInstance().getXmlInt("hud/outlineColor/g"),
+       (Uint8)Gamedata::getInstance().getXmlInt("hud/outlineColor/b"),
+       (Uint8)Gamedata::getInstance().getXmlInt("hud/outlineColor/a")}),
+  textclr(
+    {(Uint8)Gamedata::getInstance().getXmlInt("hud/textColor/r"),
+       (Uint8)Gamedata::getInstance().getXmlInt("hud/textColor/g"),
+       (Uint8)Gamedata::getInstance().getXmlInt("hud/textColor/b"),
+       (Uint8)Gamedata::getInstance().getXmlInt("hud/textColor/a")})
 {  }
 
 Hud::Hud(const Hud& hd):
@@ -36,13 +49,14 @@ Hud::Hud(const Hud& hd):
   hy(hd.hy),
   hw(hd.hw),
   hh(hd.hh),
+  buffer(hd.buffer),
   renderer(hd.renderer),
   helpHud(hd.helpHud),
   helpOn(hd.helpOn),
   playerHud(hd.playerHud),
-  player( hd.player ),
-  lifeIcon( hd.lifeIcon ),
-  bulletIcon( hd.bulletIcon ),
+  //player( hd.player ),
+  // lifeIcon( hd.lifeIcon ),
+  // bulletIcon( hd.bulletIcon ),
   hudclr(hd.hudclr),
   hudoutline(hd.hudoutline),
   textclr(hd.textclr)
@@ -57,18 +71,19 @@ Hud& Hud::operator=(const Hud& hd){
   hy = hd.hy;
   hw = hd.hw;
   hh = hd.hh;
+  buffer = hd.buffer;
   renderer = hd.renderer;
   helpHud = hd.helpHud;
   helpOn = hd.helpOn;
   playerHud = hd.playerHud;
-  player =  hd.player;
+  //player =  hd.player;
   hudclr = hd.hudclr;
   hudoutline = hd.hudoutline;
   textclr = hd.textclr;
   return *this;
 }
 
-void Hud::draw() const {
+void Hud::draw(const Player& player) const {
   if( helpOn ){
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(renderer, hudclr.r, hudclr.g, hudclr.b, hudclr.a);
@@ -79,7 +94,7 @@ void Hud::draw() const {
     IoMod::getInstance().writeText("D - move right", 75, 125,textclr);
     IoMod::getInstance().writeText("SPACE - Attack", 75, 175, textclr);
     IoMod::getInstance().writeText("F1 - Toggle Help", 75, 225, textclr);
-    SDL_RenderPresent(renderer);
+    //SDL_RenderPresent(renderer);
   }
 
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -89,13 +104,18 @@ void Hud::draw() const {
   SDL_RenderDrawRect(renderer, &playerHud);
   // std::cout << player->getScore() << std::endl;
   // draw this bullets
-  for(int n = 0; n < player->getLifeCount(); n++){
-    lifeIcon->draw( px + 10*(n+1) + lifeIcon->getWidth(), py  );
-  }
+  // for(int n = 0; n < player->getLifeCount(); n++){
+  //   lifeIcon->draw( px + 10*(n+1) + lifeIcon->getWidth(), py  );
+  // }
   // draw the lives
+  std::stringstream strm1;
+  strm1 << "Lives: " << player.getLifeCount();
+  IoMod::getInstance().writeText(strm1.str(), px+buffer, py+ph/3, textclr);
+
   // write the score
-  std::stringstream strm;
-  strm << player->getScore();
-  IoMod::getInstance().writeText(strm.str(), px+pw/2, py+hh/2, textclr);
+  std::stringstream strm2;
+  strm2 << "Score: " << player.getScore();
+  IoMod::getInstance().writeText(strm2.str(), px+pw/2+buffer, py+ph/3, textclr);
+
   SDL_RenderPresent(renderer);
 }

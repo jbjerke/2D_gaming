@@ -47,7 +47,7 @@ public:
   int getScore() const { return score; }
   int getLifeCount() const { return lives; }
   bool playerWins() const { return score >= winningScore; }
-  bool playerDies() const { return !lives; }
+  bool playerDed() const { return !lives; }
 
   void attach( SmartSprite* ss ) { observers.push_back(ss); }
   void detach( SmartSprite* ss );

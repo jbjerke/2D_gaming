@@ -36,6 +36,25 @@
     <width>250</width>
     <height>100</height>
   </player>
+  <color>
+    <r>44</r>
+    <g>14</g>
+    <b>73</b>
+    <a>150</a>
+  </color>
+  <outlineColor>
+    <r>24</r>
+    <g>4</g>
+    <b>43</b>
+    <a>150</a>
+  </outlineColor>
+  <textColor>
+    <r>255</r>
+    <g>255</g>
+    <b>255</b>
+    <a>255</a>
+  </textColor>
+  <textBuffer>15</textBuffer>
 </hud>
 
 <lifeIcon>

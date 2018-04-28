@@ -2,9 +2,10 @@
 #include "explodingSprite.h"
 #include "gamedata.h"
 #include "imageFactory.h"
+#include <ctime>
 
-TwoWayMultiSprite::~TwoWayMultiSprite(){ 
-  if(explosion) delete explosion; 
+TwoWayMultiSprite::~TwoWayMultiSprite(){
+  if(explosion) delete explosion;
 }
 
 void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
@@ -16,6 +17,7 @@ void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
 }
 
 Vector2f TwoWayMultiSprite::makeVelocity(int vx, int vy) const {
+  //srand(time(0));
   float newvx;
 	float newvy;
 
