@@ -21,7 +21,7 @@ public:
   unsigned int freeCount() const { return freeList.size(); }
 
   bool shooting() const { return !bulletList.empty(); }
-  bool collided(const Drawable*) const;
+  bool collided(const Drawable*);
 
 private:
   std::string bulletName;

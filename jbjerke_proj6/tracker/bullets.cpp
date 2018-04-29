@@ -70,12 +70,16 @@ void  Bullets::shoot(const Vector2f& pos, const Vector2f& objVel){
   }
 }
 
-bool Bullets::collided(const Drawable* obj) const {
-  for( const auto& bt : bulletList ){
-    if( strategy->execute(*bt, *obj) ){
+bool Bullets::collided(const Drawable* obj) {
+  auto bt = bulletList.begin();
+  while( bt != bulletList.end() ){
+    if( strategy->execute(**bt, *obj) ){
       // move to freeList somehow
+      freeList.push_back(*bt);
+      bt = bulletList.erase(bt);
       return true;
     }
+    else ++bt;
   }
   return false;
 }
