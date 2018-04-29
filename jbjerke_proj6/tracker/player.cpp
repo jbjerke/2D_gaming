@@ -10,7 +10,8 @@ Player::Player( const std::string& name) :
   worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
   lives(Gamedata::getInstance().getXmlInt(name+"/lifeCount")),
   score( 0 ),
-  winningScore( Gamedata::getInstance().getXmlInt(name+"/winningScore") )
+  winningScore( Gamedata::getInstance().getXmlInt(name+"/winningScore") ),
+  light( new Lights() )
 { }
 
 Player::Player(const Player& p) :
@@ -21,7 +22,8 @@ Player::Player(const Player& p) :
   worldHeight(p.worldHeight),
   lives(p.lives),
   score(p.score),
-  winningScore(p.winningScore)
+  winningScore(p.winningScore),
+  light(p.light)
 { }
 
 Player& Player::operator=(const Player& p){
@@ -33,6 +35,7 @@ Player& Player::operator=(const Player& p){
   lives = p.lives;
   score = p.score;
   winningScore = p.winningScore;
+  light = p.light;
   return *this;
 }
 
@@ -42,11 +45,14 @@ Player::~Player(){
   // }
   delete player;
 
+  delete light;
+
   observers.clear();
 }
 
 void Player::update(Uint32 ticks) {
   player->update(ticks);
+  light->update();
 
   stop();
 
@@ -68,6 +74,11 @@ void Player::detach( SmartSprite* ss ){
 			if( (*o)->getTimesHit() == (*o)->getScale() ){
         if( !player->isExploding() || (*o)->getType() != 1 ) {
           score += (*o)->getScale()*(*o)->getType();
+
+          if( lives > 0 && score < 0){
+            score = 0;
+            --lives;
+          }
         }
         o = observers.erase(o);
       }

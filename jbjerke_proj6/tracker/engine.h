@@ -34,6 +34,7 @@ private:
   Viewport& viewport;
 
   Drawable* wizard;
+  std::vector<Drawable*> harmlessdogats;
   std::vector<Drawable*> dogats;
   std::vector<SmartSprite*> pinkupines;
   Player* player;

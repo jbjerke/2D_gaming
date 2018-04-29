@@ -59,6 +59,7 @@ void  Bullets::shoot(const Vector2f& pos, const Vector2f& objVel){
   if( freeList.empty() && bulletList.size() <= maxNumOFBullets ){
     Bullet* b = new Bullet( bulletName, pos, objVel );
     bulletList.push_back(b);
+    // std::cout<<"there is a bullet. Bullet List size is = " << bulletList.size() <<std::endl;
   }
   else if( !freeList.empty() ){
     Bullet* b = freeList.front();
@@ -74,6 +75,7 @@ bool Bullets::collided(const Drawable* obj) {
   auto bt = bulletList.begin();
   while( bt != bulletList.end() ){
     if( strategy->execute(**bt, *obj) ){
+      // std::cout << "verified collision" << std::endl;
       // move to freeList somehow
       freeList.push_back(*bt);
       bt = bulletList.erase(bt);

@@ -11,7 +11,7 @@
 void Light::drawIllumination(SDL_Renderer *s, const std::list<Light*>& ll,
         int w_wid, int w_hgt, int dif_grid_wid, int dif_grid_hgt) {
     // Now let's get some diffuse Lighting going
-    
+
     SDL_BlendMode oldBlendMode;
     SDL_GetRenderDrawBlendMode(s, &oldBlendMode);
     SDL_SetRenderDrawBlendMode(s, SDL_BLENDMODE_MOD);
@@ -30,14 +30,14 @@ void Light::drawIllumination(SDL_Renderer *s, const std::list<Light*>& ll,
             std::list<Light*>::const_iterator plitr;
             for(plitr = ll.begin(); plitr != ll.end(); plitr++) {
                 const Light& currLight = *(*plitr);
-                const Triple& foreLight_pos = currLight.pos(); 
+                const Triple& foreLight_pos = currLight.pos();
                 dist = (foreLight_pos - cent).len();
 
                 fals_brig = currLight.bright() / (dist*dist);
                 bright_accum += fals_brig;
             }
             bright_accum = bright_accum > 255? 255.0 :
-            bright_accum < 0? 0 : bright_accum; 
+            bright_accum < 0? 0 : bright_accum;
 
             brightness = (Uint8) bright_accum;
             SDL_SetRenderDrawColor(s, brightness, brightness, brightness, 255);
@@ -49,8 +49,11 @@ void Light::drawIllumination(SDL_Renderer *s, const std::list<Light*>& ll,
 }
 
 void Light::update() {
-   double nx = loc.getX() - Viewport::getInstance().getX();
-   double ny = loc.getY() - Viewport::getInstance().getY();
+  const Drawable* obj = Viewport::getInstance().getObjectToTrack();
+  double objX = obj->getX() - fakeRadius;
+  double objY = obj->getY() - fakeRadius;
+   double nx = objX + loc.getX() - Viewport::getInstance().getX();
+   double ny = objY + loc.getY() - Viewport::getInstance().getY();
    translated = Triple(nx, ny, loc.getZ());
 }
 
@@ -72,7 +75,7 @@ Uint8 Light::shadowDarknessAtDistance(double d) const {
    double maxUint = 255.0;
    double scale = d / effectiveRad;
    // The ambient factor effects the brightness of the light:
-   scale = scale*scale + 
+   scale = scale*scale +
            Gamedata::getInstance().getXmlInt("ambientLighting");
    double brightness = (-maxUint)*(scale * scale) + maxUint;
    brightness = brightness < 0? 0 : brightness;

@@ -7,6 +7,7 @@
 #include <cmath>
 
 #include "shooterSprite.h"
+#include "lights.h"
 
 class SmartSprite;
 
@@ -16,7 +17,7 @@ public:
   Player(const Player&);
   ~Player();
 
-  void draw() const { player->draw(); }
+  void draw() const { player->draw(); light->draw(); }
   void update(Uint32 ticks);
   void explode();
   bool isExploding() { return player->isExploding(); }
@@ -62,6 +63,8 @@ private:
   int lives;
   int score;
   int winningScore;
+
+  Lights* light;
 
   Player& operator=(const Player&);
 };

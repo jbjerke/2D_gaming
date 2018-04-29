@@ -12,6 +12,9 @@ OBJS = \
 	gamedata.o \
 	viewport.o \
 	world.o \
+	triple.o \
+	light.o \
+	lights.o \
 	spriteSheet.o \
 	image.o \
 	imageFactory.o \

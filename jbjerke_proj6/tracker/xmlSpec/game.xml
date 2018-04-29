@@ -105,6 +105,18 @@
   <alpha>0</alpha>
 </font>
 
+<numberOfLights>1</numberOfLights>
+<lightSpec lightX1="100" lightY1="100" lightZ1="200" />
+<!-- larger noneffectiveLighting the smaller the radius of the light -->
+<noneffectiveLighting>100000</noneffectiveLighting>
+<ambientLighting>100000</ambientLighting>
+<brightness>35000000</brightness>
+<diffuseGrid>
+   <x>6</x>
+   <y>6</y>
+</diffuseGrid>
+<fakeRadius>83</fakeRadius>
+
 <IdleFireSpirit>
   <file>assets/fire_spirit/fire_spirit_idle.png</file>
   <startLoc x="150" y="660"/>

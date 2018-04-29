@@ -23,7 +23,8 @@ public:
       brightness(ib),
       effectiveRad(sqrt(
         brightness/Gamedata::
-        getInstance().getXmlFloat("noneffectiveLighting")))
+        getInstance().getXmlFloat("noneffectiveLighting"))),
+      fakeRadius(Gamedata::getInstance().getXmlInt("fakeRadius"))
       {}
 
    Light(std::string name) :
@@ -33,16 +34,20 @@ public:
       translated(),
       brightness(Gamedata::getInstance().getXmlFloat(name+"Bright")),
       effectiveRad(sqrt(
-        brightness/Gamedata::getInstance().getXmlFloat("noneffectiveLighting")))
+        brightness/Gamedata::getInstance().getXmlFloat("noneffectiveLighting"))),
+      fakeRadius(Gamedata::getInstance().getXmlInt("fakeRadius"))
       {}
 
    Light(const Light& l) : loc(l.loc), translated(),
-         brightness(l.brightness), effectiveRad(l.effectiveRad) {}
+         brightness(l.brightness), effectiveRad(l.effectiveRad),
+        fakeRadius(l.fakeRadius) {}
+
    Light& operator=(const Light& l) {
       if (this != &l) {
          loc = l.loc;
          brightness = l.brightness;
          effectiveRad = l.effectiveRad;
+         fakeRadius = l.fakeRadius;
       }
       return *this;
    }
@@ -56,8 +61,8 @@ public:
    std::vector<Triple> cons_shadow(const std::vector<Triple>& poly) const;
    double averageDistance(const std::vector<Triple>& verts) const;
    Uint8 shadowDarknessAtDistance(double d) const;
-   
-   
+
+
    const Triple& pos() const;
    void pos(const Triple& v) { loc = v; }
    double bright() const { return brightness; }
@@ -68,6 +73,7 @@ private:
    double brightness;
 
    double effectiveRad;
+   int fakeRadius;
 };
 
 

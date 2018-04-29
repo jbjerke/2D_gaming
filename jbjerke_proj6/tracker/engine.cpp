@@ -16,6 +16,10 @@
 #include "collisionStrategy.h"
 
 Engine::~Engine() {
+  for(auto* hds : harmlessdogats){
+    delete hds;
+  }
+
   for(auto* ds : dogats){
     delete ds;
   }
@@ -29,7 +33,7 @@ Engine::~Engine() {
 
   delete player;
 
-  // delete hd;
+  delete hud;
 
   std::cout << "Terminating program" << std::endl;
 }
@@ -46,6 +50,7 @@ Engine::Engine() :
   path("path", Gamedata::getInstance().getXmlInt("path/factor") ),
   viewport( Viewport::getInstance() ),
   wizard(new Sprite("Wizard")),
+  harmlessdogats(),
   dogats(),
   pinkupines(),
   player(new Player("FireSpirit")),
@@ -59,20 +64,29 @@ Engine::Engine() :
 
   unsigned int numOfDogats= Gamedata::getInstance().getXmlInt("Dogat/count");
   unsigned int numOfPinkupines= Gamedata::getInstance().getXmlInt("Pinkupine/count");
-  dogats.reserve(numOfDogats);
+  dogats.reserve(numOfDogats/2);
   pinkupines.reserve(numOfPinkupines);
 
   Vector2f pos = player->getPlayer()->getPosition();
   int w = player->getScaledWidth();
   int h = player->getScaledHeight();
 
-  for( unsigned int n = 0; n < numOfDogats; n++ ){
-    dogats.push_back( new TwoWayMultiSprite("Dogat") );
+  for( unsigned int n = 0; n < numOfDogats/2; n++ ){
+    Drawable* hdg = new TwoWayMultiSprite("Dogat");
+    hdg->setScale(0.5);
+    harmlessdogats.push_back( hdg );
+
+    Drawable* dg = new TwoWayMultiSprite("Dogat");
+    dogats.push_back( dg );
   }
 
   for( unsigned int m = 0; m < numOfPinkupines/2; m++){
-    pinkupines.push_back( new SmartSprite("Pinkupine", "aggressive", pos, w, h) );
-    player->attach( pinkupines[m] );
+    SmartSprite* sp = new SmartSprite("Pinkupine", "aggressive", pos, w, h);
+     // float scale = Gamedata::getInstance().getRandFloat(1,2);
+     // sp->setScale(scale);
+     // sp -> setScale(rand()%2 + 1);
+    pinkupines.push_back( sp );
+    player->attach( sp );
   }
 
   for( unsigned int m = 0; m < numOfPinkupines/2; m++){
@@ -100,6 +114,10 @@ Engine::Engine() :
 void Engine::draw() const {
   sky.draw();
   mntns.draw();
+
+  for(auto* hdgt : harmlessdogats ){
+    hdgt->draw();
+  }
   trees.draw();
   path.draw();
 
@@ -136,6 +154,10 @@ void Engine::draw() const {
 
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
+
+  for( auto* hdt : harmlessdogats ){
+    hdt->update(ticks);
+  }
 
   wizard->update(ticks);
 
@@ -180,6 +202,7 @@ void Engine::checkForCollisions(){
       if( player->heHitSomething(*dit) ){
         sound[1];
         (*dit)->explode();
+        return;
       }
     }
     ++dit;
@@ -188,16 +211,19 @@ void Engine::checkForCollisions(){
   std::vector<SmartSprite*>::iterator pit = pinkupines.begin();
   while( pit != pinkupines.end() ){
     if( !(*pit)->isExploding() ){
-      if ( strat->execute(*(player->getPlayer()), **pit) && !( player->isExploding() ) ){
+      if( player->heHitSomething(*pit) ){
+        // std::cout<<"correct"<<std::endl;
+        sound[1];
+        (*pit)->explode();
+        player->detach(*pit);
+        return;
+      }
+      else if ( strat->execute(*(player->getPlayer()), **pit) && !( player->isExploding() ) ){
         sound[1];
         player->explode();
         (*pit)->explode();
         player->detach(*pit);
         return;
-      }
-      if( player->heHitSomething(*pit) ){
-        (*pit)->explode();
-        player->detach(*pit);
       }
     }
     ++pit;
