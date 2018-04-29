@@ -118,6 +118,7 @@ void TwoWayMultiSprite::draw() const {
 
 void TwoWayMultiSprite::update(Uint32 ticks) {
 	advanceFrame(ticks);
+  
 	if ( explosion ){
 		explosion->update(ticks);
 		if ( explosion->chunkCount() == 0 ){

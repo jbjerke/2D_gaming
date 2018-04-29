@@ -8,6 +8,7 @@
 #include "twoWayMultiSprite.h"
 #include "shooterSprite.h"
 #include "player.h"
+#include "goalSprite.h"
 #include "smartSprite.h"
 #include "gamedata.h"
 #include "hud.h"
@@ -49,7 +50,7 @@ Engine::Engine() :
   trees("trees", Gamedata::getInstance().getXmlInt("trees/factor") ),
   path("path", Gamedata::getInstance().getXmlInt("path/factor") ),
   viewport( Viewport::getInstance() ),
-  wizard(new Sprite("Wizard")),
+  wizard(),
   harmlessdogats(),
   dogats(),
   pinkupines(),
@@ -70,6 +71,9 @@ Engine::Engine() :
   Vector2f pos = player->getPlayer()->getPosition();
   int w = player->getScaledWidth();
   int h = player->getScaledHeight();
+
+  wizard = new GoalSprite("Wizard", pos, w, h);
+  player->attach(wizard);
 
   for( unsigned int n = 0; n < numOfDogats/2; n++ ){
     Drawable* hdg = new TwoWayMultiSprite("Dogat");
@@ -127,6 +131,7 @@ void Engine::draw() const {
 
   if( player->playerWins() ){
     wizard->draw();
+    if( wizard->isOfferingGift() ) io.writeText("Press 'E' to Accept Gift", wizard->getX(), wizard->getY() - 200, color);
   }
   else{
     for(auto* dg : dogats){
@@ -139,7 +144,7 @@ void Engine::draw() const {
 
   if ( !godmode ) {
     if ( player->playerDed() ){
-      SDL_Color color = {255, 255, 255, 0};
+      // SDL_Color color = {255, 255, 255, 0};
       io.writeText("Press 'R' to restart", 625, 150, color);
       clock.pause();
     }

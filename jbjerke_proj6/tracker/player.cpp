@@ -1,9 +1,11 @@
 #include "player.h"
 #include "gamedata.h"
 #include "smartSprite.h"
+#include "goalSprite.h"
 
 Player::Player( const std::string& name) :
   player( new ShooterSprite(name) ),
+  goal( ),
   observers( ),
   initialVelocity(player->getVelocity()),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
@@ -16,6 +18,7 @@ Player::Player( const std::string& name) :
 
 Player::Player(const Player& p) :
   player(p.player),
+  goal(p.goal),
   observers(p.observers),
   initialVelocity(p.initialVelocity),
   worldWidth(p.worldWidth),
@@ -28,6 +31,7 @@ Player::Player(const Player& p) :
 
 Player& Player::operator=(const Player& p){
   player = p.player;
+  goal = p.goal;
   observers = p.observers;
   initialVelocity = p.initialVelocity;
   worldWidth = p.worldWidth;
@@ -43,6 +47,9 @@ Player::~Player(){
   // for( SmartSprite* ss : observers){
   //   delete ss;
   // }
+
+  // delete goal;
+
   delete player;
 
   delete light;
@@ -68,6 +75,8 @@ void Player::explode() {
   notify();
 }
 
+// void detach( GoalSprite* gs ) {}
+
 void Player::detach( SmartSprite* ss ){
 	std::list<SmartSprite*>::iterator o = observers.begin();
 	while( o != observers.end() ){
@@ -90,6 +99,7 @@ void Player::detach( SmartSprite* ss ){
 }
 
 void Player::notify(){
+  goal->setPlayerPos(player->getPosition() );
 	for ( auto* o : observers ){
 		o->setPlayerPos( player->getPosition() );
     o->setPlayerIsExploding( isExploding() );

@@ -22,10 +22,12 @@ OBJS = \
 	sound.o \
 	sprite.o \
 	twoWaySprite.o \
+	multisprite.o \
 	twoWayMultiSprite.o \
 	shooterSprite.o \
 	player.o \
 	smartSprite.o \
+	goalSprite.o \
 	explodingSprite.o \
 	chunk.o \
 	bullet.o \

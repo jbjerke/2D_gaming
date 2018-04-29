@@ -169,7 +169,7 @@
   </chunk>
   <bulletName>FireBall</bulletName>
   <lifeCount>3</lifeCount>
-  <winningScore>1</winningScore>
+  <winningScore>0</winningScore>
 </FireSpirit>
 
 <FireSpiritAttack>
@@ -362,14 +362,27 @@
 </LeftDogat>
 
 <Wizard>
-  <file>assets/wizard/wizard_left2.png</file>
-  <startLoc x="6500" y="570"/>
-  <frames>1</frames>
+  <file>assets/wizard/wizard.png</file>
+  <startLoc x="1500" y="570"/>
+  <frames>10</frames>
   <imageWidth>167</imageWidth>
   <imageHeight>250</imageHeight>
   <frameInterval>50</frameInterval>
   <speedX>0</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
+  <rewardDistance>200</rewardDistance>
 </Wizard>
+
+<RewardWizard>
+  <file>assets/wizard/wizard_gift.png</file>
+  <startLoc x="6500" y="570"/>
+  <frames>10</frames>
+  <imageWidth>167</imageWidth>
+  <imageHeight>250</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</RewardWizard>
 </GameData>

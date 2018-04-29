@@ -9,6 +9,7 @@
 
 class CollisionStrategy;
 class Player;
+class GoalSprite;
 class SmartSprite;
 class Hud;
 
@@ -33,7 +34,7 @@ private:
   World path;
   Viewport& viewport;
 
-  Drawable* wizard;
+  GoalSprite* wizard;
   std::vector<Drawable*> harmlessdogats;
   std::vector<Drawable*> dogats;
   std::vector<SmartSprite*> pinkupines;
