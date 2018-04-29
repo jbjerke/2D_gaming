@@ -125,14 +125,16 @@ void Engine::draw() const {
   SDL_Color color = {255, 255, 255, 0};
   io.writeText("Jordan Bjerken", 30, 775, color);
 
-  wizard->draw();
-
-  for(auto* dg : dogats){
-    dg->draw();
+  if( player->playerWins() ){
+    wizard->draw();
   }
-
-  for(auto* pk : pinkupines){
-    pk->draw();
+  else{
+    for(auto* dg : dogats){
+      dg->draw();
+    }
+    for(auto* pk : pinkupines){
+      pk->draw();
+    }
   }
 
   if ( !godmode ) {
@@ -152,8 +154,8 @@ void Engine::draw() const {
   SDL_RenderPresent(renderer);
 }
 
-void Engine::update(Uint32 ticks) {
-  checkForCollisions();
+void Engine::update(Uint32 ticks){
+  if( !( player->playerWins() ) ) checkForCollisions();
 
   for( auto* hdt : harmlessdogats ){
     hdt->update(ticks);

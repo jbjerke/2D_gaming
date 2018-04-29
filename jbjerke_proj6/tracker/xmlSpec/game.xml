@@ -169,7 +169,7 @@
   </chunk>
   <bulletName>FireBall</bulletName>
   <lifeCount>3</lifeCount>
-  <winningScore>15</winningScore>
+  <winningScore>1</winningScore>
 </FireSpirit>
 
 <FireSpiritAttack>
@@ -223,6 +223,28 @@
   <maxCount>3</maxCount>
   <reloadTime>900</reloadTime>
 </LeftFireBall>
+
+<FireSpiritDeath>
+  <file>assets/fire_spirit/fire_spirit_death_right.png</file>
+  <frames>8</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</FireSpiritDeath>
+
+<LeftFireSpiritDeath>
+  <file>assets/fire_spirit/fire_spirit_death_left.png</file>
+  <frames>8</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftFireSpiritDeath>
 
 <Pinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>

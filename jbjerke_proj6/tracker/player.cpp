@@ -62,6 +62,7 @@ void Player::update(Uint32 ticks) {
 void Player::explode() {
   --lives;
 
+  // if( playerDed() ) player->die();
   player->explode();
 
   notify();

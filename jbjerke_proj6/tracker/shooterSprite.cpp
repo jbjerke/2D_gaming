@@ -25,6 +25,8 @@ ShooterSprite::ShooterSprite( const std::string& name) :
 	leftidleimages( ImageFactory::getInstance().getImages("LeftIdle"+name) ),
 	rightattackimages( ImageFactory::getInstance().getImages(name+"Attack") ),
 	leftattackimages( ImageFactory::getInstance().getImages("Left"+name+"Attack") ),
+	// rightdeathimages( ImageFactory::getInstance().getImages(name+"Death") ),
+	// leftdeathimages( ImageFactory::getInstance().getImages("Left"+name+"Death") ),
   images( rightidleimages ),
 	ShooterSpriteName(name),
   currentFrame(0),
@@ -37,6 +39,9 @@ ShooterSprite::ShooterSprite( const std::string& name) :
   initialVelocity(getVelocity()),
 	explosion(nullptr),
 	isExploded(false),
+	// isDying(false),
+	// readyToExplode(false),
+	// isDed(false),
 	bulletName( Gamedata::getInstance().getXmlStr(name+"/bulletName") ),
 	bullets( new Bullets(bulletName) ),
 	minBulletSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/minSpeedX") ),
@@ -52,6 +57,8 @@ ShooterSprite::ShooterSprite(const ShooterSprite& s) :
 	leftidleimages(s.leftidleimages),
 	rightattackimages(s.rightattackimages),
 	leftattackimages(s.leftattackimages),
+	// rightdeathimages(s.rightdeathimages),
+	// leftdeathimages(s.leftdeathimages),
   images(s.images),
 	ShooterSpriteName(s.ShooterSpriteName),
   currentFrame(s.currentFrame),
@@ -63,7 +70,10 @@ ShooterSprite::ShooterSprite(const ShooterSprite& s) :
 	facing(s.facing),
   initialVelocity( s.initialVelocity ),
 	explosion(s.explosion),
-	isExploded(false),
+	isExploded(s.isExploded),
+	// isDying(s.isDying),
+	// readyToExplode(s.readyToExplode),
+	// isDed(s.isDed),
 	bulletName(s.bulletName),
 	bullets(s.bullets),
 	minBulletSpeed(s.minBulletSpeed),
@@ -79,6 +89,8 @@ ShooterSprite& ShooterSprite::operator=(const ShooterSprite& s) {
 	leftidleimages = s.leftidleimages;
 	rightattackimages = s.rightattackimages;
 	leftattackimages = s.leftattackimages;
+	// rightdeathimages = s.rightdeathimages;
+	// leftdeathimages = s.leftdeathimages;
   images = (s.images);
 	ShooterSpriteName = (s.ShooterSpriteName);
   currentFrame = (s.currentFrame);
@@ -142,12 +154,20 @@ void ShooterSprite::update(Uint32 ticks) {
 
 	bullets->update(ticks);
 
+	// if( isDying ){
+	// 	if( currentFrame == numberOfFrames - 1){
+	// 		explode();
+	// 	}
+	// 	return;
+	// }
+
 	if ( explosion ){
 		explosion->update(ticks);
 		if ( explosion->chunkCount() == 0 ){
 			delete explosion;
 			explosion = nullptr;
 			isExploded = true;
+			// if (isDying) { isDying = false; isDed = true; }
 		}
 		return;
 	}
@@ -217,3 +237,13 @@ void ShooterSprite::shoot() {
 		timeSinceLastBullet = 0;
 	}
 }
+
+// void ShooterSprite::die(){
+// 	if ( getVelocityX() > 0 ) { images = rightdeathimages; }
+// 	else if( getVelocityX() < 0 ) { images = leftdeathimages; }
+// 	else if( facing == RIGHT ){ images = rightdeathimages; }
+// 	else if( facing == LEFT ){ images = leftdeathimages; }
+//
+// 	numberOfFrames = Gamedata::getInstance().getXmlInt(ShooterSpriteName+"Death/frames");
+// 	isDying = true;
+// }

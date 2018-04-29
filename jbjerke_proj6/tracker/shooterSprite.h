@@ -46,6 +46,9 @@ public:
   unsigned int bulletCount() const { return bullets->bulletCount(); }
   unsigned int freeCount() const {return bullets->freeCount(); }
 
+  // void die();
+  // bool doneDed() const {return isDed; }
+
 private:
   std::vector<Image *> rightimages;
   std::vector<Image *> leftimages;
@@ -53,6 +56,8 @@ private:
   std::vector<Image *> leftidleimages;
   std::vector<Image *> rightattackimages;
   std::vector<Image *> leftattackimages;
+  // std::vector<Image *> rightdeathimages;
+  // std::vector<Image *> leftdeathimages;
   std::vector<Image *> images;
 
   std::string ShooterSpriteName;
@@ -70,6 +75,10 @@ private:
 
   ExplodingSprite* explosion;
   bool isExploded;
+
+  // bool isDying;
+  // bool readyToExplode;
+  // bool isDed;
 
   std::string bulletName;
   Bullets* bullets;

@@ -22,6 +22,8 @@ public:
   void explode();
   bool isExploding() { return player->isExploding(); }
 
+  // bool die();
+
   const ShooterSprite* getPlayer() const { return player; }
 
   const std::string& getName() const { return player->getName(); }
@@ -49,6 +51,7 @@ public:
   int getLifeCount() const { return lives; }
   bool playerWins() const { return score >= winningScore; }
   bool playerDed() const { return !lives || score < 0; }
+  // bool doneDed() const { return player->doneDed(); }
 
   void attach( SmartSprite* ss ) { observers.push_back(ss); }
   void detach( SmartSprite* ss );
