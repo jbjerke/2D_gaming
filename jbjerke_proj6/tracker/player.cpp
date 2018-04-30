@@ -75,7 +75,9 @@ void Player::explode() {
   notify();
 }
 
-// void detach( GoalSprite* gs ) {}
+// void Player::detach( GoalSprite* gs ) {
+//   delete goal;
+// }
 
 void Player::detach( SmartSprite* ss ){
 	std::list<SmartSprite*>::iterator o = observers.begin();

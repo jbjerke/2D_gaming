@@ -50,10 +50,10 @@ void Light::drawIllumination(SDL_Renderer *s, const std::list<Light*>& ll,
 
 void Light::update() {
   const Drawable* obj = Viewport::getInstance().getObjectToTrack();
-  double objX = obj->getX() - fakeRadius;
-  double objY = obj->getY() - fakeRadius;
-   double nx = objX + loc.getX() - Viewport::getInstance().getX();
-   double ny = objY + loc.getY() - Viewport::getInstance().getY();
+  double objX = obj->getX() + obj->getScaledWidth()/2; // - loc.getX();
+  double objY = obj->getY() + obj->getScaledHeight()/2; // - loc.getY();
+   double nx = objX - Viewport::getInstance().getX(); // + loc.getX()
+   double ny = objY - Viewport::getInstance().getY(); // + loc.getY()
    translated = Triple(nx, ny, loc.getZ());
 }
 

@@ -13,7 +13,7 @@ public:
   GoalSprite(const GoalSprite&);
   ~GoalSprite();
 
-  void draw() const { goal->draw(); };
+  void draw() const; // { goal->draw(); };
   void update(Uint32 ticks);
 
   void setPlayerPos(const Vector2f& p) { playerPos = p; }
@@ -43,12 +43,14 @@ private:
   MODE currentMode;
   int playerWidth;
   int playerHeight;
-  int worldWidth;
-  int worldHeight;
+  int viewWidth;
+//  int worldHeight;
 
   float rewardDistance;
 
   bool offeringGift;
+
+  float buffer;
 
   GoalSprite& operator=(const GoalSprite&);
 };

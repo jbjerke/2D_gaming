@@ -55,7 +55,7 @@ public:
   // bool doneDed() const { return player->doneDed(); }
 
   void attach( GoalSprite* gs ) { goal = gs; }
-  void detach( GoalSprite* gs ) {}
+  //void detach( GoalSprite* gs );// {}
   void attach( SmartSprite* ss ) { observers.push_back(ss); }
   void detach( SmartSprite* ss );
   void notify( );

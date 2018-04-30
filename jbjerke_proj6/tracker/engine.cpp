@@ -131,7 +131,8 @@ void Engine::draw() const {
 
   if( player->playerWins() ){
     wizard->draw();
-    if( wizard->isOfferingGift() ) io.writeText("Press 'E' to Accept Gift", wizard->getX(), wizard->getY() - 200, color);
+    // std::cout << wizard->getX() << " " << wizard->getY() << std::endl;
+    // if( wizard->isOfferingGift() ) io.writeText("Press 'E' to Accept Gift", wizard->getX() - 100 , wizard->getY() - 200, color);
   }
   else{
     for(auto* dg : dogats){
@@ -301,7 +302,9 @@ bool Engine::play() {
         }
       }
       if( keystate[SDL_SCANCODE_E ]){
-        player->explode();
+        if( wizard->isOfferingGift() ){
+          clock.pause();
+        }
       }
       draw();
       update(ticks);

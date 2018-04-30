@@ -17,10 +17,11 @@ GoalSprite::GoalSprite(const std::string& name, const Vector2f& pos, int w, int 
   currentMode(NORMAL),
   playerWidth(w),
   playerHeight(h),
-  worldWidth( Gamedata::getInstance().getXmlInt("world/width") ),
-  worldHeight( Gamedata::getInstance().getXmlInt("world/height") ),
+  viewWidth( Gamedata::getInstance().getXmlInt("view/width") ),
+  //worldHeight( Gamedata::getInstance().getXmlInt("world/height") ),
   rewardDistance( Gamedata::getInstance().getXmlFloat(name+"/rewardDistance") ),
-  offeringGift(false)
+  offeringGift(false),
+  buffer( Gamedata::getInstance().getXmlInt("font/size") + 15 )
 {
   goal->createAltImages("Reward"+name);
 }
@@ -31,8 +32,8 @@ GoalSprite::GoalSprite(const GoalSprite& g) :
   currentMode(g.currentMode),
   playerWidth(g.playerWidth),
   playerHeight(g.playerHeight),
-  worldWidth(g.worldWidth),
-  worldHeight(g.worldHeight),
+  viewWidth(g.viewWidth),
+  //worldHeight(g.worldHeight),
   rewardDistance(g.rewardDistance),
   offeringGift(g.offeringGift)
 { }
@@ -43,8 +44,8 @@ GoalSprite& GoalSprite::operator=(const GoalSprite& g){
   currentMode = g.currentMode;
   playerWidth=(g.playerWidth);
   playerHeight=(g.playerHeight);
-  worldWidth=(g.worldWidth);
-  worldHeight=(g.worldHeight);
+  viewWidth=(g.viewWidth);
+  //worldHeight=(g.worldHeight);
   rewardDistance=(g.rewardDistance);
   offeringGift= g.offeringGift;
   return *this;
@@ -73,4 +74,14 @@ void GoalSprite::update(Uint32 ticks) {
   }
 
   goal->update(ticks);
+}
+
+void GoalSprite::draw() const {
+  if( offeringGift ){
+    //std::cout <<  << std::endl;
+    IoMod::getInstance().writeText("Press 'E' to accept Gift", viewWidth/2 + playerWidth/2,
+      getImage()->getHeight() + buffer, {255,255,255,0});
+  }
+
+  goal->draw();
 }

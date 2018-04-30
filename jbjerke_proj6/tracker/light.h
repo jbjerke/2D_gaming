@@ -23,8 +23,7 @@ public:
       brightness(ib),
       effectiveRad(sqrt(
         brightness/Gamedata::
-        getInstance().getXmlFloat("noneffectiveLighting"))),
-      fakeRadius(Gamedata::getInstance().getXmlInt("fakeRadius"))
+        getInstance().getXmlFloat("noneffectiveLighting")))
       {}
 
    Light(std::string name) :
@@ -34,20 +33,17 @@ public:
       translated(),
       brightness(Gamedata::getInstance().getXmlFloat(name+"Bright")),
       effectiveRad(sqrt(
-        brightness/Gamedata::getInstance().getXmlFloat("noneffectiveLighting"))),
-      fakeRadius(Gamedata::getInstance().getXmlInt("fakeRadius"))
+        brightness/Gamedata::getInstance().getXmlFloat("noneffectiveLighting")))
       {}
 
    Light(const Light& l) : loc(l.loc), translated(),
-         brightness(l.brightness), effectiveRad(l.effectiveRad),
-        fakeRadius(l.fakeRadius) {}
+         brightness(l.brightness), effectiveRad(l.effectiveRad){}
 
    Light& operator=(const Light& l) {
       if (this != &l) {
          loc = l.loc;
          brightness = l.brightness;
          effectiveRad = l.effectiveRad;
-         fakeRadius = l.fakeRadius;
       }
       return *this;
    }
@@ -73,7 +69,6 @@ private:
    double brightness;
 
    double effectiveRad;
-   int fakeRadius;
 };
 
 
