@@ -60,7 +60,7 @@ void Menu::incrIcon() {
 void Menu::decrIcon() {
   clickY -= spaces;
   if ( clickY < spaces+optionLoc[1]) {
-    clickY = startClickY+2*spaces;
+    clickY = startClickY+spaces;
     currentOption = options.size()-1;
   }
   else --currentOption;

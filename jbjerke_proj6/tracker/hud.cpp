@@ -96,6 +96,7 @@ void Hud::draw(const Player& player) const {
     IoMod::getInstance().writeText("D - move right", hx + buffer, hy + buffer + 50,textclr);
     IoMod::getInstance().writeText("SPACE - Attack", hx + buffer, hy + buffer + 100, textclr);
     IoMod::getInstance().writeText("F1 - Toggle Help", hx + buffer, hy + buffer + 150, textclr);
+    IoMod::getInstance().writeText("P - Pause Menu", hx + buffer, hy + buffer + 200, textclr);
     //SDL_RenderPresent(renderer);
   }
 
