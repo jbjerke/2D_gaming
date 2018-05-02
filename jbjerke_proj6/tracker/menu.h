@@ -25,7 +25,7 @@ private:
   SDL_Rect hudFrame;
   SDL_Color menuColor;
   Clock& clock;
-  IOmod& io;
+  IoMod& io;
   std::vector<std::string> options;
   std::vector<int> optionLoc;
   std::vector<Sprite> clicks;

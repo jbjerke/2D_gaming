@@ -36,6 +36,8 @@ Engine::~Engine() {
 
   delete hud;
 
+  delete menuEngine;
+
   std::cout << "Terminating program" << std::endl;
 }
 
@@ -45,6 +47,7 @@ Engine::Engine() :
   clock( Clock::getInstance() ),
   sound( ),
   renderer( rc->getRenderer() ),
+  menuEngine( new MenuEngine() ),
   sky("sky", Gamedata::getInstance().getXmlInt("sky/factor") ),
   mntns("mntns", Gamedata::getInstance().getXmlInt("mntns/factor") ),
   trees("trees", Gamedata::getInstance().getXmlInt("trees/factor") ),
@@ -270,6 +273,9 @@ bool Engine::play() {
         }
         if( keystate[SDL_SCANCODE_G] ){
           godmode = !godmode;
+        }
+        if( keystate[SDL_SCANCODE_M] ){
+          menuEngine->play();
         }
         if ( keystate[SDL_SCANCODE_F1] ){
           hud->toggleHelp();

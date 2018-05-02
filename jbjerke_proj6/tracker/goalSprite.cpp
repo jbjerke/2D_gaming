@@ -35,7 +35,8 @@ GoalSprite::GoalSprite(const GoalSprite& g) :
   viewWidth(g.viewWidth),
   //worldHeight(g.worldHeight),
   rewardDistance(g.rewardDistance),
-  offeringGift(g.offeringGift)
+  offeringGift(g.offeringGift),
+  buffer(g.buffer)
 { }
 
 GoalSprite& GoalSprite::operator=(const GoalSprite& g){
@@ -48,6 +49,7 @@ GoalSprite& GoalSprite::operator=(const GoalSprite& g){
   //worldHeight=(g.worldHeight);
   rewardDistance=(g.rewardDistance);
   offeringGift= g.offeringGift;
+  buffer = g.buffer;
   return *this;
 }
 

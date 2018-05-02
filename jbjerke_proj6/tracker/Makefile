@@ -36,6 +36,8 @@ OBJS = \
 	collisionStrategy.o \
 	vector2f.o \
 	clock.o \
+	menu.o \
+	menuEngine.o \
 	engine.o \
 	main.o
 EXEC = run

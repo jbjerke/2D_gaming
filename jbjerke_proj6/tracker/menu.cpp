@@ -1,9 +1,9 @@
 #include<sstream>
 #include "menu.h"
 
-Menu::Menu(SDL_Renderer* rend) :  
-  renderer(rend), 
-  gdata(Gamedata::getInstance()), 
+Menu::Menu(SDL_Renderer* rend) :
+  renderer(rend),
+  gdata(Gamedata::getInstance()),
   hudFrame( {gdata.getXmlInt("menu/loc/x"),
              gdata.getXmlInt("menu/loc/y"),
              gdata.getXmlInt("menu/width"),
@@ -15,7 +15,7 @@ Menu::Menu(SDL_Renderer* rend) :
              static_cast<Uint8>(gdata.getXmlInt("menu/color/a"))}
   ),
   clock( Clock::getInstance() ),
-  io( IOmod::getInstance() ),
+  io( IoMod::getInstance() ),
   options(),
   optionLoc( { gdata.getXmlInt("menu/optionLoc/x"),
                gdata.getXmlInt("menu/optionLoc/y")}
@@ -40,8 +40,8 @@ Menu::Menu(SDL_Renderer* rend) :
   }
 }
 
-void Menu::incrIcon() { 
-  clickY += spaces; 
+void Menu::incrIcon() {
+  clickY += spaces;
   if ( clickY > static_cast<int>(options.size())*spaces+optionLoc[1]) {
     clickY = startClickY;
     currentOption = 0;
@@ -49,8 +49,8 @@ void Menu::incrIcon() {
   else ++currentOption;
 }
 
-void Menu::decrIcon() { 
-  clickY -= spaces; 
+void Menu::decrIcon() {
+  clickY -= spaces;
   if ( clickY < spaces+optionLoc[1]) {
     clickY = startClickY+2*spaces;
     currentOption = options.size()-1;
@@ -71,7 +71,7 @@ void Menu::draw() const {
   // Set the  color for the Menu outline:
   SDL_Rect menuFrame = {hudFrame.x+50, hudFrame.y+40,
                         hudFrame.w-100, hudFrame.h-100};
-  SDL_SetRenderDrawColor( renderer, menuColor.r, 
+  SDL_SetRenderDrawColor( renderer, menuColor.r,
                           menuColor.g, menuColor.b, menuColor.a );
   SDL_RenderFillRect( renderer, &menuFrame );
 
@@ -85,4 +85,3 @@ void Menu::draw() const {
   // and we don't want to offset by the location of the viewprot:
   clicks[currentClick].getImage()->draw(0, 0, clickX, clickY);
 }
-

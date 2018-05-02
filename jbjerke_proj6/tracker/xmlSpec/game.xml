@@ -57,20 +57,35 @@
   <textBuffer>15</textBuffer>
 </hud>
 
-<lifeIcon>
-  <file>assets/fire_spirit/life_icon.png</file>
-  <imageWidth>50</imageWidth>
-  <imageHeight>50</imageHeight>
-  <transparency>false</transparency>
-</lifeIcon>
+<menu>
+  <width>1000</width>
+  <height>800</height>
+  <noOfOptions>4</noOfOptions>
+  <loc x="250" y="25"/>
+  <optionLoc x="400" y="100"/>
+  <color r="0" g="0" b="0" a="255"/>
+  <option0>Easy</option0>
+  <option1>Normal</option1>
+  <option2>Hard</option2>
+  <option3>Exit</option3>
+  <spaces>70</spaces>
+</menu>
 
-<bulletIcon>
-  <file>assets/fire_spirit/bullet_icon.png</file>
-  <imageWidth>81</imageWidth>
-  <imageHeight>50</imageHeight>
-  <transparency>false</transparency>
-</bulletIcon>
+<clickOn>
+  <file>assets/clickon.png</file>
+  <startLoc x="340" y="170"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</clickOn>
 
+<clickOff>
+  <file>assets/clickoff.png</file>
+  <startLoc x="340" y="170"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</clickOff>
 
 <sky>
   <file>assets/background/sky_full.bmp</file>

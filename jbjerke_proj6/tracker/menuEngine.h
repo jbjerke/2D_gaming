@@ -8,10 +8,17 @@ public:
   ~MenuEngine ();
   void play();
 
+  int getGameMode() const { return gameMode; }
+
 private:
   Clock& clock;
   SDL_Renderer * const renderer;
   Menu menu;
+
+  int gameMode;
+
+  // bool gameWon;
+  // bool gameLost;
 
   void draw() const;
   void update(Uint32);

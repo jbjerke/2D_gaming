@@ -12,7 +12,8 @@ MenuEngine::~MenuEngine() { }
 MenuEngine::MenuEngine() :
   clock( Clock::getInstance() ),
   renderer( RenderContext::getInstance()->getRenderer() ),
-  menu( renderer )
+  menu( renderer ),
+  gameMode(2)
 {
 }
 
@@ -43,9 +44,9 @@ void MenuEngine::play() {
         if (keystate[SDL_SCANCODE_UP] ) menu.decrIcon();
         if (keystate[SDL_SCANCODE_RETURN] ) {
           menu.lightOn();
-          int option = menu.getOptionNo();
-          std::cout << "option chosen: " << menu.getOptionNo() << std::endl;
-          if ( option == 0 ) done = true;
+          gameMode = menu.getOptionNo();
+          //std::cout << "option chosen: " << menu.getOptionNo() << std::endl;
+          if ( gameMode ) done = true;
         }
       }
       if(event.type == SDL_KEYUP) {
