@@ -36,38 +36,23 @@
     <width>300</width>
     <height>100</height>
   </player>
-  <color>
-    <r>44</r>
-    <g>14</g>
-    <b>73</b>
-    <a>150</a>
-  </color>
-  <outlineColor>
-    <r>24</r>
-    <g>4</g>
-    <b>43</b>
-    <a>150</a>
-  </outlineColor>
-  <textColor>
-    <r>255</r>
-    <g>255</g>
-    <b>255</b>
-    <a>255</a>
-  </textColor>
+  <color r="44" g="14" b="73" a="150" />
+  <outlineColor r="24" g="4" b="43" a="150" />
+  <textColor r="255" g="255" b="255" a="255" />
   <textBuffer>15</textBuffer>
 </hud>
 
 <menu>
   <width>1000</width>
   <height>800</height>
-  <noOfOptions>4</noOfOptions>
+  <noOfOptions>2</noOfOptions>
   <loc x="250" y="25"/>
-  <optionLoc x="400" y="100"/>
+  <titleLoc x="550" y="95"/>
+  <textLoc x="425" y="200"/>
+  <optionLoc x="700" y="540"/>
   <color r="0" g="0" b="0" a="255"/>
-  <option0>Easy</option0>
-  <option1>Normal</option1>
-  <option2>Hard</option2>
-  <option3>Exit</option3>
+  <option0>Play</option0>
+  <option1>Quit</option1>
   <spaces>70</spaces>
 </menu>
 
@@ -131,9 +116,9 @@
 <numberOfLights>1</numberOfLights>
 <lightSpec lightX1="100" lightY1="100" lightZ1="200" />
 <!-- larger noneffectiveLighting the smaller the radius of the light -->
-<noneffectiveLighting>100000</noneffectiveLighting>
-<ambientLighting>100000</ambientLighting>
-<brightness>35000000</brightness>
+<noneffectiveLighting>1000000</noneffectiveLighting>
+<ambientLighting>1000000</ambientLighting>
+<brightness>45000000</brightness>
 <diffuseGrid>
    <x>6</x>
    <y>6</y>
@@ -191,8 +176,8 @@
     <distance>100</distance>
   </chunk>
   <bulletName>FireBall</bulletName>
-  <lifeCount>1</lifeCount>
-  <winningScore>3</winningScore>
+  <lifeCount>3</lifeCount>
+  <winningScore>10</winningScore>
 </FireSpirit>
 
 <FireSpiritAttack>
@@ -272,9 +257,9 @@
 <Pinkupine>
   <file>assets/pinkupine/pinkupine_right.png</file>
   <startLoc x="4000" y="725"/>
-  <safeDistance>300</safeDistance>
+  <safeDistance>500</safeDistance>
   <attackDistance>550</attackDistance>
-  <count>16</count>
+  <count>22</count>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
@@ -357,7 +342,7 @@
   <file>assets/dogat/dogat_right.png</file>
   <startLoc x="2000" y="675"/>
   <safeDistance>200</safeDistance>
-  <count>7</count>
+  <count>30</count>
   <frames>4</frames>
   <imageWidth>60</imageWidth>
   <imageHeight>60</imageHeight>
@@ -386,7 +371,7 @@
 
 <Wizard>
   <file>assets/wizard/wizard.png</file>
-  <startLoc x="1500" y="570"/>
+  <startLoc x="5000" y="570"/>
   <frames>10</frames>
   <imageWidth>167</imageWidth>
   <imageHeight>250</imageHeight>

@@ -130,8 +130,7 @@ void Engine::draw() const {
   path.draw();
 
   // Put in the HUD:
-  SDL_Color color = {255, 255, 255, 0};
-  io.writeText("Jordan Bjerken", 30, 775, color);
+  io.writeText("Jordan Bjerken", 30, 775);
 
   if( player->playerWins() ){
     wizard->draw();
@@ -245,9 +244,6 @@ void Engine::checkForCollisions(){
     ++pit;
   }
 
-  // if ( strat->execute(*player, *wizard) ){
-  //   static_cast<Player*>(player)->stop();
-  // }
 }
 
 bool Engine::play() {

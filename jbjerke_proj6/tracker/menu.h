@@ -28,6 +28,8 @@ private:
   Clock& clock;
   IoMod& io;
   std::vector<std::string> options;
+  std::vector<int> titleLoc;
+  std::vector<int> textLoc;
   std::vector<int> optionLoc;
   std::vector<Sprite *> clicks;
   Image* const backimage;

@@ -82,7 +82,7 @@ void GoalSprite::draw() const {
   if( offeringGift ){
     //std::cout <<  << std::endl;
     IoMod::getInstance().writeText("Press 'E' to accept Gift", viewWidth/2 + playerWidth/2,
-      getImage()->getHeight() + buffer, {255,255,255,0});
+      getImage()->getHeight() + buffer);
   }
 
   goal->draw();

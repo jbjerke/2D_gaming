@@ -36,16 +36,16 @@ void MenuEngine::play(bool gw, bool gl) {
       keystate = SDL_GetKeyboardState(NULL);
       if (event.type ==  SDL_QUIT) { done = true; break; }
       if(event.type == SDL_KEYDOWN) {
-        if (keystate[SDL_SCANCODE_ESCAPE] || keystate[SDL_SCANCODE_Q]) {
-          done = true;
-          break;
-        }
+        //if (keystate[SDL_SCANCODE_ESCAPE] || keystate[SDL_SCANCODE_Q]) {
+          //done = true;
+          //break;
+        //}
         if (keystate[SDL_SCANCODE_DOWN] ) menu.incrIcon();
         if (keystate[SDL_SCANCODE_UP] ) menu.decrIcon();
         if (keystate[SDL_SCANCODE_RETURN] ) {
           menu.lightOn();
           optionNo = menu.getOptionNo();
-          //std::cout << "option chosen: " << menu.getOptionNo() << std::endl;
+          std::cout << "option chosen: " << menu.getOptionNo() << std::endl;
           done = true;
         }
       }

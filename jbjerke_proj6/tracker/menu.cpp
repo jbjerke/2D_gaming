@@ -18,6 +18,12 @@ Menu::Menu(SDL_Renderer* rend) :
   clock( Clock::getInstance() ),
   io( IoMod::getInstance() ),
   options(),
+  titleLoc( { gdata.getXmlInt("menu/titleLoc/x"),
+	      gdata.getXmlInt("menu/titleLoc/y")}
+	   ),
+  textLoc( { gdata.getXmlInt("menu/textLoc/x"),
+		gdata.getXmlInt("menu/textLoc/y")}
+	     ),
   optionLoc( { gdata.getXmlInt("menu/optionLoc/x"),
                gdata.getXmlInt("menu/optionLoc/y")}
            ),
@@ -72,18 +78,19 @@ void Menu::draw(bool gameWon, bool gameLost) const {
 
   backimage->draw(0,0,hudFrame.x+20,hudFrame.y+15);
 
-  io.writeText("Options Menu", hudFrame.x+350, hudFrame.y+10+spaces);
-  io.writeText("Tim The Ferocious Fire Spirit", hudFrame.x+350, hudFrame.y+10);
+  io.writeText("Tim The Ferocious Fire Spirit", titleLoc[0], titleLoc[1]);
 
   if( gameWon ){
-    io.writeText("Congratulations! Your Power Grows!", hudFrame.x+350, hudFrame.y+10+2*spaces);
+    io.writeText("Congratulations! Your Power Grows!", textLoc[0]+70, textLoc[1]);
   }
   else if( gameLost ){
-    io.writeText("Game Over! Your Fire Has Gone Out...", hudFrame.x+350, hudFrame.y+10+2*spaces);
+    io.writeText("Game Over! Your Fire Has Gone Out...", textLoc[0]+75, textLoc[1]);
   }
   else {
-    io.writeText("Prove yourself to the Wizard and receive a gift", hudFrame.x+350, hudFrame.y+10+2*spaces);
-    io.writeText("But never kill the innocent...", hudFrame.x+350, hudFrame.y+10+3*spaces);
+    io.writeText("Prove yourself to the Wizard and receive a gift", textLoc[0], textLoc[1]);
+    io.writeText("But never kill the innocent...", textLoc[0]+100, textLoc[1]+spaces);
+    io.writeText("And be weary:", textLoc[0]+220, textLoc[1]+2.5*spaces);
+    io.writeText("Those that take to the air don't care", textLoc[0]+70, textLoc[1]+3.5*spaces);
   }
 
   int space = spaces;
