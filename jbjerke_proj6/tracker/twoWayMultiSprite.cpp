@@ -41,7 +41,7 @@ Vector2f TwoWayMultiSprite::makeStart(int sx, int sy) const {
 	else{ newsx = sx; }
 
 	newsx *= [](){ if(rand()%2) return -1; else return 1; }();
-	sy *= [](){ return rand()%2?-1:1; }();
+	//sy *= [](){ return rand()%2?-1:1; }();
 
 	return Vector2f(newsx, sy);
 }

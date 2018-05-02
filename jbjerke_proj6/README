@@ -1,17 +1,45 @@
-Overview: This demo is, basically, the tracker framework with two
-sprites rolling around the world. However, within the world are two
-lights whose number, location, brightness, and size, are specified
-in the XML for the game.
+Name: Jordan Bjerken
 
-To convert an existing tracker framework to contain the lights:
-(1) copy the 6 files into the game directory: lights.h, lights.cpp,
-    light.h, light.cpp, triple.h, triple.cpp.
-(2) Add information about the lights to your XML document.
-(3) Add to engine.h: 
-    #include "lights.h"
-    Lights lights;
-(4) Add to engine.cpp:
-    lights(), to constructor
-    lights.draw();
-    lights.update();
-(3) compile and run.
+Course: CpSc 4160
+
+Clemson email address: jbjerke@clemson.edu
+
+Project no. 6
+
+Project Due Date: 5/2/2018
+
+Game Title: "Time the Ferocious Fire Spirit"
+
+
+Game Description:
+Tim is a simple left-to-right player that can shoot fireballs. 
+The goal is for Tim to acquire a score of 10 to prove himself to a wizard who has offered Tim a contribution to his power.
+The only way to gain points is to kill those that aim to attack Tim.
+
+So in this world along with Tim, there are two other types of creatures: pinkupines and dogats.
+Pinkupines are the little guys rolling along the path. Some will attack Tim, and some will run away.
+Pinkupines are how Tim gains points, but only if he hits the ones that attack him.
+If Tim hits an innocent pinkupine, he loses points.
+If he loses points he does not have, he loses a life.
+The dogats are the guys flying around.
+They neither attack Tim, nor do they avoid Tim.
+Since they do not attack Tim, they do not count towards Tim's score.
+
+If Tim hits or runs into any of the creatures in this world, he loses a life. He's fragile, so be careful.
+
+Good Luck!
+
+
+List of Pizzazz:
+- Lighting around the player (he is a fire afterall)
+- Pause menu
+   - When the player has not lost or won, but is just pausing it explains the rules of the game
+       - Player can either continue or exit the game from this menu
+   - When the player has either lost or won, it gives the appropriate message
+       - Player can either restart the game or exit the game from here
+- Painter's 
+   - Mostly just small dogat's in the forest
+
+
+
+**All art and animations are original works.

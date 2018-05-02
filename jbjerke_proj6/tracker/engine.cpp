@@ -146,6 +146,8 @@ void Engine::draw() const {
     }
   }
 
+  if( pinkupines.size() == 1) std::cout << "x = " << pinkupines[0]->getX() << "y = " << pinkupines[0]->getY() << std::endl;
+
   // if ( !godmode ) {
   //   if ( player->playerDed() ){
   //     // SDL_Color color = {255, 255, 255, 0};
@@ -324,7 +326,7 @@ bool Engine::play() {
       draw();
       update(ticks);
       if ( !godmode ) {
-        if ( player->playerDed() ){
+        if ( player->playerDed() || pinkupines.size() == 0 ){
           // SDL_Color color = {255, 255, 255, 0};
           menuEngine->play(false, true);
 

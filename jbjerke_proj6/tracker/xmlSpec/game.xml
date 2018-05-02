@@ -8,7 +8,7 @@
 <frameCapOn>true</frameCapOn>
 <period>17</period>
 
-<maxFrames>40</maxFrames>
+<maxFrames>1200</maxFrames>
 <username>jbjerke</username>
 
 <collisionStrategy>PerPixel</collisionStrategy>

@@ -116,7 +116,6 @@ void MultiSprite::createAltImages(const std::string& name){
 }
 
 void MultiSprite::toggleAlt(){
-	std::cout << "1" << std::endl;
 	useAlt = !useAlt;
 
 	if( useAlt ) images = altimages;
