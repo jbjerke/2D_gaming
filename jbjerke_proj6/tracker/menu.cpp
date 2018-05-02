@@ -1,5 +1,6 @@
 #include<sstream>
 #include "menu.h"
+#include "imageFactory.h"
 
 Menu::Menu(SDL_Renderer* rend) :
   renderer(rend),
@@ -20,7 +21,8 @@ Menu::Menu(SDL_Renderer* rend) :
   optionLoc( { gdata.getXmlInt("menu/optionLoc/x"),
                gdata.getXmlInt("menu/optionLoc/y")}
            ),
-  clicks( {Sprite("clickOff"), Sprite("clickOn")} ),
+  clicks( {new Sprite("clickOff"), new Sprite("clickOn")} ),
+  backimage( ImageFactory::getInstance().getImage("menuBackground")),
   currentClick(0),
   currentOption(0),
   spaces(gdata.getXmlInt("menu/spaces")),
@@ -58,24 +60,32 @@ void Menu::decrIcon() {
   else --currentOption;
 }
 
-void Menu::draw() const {
+void Menu::draw(bool gameWon, bool gameLost) const {
   // First set the blend mode so that alpha blending will work;
   // the default blend mode is SDL_BLENDMODE_NONE!
   SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
   // Set the hud background color:
-  SDL_SetRenderDrawColor( renderer, 255, 255, 255, .9*255 );
+  SDL_SetRenderDrawColor( renderer, 109, 116, 123, .9*255 );
 
   // Draw the filled rectangle:
   SDL_RenderFillRect( renderer, &hudFrame );
 
-  // Set the  color for the Menu outline:
-  SDL_Rect menuFrame = {hudFrame.x+50, hudFrame.y+40,
-                        hudFrame.w-100, hudFrame.h-100};
-  SDL_SetRenderDrawColor( renderer, menuColor.r,
-                          menuColor.g, menuColor.b, menuColor.a );
-  SDL_RenderFillRect( renderer, &menuFrame );
+  backimage->draw(0,0,hudFrame.x+20,hudFrame.y+15);
 
-  io.writeText("Options Menu", hudFrame.x+350, hudFrame.y+10);
+  io.writeText("Options Menu", hudFrame.x+350, hudFrame.y+10+spaces);
+  io.writeText("Tim The Ferocious Fire Spirit", hudFrame.x+350, hudFrame.y+10);
+
+  if( gameWon ){
+    io.writeText("Congratulations! Your Power Grows!", hudFrame.x+350, hudFrame.y+10+2*spaces);
+  }
+  else if( gameLost ){
+    io.writeText("Game Over! Your Fire Has Gone Out...", hudFrame.x+350, hudFrame.y+10+2*spaces);
+  }
+  else {
+    io.writeText("Prove yourself to the Wizard and receive a gift", hudFrame.x+350, hudFrame.y+10+2*spaces);
+    io.writeText("But never kill the innocent...", hudFrame.x+350, hudFrame.y+10+3*spaces);
+  }
+
   int space = spaces;
   for ( const std::string& option : options ) {
     io.writeText(option, optionLoc[0], optionLoc[1]+space);
@@ -83,5 +93,5 @@ void Menu::draw() const {
   }
   // We have to draw the clickOn & clickOff relative to the screen,
   // and we don't want to offset by the location of the viewprot:
-  clicks[currentClick].getImage()->draw(0, 0, clickX, clickY);
+  clicks[currentClick]->getImage()->draw(0, 0, clickX, clickY);
 }

@@ -13,19 +13,19 @@ MenuEngine::MenuEngine() :
   clock( Clock::getInstance() ),
   renderer( RenderContext::getInstance()->getRenderer() ),
   menu( renderer ),
-  gameMode(2)
+  optionNo()
 {
 }
 
-void MenuEngine::draw() const {
-  menu.draw();
+void MenuEngine::draw(bool gw, bool gl) const {
+  menu.draw(gw, gl);
   SDL_RenderPresent(renderer);
 }
 
 void MenuEngine::update(Uint32) {
 }
 
-void MenuEngine::play() {
+void MenuEngine::play(bool gw, bool gl) {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -44,9 +44,9 @@ void MenuEngine::play() {
         if (keystate[SDL_SCANCODE_UP] ) menu.decrIcon();
         if (keystate[SDL_SCANCODE_RETURN] ) {
           menu.lightOn();
-          gameMode = menu.getOptionNo();
+          optionNo = menu.getOptionNo();
           //std::cout << "option chosen: " << menu.getOptionNo() << std::endl;
-          if ( gameMode ) done = true;
+          done = true;
         }
       }
       if(event.type == SDL_KEYUP) {
@@ -54,7 +54,7 @@ void MenuEngine::play() {
       }
     }
     // In this section of the event loop we allow key bounce:
-    draw();
+    draw(gw, gl);
     //update(ticks);
   }
 }

@@ -27,6 +27,9 @@ private:
   const IoMod& io;
   Clock& clock;
 
+  // enum MODE{easy, normal, hard};
+  // MODE currentMode;
+
   SDLSound sound;
 
   SDL_Renderer * const renderer;

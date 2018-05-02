@@ -52,6 +52,8 @@ public:
   int getLifeCount() const { return lives; }
   bool playerWins() const { return score >= winningScore; }
   bool playerDed() const { return !lives || score < 0; }
+  // void recieve
+  // bool playerReceivedGift() const { return giftReceived; }
   // bool doneDed() const { return player->doneDed(); }
 
   void attach( GoalSprite* gs ) { goal = gs; }
@@ -70,6 +72,7 @@ private:
   int lives;
   int score;
   int winningScore;
+  // bool giftReceived;
 
   Lights* light;
 

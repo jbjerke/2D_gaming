@@ -45,6 +45,7 @@ Engine::Engine() :
   rc( RenderContext::getInstance() ),
   io( IoMod::getInstance() ),
   clock( Clock::getInstance() ),
+  // currentMode(normal),
   sound( ),
   renderer( rc->getRenderer() ),
   menuEngine( new MenuEngine() ),
@@ -146,13 +147,17 @@ void Engine::draw() const {
     }
   }
 
-  if ( !godmode ) {
-    if ( player->playerDed() ){
-      // SDL_Color color = {255, 255, 255, 0};
-      io.writeText("Press 'R' to restart", 625, 150, color);
-      clock.pause();
-    }
-  }
+  // if ( !godmode ) {
+  //   if ( player->playerDed() ){
+  //     // SDL_Color color = {255, 255, 255, 0};
+  //     menuEngine->play(false, true);
+  //
+  //     int option = menuEngine->getOptionNo();
+  //
+  //     if( option == 0 ) return true;
+  //     else if( option == 1 ) return false;
+  //   }
+  // }
 
   player->draw();
 
@@ -253,6 +258,8 @@ bool Engine::play() {
   FrameGenerator frameGen;
   // SDLSound sound;
 
+  //menuEngine->play();
+
   while ( !done ) {
     // The next loop polls for events, guarding against key bounce:
     while ( SDL_PollEvent(&event) ) {
@@ -264,8 +271,11 @@ bool Engine::play() {
           break;
         }
         if ( keystate[SDL_SCANCODE_P] ) {
-          if ( clock.isPaused() ) clock.unpause();
-          else clock.pause();
+          menuEngine->play(false, false);
+
+          int opt = menuEngine->getOptionNo();
+
+          if( opt == 1 ) return false;
         }
         if( keystate[SDL_SCANCODE_R] ){
           clock.unpause();
@@ -274,11 +284,18 @@ bool Engine::play() {
         if( keystate[SDL_SCANCODE_G] ){
           godmode = !godmode;
         }
-        if( keystate[SDL_SCANCODE_M] ){
-          menuEngine->play();
-        }
         if ( keystate[SDL_SCANCODE_F1] ){
           hud->toggleHelp();
+        }
+        if( keystate[SDL_SCANCODE_E ]){
+          if( wizard->isOfferingGift() ){
+            menuEngine->play(true, false);
+
+            int option = menuEngine->getOptionNo();
+
+            if( option == 0 ) return true;
+            else if( option == 1 ) return false;
+          }
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
@@ -307,13 +324,20 @@ bool Engine::play() {
           player->heAttak();
         }
       }
-      if( keystate[SDL_SCANCODE_E ]){
-        if( wizard->isOfferingGift() ){
-          clock.pause();
-        }
-      }
+
       draw();
       update(ticks);
+      if ( !godmode ) {
+        if ( player->playerDed() ){
+          // SDL_Color color = {255, 255, 255, 0};
+          menuEngine->play(false, true);
+
+          int option = menuEngine->getOptionNo();
+
+          if( option == 0 ) return true;
+          else if( option == 1 ) return false;
+        }
+      }
       if ( makeVideo ) {
         frameGen.makeFrame();
       }

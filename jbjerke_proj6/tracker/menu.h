@@ -5,11 +5,12 @@
 #include "clock.h"
 #include "ioMod.h"
 #include "sprite.h"
+#include "image.h"
 
 class Menu {
 public:
   Menu(SDL_Renderer*);
-  void draw() const;
+  void draw(bool, bool) const;
   void update();
   void incrIcon();
   void decrIcon();
@@ -28,7 +29,8 @@ private:
   IoMod& io;
   std::vector<std::string> options;
   std::vector<int> optionLoc;
-  std::vector<Sprite> clicks;
+  std::vector<Sprite *> clicks;
+  Image* const backimage;
   int currentClick;
   int currentOption;
   int spaces;

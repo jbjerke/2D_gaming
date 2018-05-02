@@ -71,6 +71,14 @@
   <spaces>70</spaces>
 </menu>
 
+<menuBackground>
+  <file>assets/menu_background.png</file>
+  <startLoc x="340" y="170"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</menuBackground>
+
 <clickOn>
   <file>assets/clickon.png</file>
   <startLoc x="340" y="170"/>
@@ -115,8 +123,8 @@
   <file>fonts/Amatic_SC/AmaticSC-Bold.ttf</file>
   <size>50</size>
   <red>255</red>
-  <green>0</green>
-  <blue>0</blue>
+  <green>255</green>
+  <blue>255</blue>
   <alpha>0</alpha>
 </font>
 
@@ -183,8 +191,8 @@
     <distance>100</distance>
   </chunk>
   <bulletName>FireBall</bulletName>
-  <lifeCount>3</lifeCount>
-  <winningScore>0</winningScore>
+  <lifeCount>1</lifeCount>
+  <winningScore>3</winningScore>
 </FireSpirit>
 
 <FireSpiritAttack>
@@ -266,7 +274,7 @@
   <startLoc x="4000" y="725"/>
   <safeDistance>300</safeDistance>
   <attackDistance>550</attackDistance>
-  <count>10</count>
+  <count>16</count>
   <frames>8</frames>
   <imageWidth>75</imageWidth>
   <imageHeight>75</imageHeight>
