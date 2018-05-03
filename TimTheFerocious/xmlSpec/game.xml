@@ -1,0 +1,396 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation.
+     So make sure to include your name as part of the screenTitle -->
+<title>The Tracker Framework</title>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+
+<maxFrames>1200</maxFrames>
+<username>jbjerke</username>
+
+<collisionStrategy>PerPixel</collisionStrategy>
+
+<view>
+  <width>1500</width>
+  <height>850</height>
+</view>
+
+<world>
+  <width>7000</width>
+  <height>1000</height>
+</world>
+
+<hud>
+  <help>
+    <x>50</x>
+    <y>50</y>
+    <width>250</width>
+    <height>300</height>
+  </help>
+  <player>
+    <x>600</x>
+    <y>750</y>
+    <width>300</width>
+    <height>100</height>
+  </player>
+  <color r="44" g="14" b="73" a="150" />
+  <outlineColor r="24" g="4" b="43" a="150" />
+  <textColor r="255" g="255" b="255" a="255" />
+  <textBuffer>15</textBuffer>
+</hud>
+
+<menu>
+  <width>1000</width>
+  <height>800</height>
+  <noOfOptions>2</noOfOptions>
+  <loc x="250" y="25"/>
+  <titleLoc x="550" y="95"/>
+  <textLoc x="425" y="200"/>
+  <optionLoc x="700" y="540"/>
+  <color r="0" g="0" b="0" a="255"/>
+  <option0>Play</option0>
+  <option1>Quit</option1>
+  <spaces>70</spaces>
+</menu>
+
+<menuBackground>
+  <file>assets/menu_background.png</file>
+  <startLoc x="340" y="170"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</menuBackground>
+
+<clickOn>
+  <file>assets/clickon.png</file>
+  <startLoc x="340" y="170"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</clickOn>
+
+<clickOff>
+  <file>assets/clickoff.png</file>
+  <startLoc x="340" y="170"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</clickOff>
+
+<sky>
+  <file>assets/background/sky_full.bmp</file>
+  <factor>5</factor>
+  <transparency>false</transparency>
+</sky>
+
+<mntns>
+  <file>assets/background/mntns_full.bmp</file>
+  <factor>4</factor>
+  <transparency>false</transparency>
+</mntns>
+
+<trees>
+  <file>assets/background/foret_full.bmp</file>
+  <factor>2</factor>
+  <transparency>false</transparency>
+</trees>
+
+<path>
+  <file>assets/background/stonepath_full.bmp</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</path>
+
+<font name="font">
+  <file>fonts/Amatic_SC/AmaticSC-Bold.ttf</file>
+  <size>50</size>
+  <red>255</red>
+  <green>255</green>
+  <blue>255</blue>
+  <alpha>0</alpha>
+</font>
+
+<numberOfLights>1</numberOfLights>
+<lightSpec lightX1="100" lightY1="100" lightZ1="200" />
+<!-- larger noneffectiveLighting the smaller the radius of the light -->
+<noneffectiveLighting>1000000</noneffectiveLighting>
+<ambientLighting>1000000</ambientLighting>
+<brightness>45000000</brightness>
+<diffuseGrid>
+   <x>6</x>
+   <y>6</y>
+</diffuseGrid>
+<fakeRadius>83</fakeRadius>
+
+<IdleFireSpirit>
+  <file>assets/fire_spirit/fire_spirit_idle.png</file>
+  <startLoc x="150" y="660"/>
+  <frames>6</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</IdleFireSpirit>
+
+<LeftIdleFireSpirit>
+  <file>assets/fire_spirit/fire_spirit_idle_left.png</file>
+  <startLoc x="150" y="660"/>
+  <frames>6</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftIdleFireSpirit>
+
+<LeftFireSpirit>
+  <file>assets/fire_spirit/fire_spirit_left.png</file>
+  <startLoc x="150" y="660"/>
+  <frames>12</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftFireSpirit>
+
+<FireSpirit>
+  <file>assets/fire_spirit/fire_spirit_right.png</file>
+  <startLoc x="150" y="660"/>
+  <frames>12</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+  <chunk>
+    <size>50</size>
+    <distance>100</distance>
+  </chunk>
+  <bulletName>FireBall</bulletName>
+  <lifeCount>3</lifeCount>
+  <winningScore>10</winningScore>
+</FireSpirit>
+
+<FireSpiritAttack>
+  <file>assets/fire_spirit/fire_spirit_attack_right.png</file>
+  <frames>4</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</FireSpiritAttack>
+
+<LeftFireSpiritAttack>
+  <file>assets/fire_spirit/fire_spirit_attack_left.png</file>
+  <frames>4</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>250</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftFireSpiritAttack>
+
+<FireBall>
+  <file>assets/fire_spirit/fire_spirit_projectile_right.png</file>
+  <frames>1</frames>
+  <imageWidth>73</imageWidth>
+  <imageHeight>45</imageHeight>
+  <speedX>500</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+  <interval>300</interval>
+  <minSpeedX>700</minSpeedX>
+  <distance>500</distance>
+  <maxCount>3</maxCount>
+  <reloadTime>900</reloadTime>
+</FireBall>
+
+<LeftFireBall>
+  <file>assets/fire_spirit/fire_spirit_projectile_left.png</file>
+  <frames>1</frames>
+  <imageWidth>73</imageWidth>
+  <imageHeight>45</imageHeight>
+  <speedX>500</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+  <interval>300</interval>
+  <minSpeedX>700</minSpeedX>
+  <distance>500</distance>
+  <maxCount>3</maxCount>
+  <reloadTime>900</reloadTime>
+</LeftFireBall>
+
+<FireSpiritDeath>
+  <file>assets/fire_spirit/fire_spirit_death_right.png</file>
+  <frames>8</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</FireSpiritDeath>
+
+<LeftFireSpiritDeath>
+  <file>assets/fire_spirit/fire_spirit_death_left.png</file>
+  <frames>8</frames>
+  <imageWidth>120</imageWidth>
+  <imageHeight>120</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftFireSpiritDeath>
+
+<Pinkupine>
+  <file>assets/pinkupine/pinkupine_right.png</file>
+  <startLoc x="4000" y="725"/>
+  <safeDistance>500</safeDistance>
+  <attackDistance>550</attackDistance>
+  <count>22</count>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>175</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+  <chunk>
+    <size>30</size>
+    <distance>100</distance>
+  </chunk>
+</Pinkupine>
+
+<LeftPinkupine>
+  <file>assets/pinkupine/pinkupine_left.png</file>
+  <startLoc x="4000" y="725"/>
+  <safeDistance>200</safeDistance>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>175</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftPinkupine>
+
+<EvadePinkupine>
+  <file>assets/pinkupine/worried_pinkupine_right.png</file>
+  <startLoc x="4000" y="725"/>
+  <safeDistance>200</safeDistance>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>175</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</EvadePinkupine>
+
+<LeftEvadePinkupine>
+  <file>assets/pinkupine/worried_pinkupine_left.png</file>
+  <startLoc x="4000" y="725"/>
+  <safeDistance>200</safeDistance>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>175</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftEvadePinkupine>
+
+<AttackPinkupine>
+  <file>assets/pinkupine/angry_pinkupine_right.png</file>
+  <startLoc x="4000" y="725"/>
+  <attackDistance>200</attackDistance>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>175</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</AttackPinkupine>
+
+<LeftAttackPinkupine>
+  <file>assets/pinkupine/angry_pinkupine_right.png</file>
+  <startLoc x="4000" y="725"/>
+  <attackDistance>200</attackDistance>
+  <frames>8</frames>
+  <imageWidth>75</imageWidth>
+  <imageHeight>75</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>175</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</LeftAttackPinkupine>
+
+<Dogat>
+  <file>assets/dogat/dogat_right.png</file>
+  <startLoc x="2000" y="675"/>
+  <safeDistance>200</safeDistance>
+  <count>30</count>
+  <frames>4</frames>
+  <imageWidth>60</imageWidth>
+  <imageHeight>60</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>225</speedX>
+  <speedY>150</speedY>
+  <transparency>false</transparency>
+  <chunk>
+    <size>50</size>
+    <distance>100</distance>
+  </chunk>
+</Dogat>
+
+<LeftDogat>
+  <file>assets/dogat/dogat_left.png</file>
+  <startLoc x="4000" y="675"/>
+  <safeDistance>200</safeDistance>
+  <frames>4</frames>
+  <imageWidth>60</imageWidth>
+  <imageHeight>60</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>225</speedX>
+  <speedY>150</speedY>
+  <transparency>false</transparency>
+</LeftDogat>
+
+<Wizard>
+  <file>assets/wizard/wizard.png</file>
+  <startLoc x="5000" y="570"/>
+  <frames>10</frames>
+  <imageWidth>167</imageWidth>
+  <imageHeight>250</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+  <rewardDistance>200</rewardDistance>
+</Wizard>
+
+<RewardWizard>
+  <file>assets/wizard/wizard_gift.png</file>
+  <startLoc x="6500" y="570"/>
+  <frames>10</frames>
+  <imageWidth>167</imageWidth>
+  <imageHeight>250</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</RewardWizard>
+</GameData>
