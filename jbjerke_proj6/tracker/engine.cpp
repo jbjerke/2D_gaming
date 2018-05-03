@@ -332,6 +332,7 @@ bool Engine::play() {
 
           int option = menuEngine->getOptionNo();
 
+          keystate = SDL_GetKeyboardState(NULL);
           if( option == 0 ) return true;
           else if( option == 1 ) return false;
         }
