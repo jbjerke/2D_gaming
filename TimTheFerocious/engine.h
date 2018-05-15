@@ -56,7 +56,7 @@ private:
 
   Hud* hud;
 
-  bool makeVideo;
+  //bool makeVideo;
 
   void draw() const;
   void update(Uint32);

@@ -13,7 +13,7 @@
 #include "gamedata.h"
 #include "hud.h"
 #include "engine.h"
-#include "frameGenerator.h"
+//#include "frameGenerator.h"
 #include "collisionStrategy.h"
 
 Engine::~Engine() {
@@ -62,8 +62,8 @@ Engine::Engine() :
   strat(),
   collision( false ),
   godmode( false ),
-  hud(new Hud() ),
-  makeVideo( false )
+  hud(new Hud() )
+  // makeVideo( false )
 {
   clock.startClock();
 
@@ -253,7 +253,7 @@ bool Engine::play() {
   const Uint8* keystate;
   bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
-  FrameGenerator frameGen;
+  // FrameGenerator frameGen;
   // SDLSound sound;
 
   //menuEngine->play();
@@ -295,14 +295,14 @@ bool Engine::play() {
             else if( option == 1 ) return false;
           }
         }
-        if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
-          std::cout << "Initiating frame capture" << std::endl;
-          makeVideo = true;
-        }
-        else if (keystate[SDL_SCANCODE_F4] && makeVideo) {
-          std::cout << "Terminating frame capture" << std::endl;
-          makeVideo = false;
-        }
+        // if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
+        //   std::cout << "Initiating frame capture" << std::endl;
+        //   makeVideo = true;
+        // }
+        // else if (keystate[SDL_SCANCODE_F4] && makeVideo) {
+        //   std::cout << "Terminating frame capture" << std::endl;
+        //   makeVideo = false;
+        // }
       }
     }
 
@@ -337,9 +337,9 @@ bool Engine::play() {
           else if( option == 1 ) return false;
         }
       }
-      if ( makeVideo ) {
-        frameGen.makeFrame();
-      }
+      // if ( makeVideo ) {
+      //   frameGen.makeFrame();
+      // }
     }
   }
   return false;
